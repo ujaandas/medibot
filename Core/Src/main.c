@@ -23,7 +23,6 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "lcd.h"
-#include "max30102_for_stm32_hal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -33,7 +32,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define RATE_SIZE 4
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -49,13 +47,7 @@ UART_HandleTypeDef huart1;
 SRAM_HandleTypeDef hsram1;
 
 /* USER CODE BEGIN PV */
-max30102_t max30102;
 
-uint8_t rateSpot = 0;
-uint32_t rates[RATE_SIZE]; // Array to hold the last few BPM readings
-uint32_t lastBeat = 0;
-uint32_t beatAvg = 0;
-uint32_t beatsPerMinute = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -78,23 +70,9 @@ int __io_putchar(int ch)
   return ch;
 }
 
-// Override plot function
-void max30102_plot(uint32_t ir_sample, uint32_t red_sample)
-{
-    // printf("ir:%u\n", ir_sample);                  // Print IR only
-    // printf("r:%u\n", red_sample);                  // Print Red only
-    printf("ir: %lu,r: %lu\n", ir_sample, red_sample);    // Print IR and Red
-}
-
 void dec_to_str(uint32_t adcVal, char *buffer) {
     sprintf(buffer, "%4lu", adcVal);
 }
-
-int checkForBeat(uint32_t irValue) {
-	// placeholder
-    return irValue > 50000;
-}
-
 
 /* USER CODE END 0 */
 
@@ -134,37 +112,6 @@ int main(void)
 
   char name[] = "DAS, Ujaan";
   LCD_DrawString(0, 0, name);
-  char dec1[10];
-  char dec2[10];
-  char bpmStr[20];
-  char avgBpmStr[20];
-
-  // init and pass i2c handle
-  max30102_init(&max30102, &hi2c2);
-
-  // reset and clear fifo ptrs
-  max30102_reset(&max30102);
-  max30102_clear_fifo(&max30102);
-
-  // set up config
-  // fifo
-  max30102_set_fifo_config(&max30102, max30102_smp_ave_8, 1, 7);
-  max30102_set_led_pulse_width(&max30102, max30102_pw_16_bit);
-  // led
-  max30102_set_adc_resolution(&max30102, max30102_adc_2048);
-  max30102_set_sampling_rate(&max30102, max30102_sr_800);
-  max30102_set_led_current_1(&max30102, 6.2);
-  max30102_set_led_current_2(&max30102, 6.2);
-
-  // measurement mode
-  max30102_set_mode(&max30102, max30102_heart_rate);
-  max30102_set_a_full(&max30102, 1);
-
-  // rqd interrupts
-  max30102_set_a_full(&max30102, 1);
-  max30102_set_die_temp_en(&max30102, 1);
-  max30102_set_die_temp_rdy(&max30102, 1);
-
 
   /* USER CODE END 2 */
 
@@ -172,50 +119,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  if (max30102_has_interrupt(&max30102)) {
-		  max30102_interrupt_handler(&max30102);
 
-		  uint32_t irValue = max30102._ir_samples[0];
-		  uint32_t redValue = max30102._red_samples[0];
-
-		  if (checkForBeat(irValue) == 1) {
-			  uint32_t delta = HAL_GetTick() - lastBeat;
-			  lastBeat = HAL_GetTick();
-			  beatsPerMinute = 60000 / delta;
-
-			  if (beatsPerMinute < 255 && beatsPerMinute > 20) {
-				  rates[rateSpot++] = beatsPerMinute;
-				  rateSpot %= RATE_SIZE;
-
-				  beatAvg = 0;
-				  for (uint8_t x = 0; x < RATE_SIZE; x++) {
-					  beatAvg += rates[x];
-				  }
-				  beatAvg /= RATE_SIZE;
-			  }
-		  }
-
-		  // Convert values to strings for LCD display
-		  dec_to_str(irValue, dec1);
-		  dec_to_str(redValue, dec2);
-		  dec_to_str(beatsPerMinute, bpmStr);
-		  dec_to_str(beatAvg, avgBpmStr);
-
-		  // Display on LCD
-		  LCD_DrawString(0, 30, "IR: ");
-		  LCD_DrawString(30, 30, dec1);
-		  LCD_DrawString(0, 50, "Red: ");
-		  LCD_DrawString(50, 50, dec2);
-		  LCD_DrawString(0, 70, "BPM: ");
-		  LCD_DrawString(40, 70, bpmStr);
-		  LCD_DrawString(0, 90, "Avg BPM: ");
-		  LCD_DrawString(70, 90, avgBpmStr);
-
-		  if (irValue < 50000) {
-			  LCD_DrawString(0, 110, "No finger?");
-		  }
-	  }
-	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

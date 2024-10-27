@@ -22,7 +22,6 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "max30102_for_stm32_hal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,7 +41,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern max30102_t max30102;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -208,7 +206,6 @@ void EXTI3_IRQHandler(void)
 	int status = __HAL_GPIO_EXTI_GET_IT(GPIO_PIN_3);
 	if (status != RESET)
 	{
-		max30102_interrupt_handler(&max30102);
 		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_3);
 		HAL_GPIO_EXTI_Callback(GPIO_PIN_3);
 	}
