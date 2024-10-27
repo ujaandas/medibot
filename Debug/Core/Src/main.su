@@ -1,10 +1,10 @@
-../Core/Src/main.c:71:5:__io_putchar	24	static
-../Core/Src/main.c:78:6:dec_to_str	16	static
-../Core/Src/main.c:88:5:main	48	static
-../Core/Src/main.c:155:6:SystemClock_Config	72	static
-../Core/Src/main.c:195:13:MX_I2C2_Init	8	static
-../Core/Src/main.c:229:13:MX_TIM1_Init	32	static
-../Core/Src/main.c:275:13:MX_USART1_UART_Init	8	static
-../Core/Src/main.c:308:13:MX_GPIO_Init	48	static
-../Core/Src/main.c:371:13:MX_FSMC_Init	40	static
-../Core/Src/main.c:435:6:Error_Handler	4	static,ignoring_inline_asm
+../Core/Src/main.cpp:71:5:int __io_putchar(int)	24	static
+../Core/Src/main.cpp:78:6:void dec_to_str(uint32_t, char*)	16	static
+../Core/Src/main.cpp:88:5:int main()	88	static
+../Core/Src/main.cpp:158:6:void SystemClock_Config()	72	static
+../Core/Src/main.cpp:198:13:void MX_I2C2_Init()	8	static
+../Core/Src/main.cpp:232:13:void MX_TIM1_Init()	32	static
+../Core/Src/main.cpp:278:13:void MX_USART1_UART_Init()	8	static
+../Core/Src/main.cpp:311:13:void MX_GPIO_Init()	48	static
+../Core/Src/main.cpp:374:13:void MX_FSMC_Init()	40	static
+../Core/Src/main.cpp:438:6:void Error_Handler()	4	static,ignoring_inline_asm

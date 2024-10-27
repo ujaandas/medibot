@@ -21,9 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include <stdio.h>
 #include "lcd.h"
-#include "stepper.h"
+#include <stdio.h>
+#include <StepperMotor.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -121,14 +121,15 @@ int main(void)
 
   HAL_TIM_Base_Start(&htim1);
 
-  StepperMotor motor = {
-          .GPIO_Port = GPIOA,
-          .Pin1 = STP_1_Pin,
-          .Pin2 = STP_2_Pin,
-          .Pin3 = STP_3_Pin,
-          .Pin4 = STP_4_Pin,
-          .Timer = &htim1
-      };
+//  StepperMotor motor = {
+//          .GPIO_Port = GPIOA,
+//          .Pin1 = STP_1_Pin,
+//          .Pin2 = STP_2_Pin,
+//          .Pin3 = STP_3_Pin,
+//          .Pin4 = STP_4_Pin,
+//          .Timer = &htim1
+//      };
+  StepperMotor motor(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
 
   /* USER CODE END 2 */
 
@@ -136,10 +137,12 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  step_motor(&motor, 256, 1000, 1);  // 256 half revolution
+//	  step_motor(&motor, 256, 1000, 1);  // 256 half revolution
+//	  HAL_Delay(100);
+//	  step_motor(&motor, 128, 1000, 0); // 128 quarter revolution
+	  motor.stepMotor(256, 1000, true);
 	  HAL_Delay(100);
-	  step_motor(&motor, 128, 1000, 0); // 128 quarter revolution
-	  HAL_Delay(100);
+	  motor.stepMotor(128, 1000, false);
 
     /* USER CODE END WHILE */
 
