@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include "lcd.h"
+#include "stepper.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -78,35 +79,6 @@ void dec_to_str(uint32_t adcVal, char *buffer) {
     sprintf(buffer, "%4lu", adcVal);
 }
 
-void microDelay (uint16_t delay)
-{
-  __HAL_TIM_SET_COUNTER(&htim1, 0);
-  while (__HAL_TIM_GET_COUNTER(&htim1) < delay);
-}
-
-void stepMotor(int steps, uint16_t delay, int clockwise) {
-    const GPIO_PinState state[8][4] = {
-        {GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_RESET},
-        {GPIO_PIN_SET, GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET},
-        {GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET},
-        {GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET, GPIO_PIN_RESET},
-        {GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_RESET},
-        {GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET},
-        {GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET},
-        {GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET}
-    };
-
-    for (int x = 0; x < steps; ++x) {
-        for (int i = 0; i < 8; ++i) {
-            int index = clockwise ? 7 - i : i;
-            HAL_GPIO_WritePin(GPIOA, STP_1_Pin, state[index][0]);
-            HAL_GPIO_WritePin(GPIOA, STP_2_Pin, state[index][1]);
-            HAL_GPIO_WritePin(GPIOA, STP_3_Pin, state[index][2]);
-            HAL_GPIO_WritePin(GPIOA, STP_4_Pin, state[index][3]);
-            microDelay(delay);
-        }
-    }
-}
 /* USER CODE END 0 */
 
 /**
@@ -149,16 +121,24 @@ int main(void)
 
   HAL_TIM_Base_Start(&htim1);
 
+  StepperMotor motor = {
+          .GPIO_Port = GPIOA,
+          .Pin1 = STP_1_Pin,
+          .Pin2 = STP_2_Pin,
+          .Pin3 = STP_3_Pin,
+          .Pin4 = STP_4_Pin,
+          .Timer = &htim1
+      };
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-
-	  stepMotor(256, 1000, 1);  // 256 half revolution
+	  step_motor(&motor, 256, 1000, 1);  // 256 half revolution
 	  HAL_Delay(100);
-	  stepMotor(128, 1000, 0); // 128 quarter revolution
+	  step_motor(&motor, 128, 1000, 0); // 128 quarter revolution
 	  HAL_Delay(100);
 
     /* USER CODE END WHILE */
@@ -337,7 +317,7 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_RESET);
@@ -361,7 +341,7 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LCD_BL_Pin */
