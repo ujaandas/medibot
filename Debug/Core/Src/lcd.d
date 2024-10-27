@@ -1,4 +1,4 @@
-Core/Src/lcd.o: ../Core/Src/lcd.c ../Core/Inc/lcd.h \
+Core/Src/lcd.o: ../Core/Src/lcd.cpp ../Core/Inc/lcd.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h \
  ../Core/Inc/stm32f1xx_hal_conf.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h \

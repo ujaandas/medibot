@@ -1,5 +1,5 @@
 #include "lcd.h"
-#include "ascii.h"	
+#include "ascii.h"
 
 void		LCD_REG_Config          ( void );
 void		LCD_FillColor           ( uint32_t ulAmout_Point, uint16_t usColor );
