@@ -32,6 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -41,6 +42,8 @@
 
 /* Private variables ---------------------------------------------------------*/
  I2C_HandleTypeDef hi2c2;
+
+TIM_HandleTypeDef htim1;
 
 UART_HandleTypeDef huart1;
 
@@ -56,6 +59,7 @@ static void MX_GPIO_Init(void);
 static void MX_FSMC_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -74,6 +78,35 @@ void dec_to_str(uint32_t adcVal, char *buffer) {
     sprintf(buffer, "%4lu", adcVal);
 }
 
+void microDelay (uint16_t delay)
+{
+  __HAL_TIM_SET_COUNTER(&htim1, 0);
+  while (__HAL_TIM_GET_COUNTER(&htim1) < delay);
+}
+
+void stepMotor(int steps, uint16_t delay, int clockwise) {
+    const GPIO_PinState state[8][4] = {
+        {GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_RESET},
+        {GPIO_PIN_SET, GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET},
+        {GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET},
+        {GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET, GPIO_PIN_RESET},
+        {GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_RESET},
+        {GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET, GPIO_PIN_SET},
+        {GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET},
+        {GPIO_PIN_SET, GPIO_PIN_RESET, GPIO_PIN_RESET, GPIO_PIN_SET}
+    };
+
+    for (int x = 0; x < steps; ++x) {
+        for (int i = 0; i < 8; ++i) {
+            int index = clockwise ? 7 - i : i;
+            HAL_GPIO_WritePin(GPIOA, STP_1_Pin, state[index][0]);
+            HAL_GPIO_WritePin(GPIOA, STP_2_Pin, state[index][1]);
+            HAL_GPIO_WritePin(GPIOA, STP_3_Pin, state[index][2]);
+            HAL_GPIO_WritePin(GPIOA, STP_4_Pin, state[index][3]);
+            microDelay(delay);
+        }
+    }
+}
 /* USER CODE END 0 */
 
 /**
@@ -107,11 +140,14 @@ int main(void)
   MX_FSMC_Init();
   MX_I2C2_Init();
   MX_USART1_UART_Init();
+  MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
   LCD_INIT();
 
   char name[] = "DAS, Ujaan";
   LCD_DrawString(0, 0, name);
+
+  HAL_TIM_Base_Start(&htim1);
 
   /* USER CODE END 2 */
 
@@ -119,6 +155,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
+	  stepMotor(256, 1000, 1);  // 256 half revolution
+	  HAL_Delay(100);
+	  stepMotor(128, 1000, 0); // 128 quarter revolution
+	  HAL_Delay(100);
 
     /* USER CODE END WHILE */
 
@@ -201,6 +242,52 @@ static void MX_I2C2_Init(void)
 }
 
 /**
+  * @brief TIM1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM1_Init(void)
+{
+
+  /* USER CODE BEGIN TIM1_Init 0 */
+
+  /* USER CODE END TIM1_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM1_Init 1 */
+
+  /* USER CODE END TIM1_Init 1 */
+  htim1.Instance = TIM1;
+  htim1.Init.Prescaler = 71;
+  htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim1.Init.Period = 65535;
+  htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim1.Init.RepetitionCounter = 0;
+  htim1.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim1, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim1, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM1_Init 2 */
+
+  /* USER CODE END TIM1_Init 2 */
+
+}
+
+/**
   * @brief USART1 Initialization Function
   * @param None
   * @retval None
@@ -250,6 +337,9 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(LCD_BL_GPIO_Port, LCD_BL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
@@ -265,6 +355,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pin = GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : STP_1_Pin STP_2_Pin STP_3_Pin STP_4_Pin */
+  GPIO_InitStruct.Pin = STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LCD_BL_Pin */
