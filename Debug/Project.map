@@ -103,9 +103,9 @@ Archive member included to satisfy reference by file (symbol)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-readr.o)
                               /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-stdio.o) (_read_r)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a(_arm_muldf3.o)
-                              ./Core/Src/lcd.o (__aeabi_dmul)
+                              ./Core/Inc/Screen/lcd.o (__aeabi_dmul)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a(_arm_addsubdf3.o)
-                              ./Core/Src/lcd.o (__aeabi_dsub)
+                              ./Core/Inc/Screen/lcd.o (__aeabi_dsub)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a(_arm_muldivdf3.o)
                               /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-dtoa.o) (__aeabi_ddiv)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a(_arm_cmpdf2.o)
@@ -113,7 +113,7 @@ Archive member included to satisfy reference by file (symbol)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a(_arm_unorddf2.o)
                               /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/libc_nano.a(lib_a-nano-vfprintf_float.o) (__aeabi_dcmpun)
 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a(_arm_fixdfsi.o)
-                              ./Core/Src/lcd.o (__aeabi_d2iz)
+                              ./Core/Inc/Screen/lcd.o (__aeabi_d2iz)
 
 Discarded input sections
 
@@ -129,147 +129,147 @@ Discarded input sections
  .ARM.exidx     0x0000000000000000       0x10 /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
  .ARM.attributes
                 0x0000000000000000       0x1b /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor.o
- .text          0x0000000000000000        0x0 ./Core/Inc/StepperMotor.o
- .data          0x0000000000000000        0x0 ./Core/Inc/StepperMotor.o
- .bss           0x0000000000000000        0x0 ./Core/Inc/StepperMotor.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .group         0x0000000000000000        0xc ./Core/Src/lcd.o
- .text          0x0000000000000000        0x0 ./Core/Src/lcd.o
- .data          0x0000000000000000        0x0 ./Core/Src/lcd.o
- .bss           0x0000000000000000        0x0 ./Core/Src/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/Screen/lcd.o
+ .text          0x0000000000000000        0x0 ./Core/Inc/Screen/lcd.o
+ .data          0x0000000000000000        0x0 ./Core/Inc/Screen/lcd.o
+ .bss           0x0000000000000000        0x0 ./Core/Inc/Screen/lcd.o
  .text._Z13LCD_Read_Datav
-                0x0000000000000000       0x18 ./Core/Src/lcd.o
+                0x0000000000000000       0x18 ./Core/Inc/Screen/lcd.o
  .text._Z18LCD_Read_PixelDatav
-                0x0000000000000000       0x66 ./Core/Src/lcd.o
+                0x0000000000000000       0x66 ./Core/Inc/Screen/lcd.o
  .text._Z17LCD_GetPointPixeltt
-                0x0000000000000000       0x2e ./Core/Src/lcd.o
+                0x0000000000000000       0x2e ./Core/Inc/Screen/lcd.o
  .text._Z12LCD_DrawLinettttt
-                0x0000000000000000      0x108 ./Core/Src/lcd.o
+                0x0000000000000000      0x108 ./Core/Inc/Screen/lcd.o
  .text._Z11getHighBytei
-                0x0000000000000000       0x16 ./Core/Src/lcd.o
+                0x0000000000000000       0x16 ./Core/Inc/Screen/lcd.o
  .text._Z10getLowBytei
-                0x0000000000000000       0x16 ./Core/Src/lcd.o
+                0x0000000000000000       0x16 ./Core/Inc/Screen/lcd.o
  .text._Z11LCD_DrawDotttt
-                0x0000000000000000       0xee ./Core/Src/lcd.o
+                0x0000000000000000       0xee ./Core/Inc/Screen/lcd.o
  .text._Z15LCD_DrawEllipsettttt
-                0x0000000000000000      0x2f8 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0xb44 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x227 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x2e ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x22 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x1c ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x22 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x8e ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x51 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x103 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x6a ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x1df ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x1c ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x22 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0xbd ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0xd23 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000     0xfd8c ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x6d ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000     0x34a2 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x17b ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x5c ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x5bc ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x4d5 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x1cb ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x114 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x1ea ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x27 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x144 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x1bc ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x30 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x3c ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x57 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0x87 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x24f ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x356 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x287 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x140 ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x8ed ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000      0x28e ./Core/Src/lcd.o
- .debug_macro   0x0000000000000000       0xb5 ./Core/Src/lcd.o
+                0x0000000000000000      0x2f8 ./Core/Inc/Screen/lcd.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .group         0x0000000000000000        0xc ./Core/Inc/StepperMotor/StepperMotor.o
+ .text          0x0000000000000000        0x0 ./Core/Inc/StepperMotor/StepperMotor.o
+ .data          0x0000000000000000        0x0 ./Core/Inc/StepperMotor/StepperMotor.o
+ .bss           0x0000000000000000        0x0 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0xb44 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x227 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x2e ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x22 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x1c ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x22 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x8e ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x51 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x103 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x6a ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x1df ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x1c ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x22 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0xbd ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0xd23 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000     0xfd8c ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x6d ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000     0x34a2 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x17b ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x5c ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x5bc ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x4d5 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x1cb ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x114 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x1ea ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x27 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x144 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x1bc ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x30 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x3c ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x57 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0x87 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x24f ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x356 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x287 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x140 ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x8ed ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000      0x28e ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x0000000000000000       0xb5 ./Core/Inc/StepperMotor/StepperMotor.o
  .group         0x0000000000000000        0xc ./Core/Src/main.o
  .group         0x0000000000000000        0xc ./Core/Src/main.o
  .group         0x0000000000000000        0xc ./Core/Src/main.o
@@ -3438,8 +3438,8 @@ Linker script and memory map
 LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crti.o
 LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
 LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/../../../../arm-none-eabi/lib/thumb/v7-m/nofp/crt0.o
-LOAD ./Core/Inc/StepperMotor.o
-LOAD ./Core/Src/lcd.o
+LOAD ./Core/Inc/Screen/lcd.o
+LOAD ./Core/Inc/StepperMotor/StepperMotor.o
 LOAD ./Core/Src/main.o
 LOAD ./Core/Src/stm32f1xx_hal_msp.o
 LOAD ./Core/Src/stm32f1xx_it.o
@@ -3548,56 +3548,56 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x0000000008000b10                __fixdfsi
                 0x0000000008000b10                __aeabi_d2iz
  *(.text*)
- .text._ZN12StepperMotorC2EP12GPIO_TypeDefttttP17TIM_HandleTypeDef
-                0x0000000008000b60       0x60 ./Core/Inc/StepperMotor.o
-                0x0000000008000b60                StepperMotor::StepperMotor(GPIO_TypeDef*, unsigned short, unsigned short, unsigned short, unsigned short, TIM_HandleTypeDef*)
-                0x0000000008000b60                StepperMotor::StepperMotor(GPIO_TypeDef*, unsigned short, unsigned short, unsigned short, unsigned short, TIM_HandleTypeDef*)
- .text._ZN12StepperMotor10microDelayEt
-                0x0000000008000bc0       0x3a ./Core/Inc/StepperMotor.o
-                0x0000000008000bc0                StepperMotor::microDelay(unsigned short)
- .text._ZN12StepperMotor10stepSingleEi
-                0x0000000008000bfa       0x72 ./Core/Inc/StepperMotor.o
-                0x0000000008000bfa                StepperMotor::stepSingle(int)
- .text._ZN12StepperMotor9stepMotorEitb
-                0x0000000008000c6c       0x68 ./Core/Inc/StepperMotor.o
-                0x0000000008000c6c                StepperMotor::stepMotor(int, unsigned short, bool)
  .text._Z5Delaym
-                0x0000000008000cd4       0x2a ./Core/Src/lcd.o
-                0x0000000008000cd4                Delay(unsigned long)
+                0x0000000008000b60       0x2a ./Core/Inc/Screen/lcd.o
+                0x0000000008000b60                Delay(unsigned long)
  .text._Z8LCD_INITv
-                0x0000000008000cfe       0x2e ./Core/Src/lcd.o
-                0x0000000008000cfe                LCD_INIT()
+                0x0000000008000b8a       0x2e ./Core/Inc/Screen/lcd.o
+                0x0000000008000b8a                LCD_INIT()
  .text._Z7LCD_Rstv
-                0x0000000008000d2c       0x30 ./Core/Src/lcd.o
-                0x0000000008000d2c                LCD_Rst()
+                0x0000000008000bb8       0x30 ./Core/Inc/Screen/lcd.o
+                0x0000000008000bb8                LCD_Rst()
  .text._Z19LCD_BackLed_Control15FunctionalState
-                0x0000000008000d5c       0x38 ./Core/Src/lcd.o
-                0x0000000008000d5c                LCD_BackLed_Control(FunctionalState)
+                0x0000000008000be8       0x38 ./Core/Inc/Screen/lcd.o
+                0x0000000008000be8                LCD_BackLed_Control(FunctionalState)
  .text._Z13LCD_Write_Cmdt
-                0x0000000008000d94       0x1c ./Core/Src/lcd.o
-                0x0000000008000d94                LCD_Write_Cmd(unsigned short)
+                0x0000000008000c20       0x1c ./Core/Inc/Screen/lcd.o
+                0x0000000008000c20                LCD_Write_Cmd(unsigned short)
  .text._Z14LCD_Write_Datat
-                0x0000000008000db0       0x20 ./Core/Src/lcd.o
-                0x0000000008000db0                LCD_Write_Data(unsigned short)
+                0x0000000008000c3c       0x20 ./Core/Inc/Screen/lcd.o
+                0x0000000008000c3c                LCD_Write_Data(unsigned short)
  .text._Z14LCD_REG_Configv
-                0x0000000008000dd0      0x234 ./Core/Src/lcd.o
-                0x0000000008000dd0                LCD_REG_Config()
+                0x0000000008000c5c      0x234 ./Core/Inc/Screen/lcd.o
+                0x0000000008000c5c                LCD_REG_Config()
  .text._Z14LCD_OpenWindowtttt
-                0x0000000008001004       0xb2 ./Core/Src/lcd.o
-                0x0000000008001004                LCD_OpenWindow(unsigned short, unsigned short, unsigned short, unsigned short)
+                0x0000000008000e90       0xb2 ./Core/Inc/Screen/lcd.o
+                0x0000000008000e90                LCD_OpenWindow(unsigned short, unsigned short, unsigned short, unsigned short)
  .text._Z13LCD_FillColormt
-                0x00000000080010b6       0x3a ./Core/Src/lcd.o
-                0x00000000080010b6                LCD_FillColor(unsigned long, unsigned short)
+                0x0000000008000f42       0x3a ./Core/Inc/Screen/lcd.o
+                0x0000000008000f42                LCD_FillColor(unsigned long, unsigned short)
  .text._Z9LCD_Clearttttt
-                0x00000000080010f0       0x46 ./Core/Src/lcd.o
-                0x00000000080010f0                LCD_Clear(unsigned short, unsigned short, unsigned short, unsigned short, unsigned short)
- *fill*         0x0000000008001136        0x2 
+                0x0000000008000f7c       0x46 ./Core/Inc/Screen/lcd.o
+                0x0000000008000f7c                LCD_Clear(unsigned short, unsigned short, unsigned short, unsigned short, unsigned short)
+ *fill*         0x0000000008000fc2        0x2 
  .text._Z12LCD_DrawCharttc
-                0x0000000008001138       0x8c ./Core/Src/lcd.o
-                0x0000000008001138                LCD_DrawChar(unsigned short, unsigned short, char)
+                0x0000000008000fc4       0x8c ./Core/Inc/Screen/lcd.o
+                0x0000000008000fc4                LCD_DrawChar(unsigned short, unsigned short, char)
  .text._Z14LCD_DrawStringttPKc
-                0x00000000080011c4       0x5c ./Core/Src/lcd.o
-                0x00000000080011c4                LCD_DrawString(unsigned short, unsigned short, char const*)
+                0x0000000008001050       0x5c ./Core/Inc/Screen/lcd.o
+                0x0000000008001050                LCD_DrawString(unsigned short, unsigned short, char const*)
+ .text._ZN12StepperMotorC2EP12GPIO_TypeDefttttP17TIM_HandleTypeDef
+                0x00000000080010ac       0x60 ./Core/Inc/StepperMotor/StepperMotor.o
+                0x00000000080010ac                StepperMotor::StepperMotor(GPIO_TypeDef*, unsigned short, unsigned short, unsigned short, unsigned short, TIM_HandleTypeDef*)
+                0x00000000080010ac                StepperMotor::StepperMotor(GPIO_TypeDef*, unsigned short, unsigned short, unsigned short, unsigned short, TIM_HandleTypeDef*)
+ .text._ZN12StepperMotor10microDelayEt
+                0x000000000800110c       0x3a ./Core/Inc/StepperMotor/StepperMotor.o
+                0x000000000800110c                StepperMotor::microDelay(unsigned short)
+ .text._ZN12StepperMotor10singleStepEi
+                0x0000000008001146       0x72 ./Core/Inc/StepperMotor/StepperMotor.o
+                0x0000000008001146                StepperMotor::singleStep(int)
+ .text._ZN12StepperMotor9makeStepsEitb
+                0x00000000080011b8       0x68 ./Core/Inc/StepperMotor/StepperMotor.o
+                0x00000000080011b8                StepperMotor::makeSteps(int, unsigned short, bool)
  .text.main     0x0000000008001220       0x98 ./Core/Src/main.o
                 0x0000000008001220                main
  .text._Z18SystemClock_Configv
@@ -4107,12 +4107,12 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
 .rodata         0x00000000080061d8      0xa2c
                 0x00000000080061d8                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x00000000080061d8       0x20 ./Core/Inc/StepperMotor.o
+ .rodata        0x00000000080061d8       0x20 ./Core/Inc/StepperMotor/StepperMotor.o
  .rodata        0x00000000080061f8       0x13 ./Core/Src/main.o
  *(.rodata*)
  *fill*         0x000000000800620b        0x1 
  .rodata._ZL12ucAscii_1608
-                0x000000000800620c      0x5f0 ./Core/Src/lcd.o
+                0x000000000800620c      0x5f0 ./Core/Inc/Screen/lcd.o
  .rodata.AHBPrescTable
                 0x00000000080067fc       0x10 ./Core/Src/system_stm32f1xx.o
                 0x00000000080067fc                AHBPrescTable
@@ -4311,9 +4311,9 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .ARM.attributes
                 0x000000000000001d       0x2d /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/crtbegin.o
  .ARM.attributes
-                0x000000000000004a       0x2d ./Core/Inc/StepperMotor.o
+                0x000000000000004a       0x2d ./Core/Inc/Screen/lcd.o
  .ARM.attributes
-                0x0000000000000077       0x2d ./Core/Src/lcd.o
+                0x0000000000000077       0x2d ./Core/Inc/StepperMotor/StepperMotor.o
  .ARM.attributes
                 0x00000000000000a4       0x2d ./Core/Src/main.o
  .ARM.attributes
@@ -4453,8 +4453,8 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
 LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.10.3-2021.10.macos64_1.0.0.202111181127/tools/bin/../lib/gcc/arm-none-eabi/10.3.1/thumb/v7-m/nofp/libgcc.a
 
 .debug_info     0x0000000000000000    0x120cb
- .debug_info    0x0000000000000000      0xa25 ./Core/Inc/StepperMotor.o
- .debug_info    0x0000000000000a25      0x967 ./Core/Src/lcd.o
+ .debug_info    0x0000000000000000      0x967 ./Core/Inc/Screen/lcd.o
+ .debug_info    0x0000000000000967      0xa25 ./Core/Inc/StepperMotor/StepperMotor.o
  .debug_info    0x000000000000138c     0x1b04 ./Core/Src/main.o
  .debug_info    0x0000000000002e90     0x1218 ./Core/Src/stm32f1xx_hal_msp.o
  .debug_info    0x00000000000040a8      0x239 ./Core/Src/stm32f1xx_it.o
@@ -4474,8 +4474,8 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_info    0x000000000001169f      0xa2c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
 
 .debug_abbrev   0x0000000000000000     0x26a7
- .debug_abbrev  0x0000000000000000      0x268 ./Core/Inc/StepperMotor.o
- .debug_abbrev  0x0000000000000268      0x24f ./Core/Src/lcd.o
+ .debug_abbrev  0x0000000000000000      0x24f ./Core/Inc/Screen/lcd.o
+ .debug_abbrev  0x000000000000024f      0x268 ./Core/Inc/StepperMotor/StepperMotor.o
  .debug_abbrev  0x00000000000004b7      0x3c1 ./Core/Src/main.o
  .debug_abbrev  0x0000000000000878      0x23a ./Core/Src/stm32f1xx_hal_msp.o
  .debug_abbrev  0x0000000000000ab2      0x138 ./Core/Src/stm32f1xx_it.o
@@ -4496,9 +4496,9 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
 
 .debug_aranges  0x0000000000000000     0x1160
  .debug_aranges
-                0x0000000000000000       0x38 ./Core/Inc/StepperMotor.o
+                0x0000000000000000       0xb8 ./Core/Inc/Screen/lcd.o
  .debug_aranges
-                0x0000000000000038       0xb8 ./Core/Src/lcd.o
+                0x00000000000000b8       0x38 ./Core/Inc/StepperMotor/StepperMotor.o
  .debug_aranges
                 0x00000000000000f0       0x68 ./Core/Src/main.o
  .debug_aranges
@@ -4535,8 +4535,8 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
                 0x00000000000010b8       0xa8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
 
 .debug_ranges   0x0000000000000000     0x1080
- .debug_ranges  0x0000000000000000       0x28 ./Core/Inc/StepperMotor.o
- .debug_ranges  0x0000000000000028       0xa8 ./Core/Src/lcd.o
+ .debug_ranges  0x0000000000000000       0xa8 ./Core/Inc/Screen/lcd.o
+ .debug_ranges  0x00000000000000a8       0x28 ./Core/Inc/StepperMotor/StepperMotor.o
  .debug_ranges  0x00000000000000d0       0x58 ./Core/Src/main.o
  .debug_ranges  0x0000000000000128       0x60 ./Core/Src/stm32f1xx_hal_msp.o
  .debug_ranges  0x0000000000000188       0x60 ./Core/Src/stm32f1xx_it.o
@@ -4556,49 +4556,49 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_ranges  0x0000000000000fe8       0x98 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
 
 .debug_macro    0x0000000000000000    0x1d658
- .debug_macro   0x0000000000000000      0x1db ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000001db      0xb44 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000000d1f      0x227 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000000f46       0x2e ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000000f74       0x22 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000000f96       0x1c ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000000fb2       0x22 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000000fd4       0x8e ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000001062       0x51 ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000010b3      0x103 ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000011b6       0x6a ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000001220      0x1df ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000013ff       0x1c ./Core/Inc/StepperMotor.o
- .debug_macro   0x000000000000141b       0x22 ./Core/Inc/StepperMotor.o
- .debug_macro   0x000000000000143d       0xbd ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000014fa      0xd23 ./Core/Inc/StepperMotor.o
- .debug_macro   0x000000000000221d     0xfd8c ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000011fa9       0x6d ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000012016     0x34a2 ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000154b8      0x17b ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000015633       0x5c ./Core/Inc/StepperMotor.o
- .debug_macro   0x000000000001568f      0x5bc ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000015c4b      0x4d5 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016120      0x1cb ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000162eb      0x114 ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000163ff      0x1ea ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000165e9       0x27 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016610      0x144 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016754      0x1bc ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016910       0x30 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016940       0x3c ./Core/Inc/StepperMotor.o
- .debug_macro   0x000000000001697c       0x57 ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000169d3       0x87 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016a5a      0x24f ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016ca9      0x356 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000016fff      0x287 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000017286      0x140 ./Core/Inc/StepperMotor.o
- .debug_macro   0x00000000000173c6      0x8ed ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000017cb3      0x28e ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000017f41       0xb5 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000017ff6       0x10 ./Core/Inc/StepperMotor.o
- .debug_macro   0x0000000000018006      0x1e5 ./Core/Src/lcd.o
- .debug_macro   0x00000000000181eb       0xd0 ./Core/Src/lcd.o
+ .debug_macro   0x0000000000000000      0x1e5 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000001e5      0xb44 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000000d29      0x227 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000000f50       0x2e ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000000f7e       0x22 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000000fa0       0x1c ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000000fbc       0x22 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000000fde       0x8e ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000000106c       0x51 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000010bd      0x103 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000011c0       0x6a ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000000122a      0x1df ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000001409       0x1c ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000001425       0x22 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000001447       0xbd ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000001504      0xd23 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000002227     0xfd8c ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000011fb3       0x6d ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000012020     0x34a2 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000154c2      0x17b ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000001563d       0x5c ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000015699      0x5bc ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000015c55      0x4d5 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000001612a      0x1cb ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000162f5      0x114 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000016409      0x1ea ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000165f3       0x27 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000001661a      0x144 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000001675e      0x1bc ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000001691a       0x30 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x000000000001694a       0x3c ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000016986       0x57 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000169dd       0x87 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000016a64      0x24f ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000016cb3      0x356 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000017009      0x287 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000017290      0x140 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000173d0      0x8ed ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000017cbd      0x28e ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000017f4b       0xb5 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x0000000000018000       0xd0 ./Core/Inc/Screen/lcd.o
+ .debug_macro   0x00000000000180d0      0x1db ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_macro   0x00000000000182ab       0x10 ./Core/Inc/StepperMotor/StepperMotor.o
  .debug_macro   0x00000000000182bb      0x34c ./Core/Src/main.o
  .debug_macro   0x0000000000018607       0x5e ./Core/Src/main.o
  .debug_macro   0x0000000000018665       0xd6 ./Core/Src/main.o
@@ -4674,71 +4674,71 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .debug_macro   0x000000000001d290      0x1c8 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
  .debug_macro   0x000000000001d458      0x200 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
 
-.debug_line     0x0000000000000000    0x13bb2
- .debug_line    0x0000000000000000      0x786 ./Core/Inc/StepperMotor.o
- .debug_line    0x0000000000000786      0xc20 ./Core/Src/lcd.o
- .debug_line    0x00000000000013a6      0xb68 ./Core/Src/main.o
- .debug_line    0x0000000000001f0e      0x85a ./Core/Src/stm32f1xx_hal_msp.o
- .debug_line    0x0000000000002768      0x7e1 ./Core/Src/stm32f1xx_it.o
- .debug_line    0x0000000000002f49      0x82b ./Core/Src/syscalls.o
- .debug_line    0x0000000000003774      0x521 ./Core/Src/sysmem.o
- .debug_line    0x0000000000003c95      0x762 ./Core/Src/system_stm32f1xx.o
- .debug_line    0x00000000000043f7       0x87 ./Core/Startup/startup_stm32f103vetx.o
- .debug_line    0x000000000000447e      0x98f ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_line    0x0000000000004e0d      0xb77 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_line    0x0000000000005984      0xa50 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_line    0x00000000000063d4     0x3b25 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
- .debug_line    0x0000000000009ef9      0xd9b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
- .debug_line    0x000000000000ac94      0xd08 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.o
- .debug_line    0x000000000000b99c     0x3655 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
- .debug_line    0x000000000000eff1     0x193b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
- .debug_line    0x000000000001092c     0x2856 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
- .debug_line    0x0000000000013182      0xa30 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
+.debug_line     0x0000000000000000    0x13bfe
+ .debug_line    0x0000000000000000      0xc27 ./Core/Inc/Screen/lcd.o
+ .debug_line    0x0000000000000c27      0x79f ./Core/Inc/StepperMotor/StepperMotor.o
+ .debug_line    0x00000000000013c6      0xb94 ./Core/Src/main.o
+ .debug_line    0x0000000000001f5a      0x85a ./Core/Src/stm32f1xx_hal_msp.o
+ .debug_line    0x00000000000027b4      0x7e1 ./Core/Src/stm32f1xx_it.o
+ .debug_line    0x0000000000002f95      0x82b ./Core/Src/syscalls.o
+ .debug_line    0x00000000000037c0      0x521 ./Core/Src/sysmem.o
+ .debug_line    0x0000000000003ce1      0x762 ./Core/Src/system_stm32f1xx.o
+ .debug_line    0x0000000000004443       0x87 ./Core/Startup/startup_stm32f103vetx.o
+ .debug_line    0x00000000000044ca      0x98f ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_line    0x0000000000004e59      0xb77 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_line    0x00000000000059d0      0xa50 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_line    0x0000000000006420     0x3b25 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
+ .debug_line    0x0000000000009f45      0xd9b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_line    0x000000000000ace0      0xd08 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.o
+ .debug_line    0x000000000000b9e8     0x3655 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+ .debug_line    0x000000000000f03d     0x193b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+ .debug_line    0x0000000000010978     0x2856 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
+ .debug_line    0x00000000000131ce      0xa30 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
 
-.debug_str      0x0000000000000000    0xa0622
- .debug_str     0x0000000000000000    0x95ad6 ./Core/Inc/StepperMotor.o
-                                      0x960c6 (size before relaxing)
- .debug_str     0x0000000000095ad6      0x7fb ./Core/Src/lcd.o
-                                      0x961f6 (size before relaxing)
- .debug_str     0x00000000000962d1     0x4cd4 ./Core/Src/main.o
-                                      0x9b4c2 (size before relaxing)
- .debug_str     0x000000000009afa5      0x30b ./Core/Src/stm32f1xx_hal_msp.o
+.debug_str      0x0000000000000000    0xa0638
+ .debug_str     0x0000000000000000    0x95d64 ./Core/Inc/Screen/lcd.o
+                                      0x961fd (size before relaxing)
+ .debug_str     0x0000000000095d64      0x581 ./Core/Inc/StepperMotor/StepperMotor.o
+                                      0x960d3 (size before relaxing)
+ .debug_str     0x00000000000962e5     0x4cd6 ./Core/Src/main.o
+                                      0x9b4c4 (size before relaxing)
+ .debug_str     0x000000000009afbb      0x30b ./Core/Src/stm32f1xx_hal_msp.o
                                       0x962a4 (size before relaxing)
- .debug_str     0x000000000009b2b0      0x13c ./Core/Src/stm32f1xx_it.o
+ .debug_str     0x000000000009b2c6      0x13c ./Core/Src/stm32f1xx_it.o
                                       0x9571d (size before relaxing)
- .debug_str     0x000000000009b3ec     0x1880 ./Core/Src/syscalls.o
+ .debug_str     0x000000000009b402     0x1880 ./Core/Src/syscalls.o
                                        0x8a0c (size before relaxing)
- .debug_str     0x000000000009cc6c       0x6b ./Core/Src/sysmem.o
+ .debug_str     0x000000000009cc82       0x6b ./Core/Src/sysmem.o
                                        0x5d48 (size before relaxing)
- .debug_str     0x000000000009ccd7       0x7e ./Core/Src/system_stm32f1xx.o
+ .debug_str     0x000000000009cced       0x7e ./Core/Src/system_stm32f1xx.o
                                       0x95534 (size before relaxing)
- .debug_str     0x000000000009cd55       0x36 ./Core/Startup/startup_stm32f103vetx.o
+ .debug_str     0x000000000009cd6b       0x36 ./Core/Startup/startup_stm32f103vetx.o
                                          0x62 (size before relaxing)
- .debug_str     0x000000000009cd8b      0x31b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_str     0x000000000009cda1      0x31b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
                                       0x95d4b (size before relaxing)
- .debug_str     0x000000000009d0a6      0x29e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_str     0x000000000009d0bc      0x29e ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
                                       0x95c97 (size before relaxing)
- .debug_str     0x000000000009d344      0x294 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_str     0x000000000009d35a      0x294 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
                                       0x958ba (size before relaxing)
- .debug_str     0x000000000009d5d8      0xbd0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
+ .debug_str     0x000000000009d5ee      0xbd0 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
                                       0x965fb (size before relaxing)
- .debug_str     0x000000000009e1a8      0x209 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+ .debug_str     0x000000000009e1be      0x209 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
                                       0x95963 (size before relaxing)
- .debug_str     0x000000000009e3b1      0x291 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.o
+ .debug_str     0x000000000009e3c7      0x291 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_sram.o
                                       0x95bb7 (size before relaxing)
- .debug_str     0x000000000009e642      0xdf1 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
+ .debug_str     0x000000000009e658      0xdf1 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o
                                       0x96965 (size before relaxing)
- .debug_str     0x000000000009f433      0x493 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+ .debug_str     0x000000000009f449      0x493 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
                                       0x96171 (size before relaxing)
- .debug_str     0x000000000009f8c6      0x615 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
+ .debug_str     0x000000000009f8dc      0x615 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_uart.o
                                       0x95fd4 (size before relaxing)
- .debug_str     0x000000000009fedb      0x747 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
+ .debug_str     0x000000000009fef1      0x747 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
                                       0x95e99 (size before relaxing)
 
 .comment        0x0000000000000000       0x50
- .comment       0x0000000000000000       0x50 ./Core/Inc/StepperMotor.o
+ .comment       0x0000000000000000       0x50 ./Core/Inc/Screen/lcd.o
                                          0x51 (size before relaxing)
- .comment       0x0000000000000050       0x51 ./Core/Src/lcd.o
+ .comment       0x0000000000000050       0x51 ./Core/Inc/StepperMotor/StepperMotor.o
  .comment       0x0000000000000050       0x51 ./Core/Src/main.o
  .comment       0x0000000000000050       0x51 ./Core/Src/stm32f1xx_hal_msp.o
  .comment       0x0000000000000050       0x51 ./Core/Src/stm32f1xx_it.o
@@ -4757,8 +4757,8 @@ LOAD /Applications/STM32CubeIDE.app/Contents/Eclipse/plugins/com.st.stm32cube.id
  .comment       0x0000000000000050       0x51 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_ll_fsmc.o
 
 .debug_frame    0x0000000000000000     0x5a0c
- .debug_frame   0x0000000000000000       0xac ./Core/Inc/StepperMotor.o
- .debug_frame   0x00000000000000ac      0x2f4 ./Core/Src/lcd.o
+ .debug_frame   0x0000000000000000      0x2f4 ./Core/Inc/Screen/lcd.o
+ .debug_frame   0x00000000000002f4       0xac ./Core/Inc/StepperMotor/StepperMotor.o
  .debug_frame   0x00000000000003a0      0x158 ./Core/Src/main.o
  .debug_frame   0x00000000000004f8      0x1a0 ./Core/Src/stm32f1xx_hal_msp.o
  .debug_frame   0x0000000000000698      0x144 ./Core/Src/stm32f1xx_it.o

@@ -21,9 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "lcd.h"
+#include <Screen/lcd.h>
 #include <stdio.h>
-#include <StepperMotor.h>
+#include <StepperMotor/StepperMotor.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -129,7 +129,7 @@ int main(void)
 //          .Pin4 = STP_4_Pin,
 //          .Timer = &htim1
 //      };
-  StepperMotor motor(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
+  StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
 
   /* USER CODE END 2 */
 
@@ -140,9 +140,9 @@ int main(void)
 //	  step_motor(&motor, 256, 1000, 1);  // 256 half revolution
 //	  HAL_Delay(100);
 //	  step_motor(&motor, 128, 1000, 0); // 128 quarter revolution
-	  motor.stepMotor(256, 1000, true);
+	  stepper.makeSteps(256, 1000, true);
 	  HAL_Delay(100);
-	  motor.stepMotor(128, 1000, false);
+	  stepper.makeSteps(128, 1000, false);
 
     /* USER CODE END WHILE */
 

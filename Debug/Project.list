@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  0001d658  00000000  00000000  00036b58  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00013bb2  00000000  00000000  000541b0  2**0
+ 17 .debug_line   00013bfe  00000000  00000000  000541b0  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000a0622  00000000  00000000  00067d62  2**0
+ 18 .debug_str    000a0638  00000000  00000000  00067dae  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000050  00000000  00000000  00108384  2**0
+ 19 .comment      00000050  00000000  00000000  001083e6  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00005a0c  00000000  00000000  001083d4  2**2
+ 20 .debug_frame  00005a0c  00000000  00000000  00108438  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -872,1103 +872,1103 @@ Disassembly of section .text:
  8000b5c:	4770      	bx	lr
  8000b5e:	bf00      	nop
 
-08000b60 <_ZN12StepperMotorC1EP12GPIO_TypeDefttttP17TIM_HandleTypeDef>:
- *      Author: ooj
- */
-
-#include "StepperMotor.h"
-
-StepperMotor::StepperMotor(GPIO_TypeDef* GPIO_Port, uint16_t Pin1, uint16_t Pin2, uint16_t Pin3, uint16_t Pin4, TIM_HandleTypeDef* Timer)
- 8000b60:	b4b0      	push	{r4, r5, r7}
- 8000b62:	b085      	sub	sp, #20
- 8000b64:	af00      	add	r7, sp, #0
- 8000b66:	60f8      	str	r0, [r7, #12]
- 8000b68:	60b9      	str	r1, [r7, #8]
- 8000b6a:	4611      	mov	r1, r2
- 8000b6c:	461a      	mov	r2, r3
- 8000b6e:	460b      	mov	r3, r1
- 8000b70:	80fb      	strh	r3, [r7, #6]
- 8000b72:	4613      	mov	r3, r2
- 8000b74:	80bb      	strh	r3, [r7, #4]
-    : GPIO_Port(GPIO_Port), Pin1(Pin1), Pin2(Pin2), Pin3(Pin3), Pin4(Pin4), Timer(Timer) {}
- 8000b76:	68fb      	ldr	r3, [r7, #12]
- 8000b78:	68ba      	ldr	r2, [r7, #8]
- 8000b7a:	601a      	str	r2, [r3, #0]
- 8000b7c:	68fb      	ldr	r3, [r7, #12]
- 8000b7e:	88fa      	ldrh	r2, [r7, #6]
- 8000b80:	809a      	strh	r2, [r3, #4]
- 8000b82:	68fb      	ldr	r3, [r7, #12]
- 8000b84:	88ba      	ldrh	r2, [r7, #4]
- 8000b86:	80da      	strh	r2, [r3, #6]
- 8000b88:	68fb      	ldr	r3, [r7, #12]
- 8000b8a:	8c3a      	ldrh	r2, [r7, #32]
- 8000b8c:	811a      	strh	r2, [r3, #8]
- 8000b8e:	68fb      	ldr	r3, [r7, #12]
- 8000b90:	8cba      	ldrh	r2, [r7, #36]	; 0x24
- 8000b92:	815a      	strh	r2, [r3, #10]
- 8000b94:	68fb      	ldr	r3, [r7, #12]
- 8000b96:	6aba      	ldr	r2, [r7, #40]	; 0x28
- 8000b98:	60da      	str	r2, [r3, #12]
- 8000b9a:	68fb      	ldr	r3, [r7, #12]
- 8000b9c:	4a07      	ldr	r2, [pc, #28]	; (8000bbc <_ZN12StepperMotorC1EP12GPIO_TypeDefttttP17TIM_HandleTypeDef+0x5c>)
- 8000b9e:	f103 0410 	add.w	r4, r3, #16
- 8000ba2:	4615      	mov	r5, r2
- 8000ba4:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
- 8000ba6:	c40f      	stmia	r4!, {r0, r1, r2, r3}
- 8000ba8:	e895 000f 	ldmia.w	r5, {r0, r1, r2, r3}
- 8000bac:	e884 000f 	stmia.w	r4, {r0, r1, r2, r3}
- 8000bb0:	68fb      	ldr	r3, [r7, #12]
- 8000bb2:	4618      	mov	r0, r3
- 8000bb4:	3714      	adds	r7, #20
- 8000bb6:	46bd      	mov	sp, r7
- 8000bb8:	bcb0      	pop	{r4, r5, r7}
- 8000bba:	4770      	bx	lr
- 8000bbc:	080061d8 	.word	0x080061d8
-
-08000bc0 <_ZN12StepperMotor10microDelayEt>:
-
-void StepperMotor::microDelay(uint16_t delay) {
- 8000bc0:	b480      	push	{r7}
- 8000bc2:	b083      	sub	sp, #12
- 8000bc4:	af00      	add	r7, sp, #0
- 8000bc6:	6078      	str	r0, [r7, #4]
- 8000bc8:	460b      	mov	r3, r1
- 8000bca:	807b      	strh	r3, [r7, #2]
-    __HAL_TIM_SET_COUNTER(Timer, 0);
- 8000bcc:	687b      	ldr	r3, [r7, #4]
- 8000bce:	68db      	ldr	r3, [r3, #12]
- 8000bd0:	681b      	ldr	r3, [r3, #0]
- 8000bd2:	2200      	movs	r2, #0
- 8000bd4:	625a      	str	r2, [r3, #36]	; 0x24
-    while (__HAL_TIM_GET_COUNTER(Timer) < delay);
- 8000bd6:	687b      	ldr	r3, [r7, #4]
- 8000bd8:	68db      	ldr	r3, [r3, #12]
- 8000bda:	681b      	ldr	r3, [r3, #0]
- 8000bdc:	6a5a      	ldr	r2, [r3, #36]	; 0x24
- 8000bde:	887b      	ldrh	r3, [r7, #2]
- 8000be0:	429a      	cmp	r2, r3
- 8000be2:	bf34      	ite	cc
- 8000be4:	2301      	movcc	r3, #1
- 8000be6:	2300      	movcs	r3, #0
- 8000be8:	b2db      	uxtb	r3, r3
- 8000bea:	2b00      	cmp	r3, #0
- 8000bec:	d000      	beq.n	8000bf0 <_ZN12StepperMotor10microDelayEt+0x30>
- 8000bee:	e7f2      	b.n	8000bd6 <_ZN12StepperMotor10microDelayEt+0x16>
-}
- 8000bf0:	bf00      	nop
- 8000bf2:	370c      	adds	r7, #12
- 8000bf4:	46bd      	mov	sp, r7
- 8000bf6:	bc80      	pop	{r7}
- 8000bf8:	4770      	bx	lr
-
-08000bfa <_ZN12StepperMotor10stepSingleEi>:
-
-void StepperMotor::stepSingle(int index) {
- 8000bfa:	b580      	push	{r7, lr}
- 8000bfc:	b082      	sub	sp, #8
- 8000bfe:	af00      	add	r7, sp, #0
- 8000c00:	6078      	str	r0, [r7, #4]
- 8000c02:	6039      	str	r1, [r7, #0]
-    HAL_GPIO_WritePin(GPIO_Port, Pin1, state[index][0]);
- 8000c04:	687b      	ldr	r3, [r7, #4]
- 8000c06:	6818      	ldr	r0, [r3, #0]
- 8000c08:	687b      	ldr	r3, [r7, #4]
- 8000c0a:	8899      	ldrh	r1, [r3, #4]
- 8000c0c:	687b      	ldr	r3, [r7, #4]
- 8000c0e:	683a      	ldr	r2, [r7, #0]
- 8000c10:	3204      	adds	r2, #4
- 8000c12:	f813 3022 	ldrb.w	r3, [r3, r2, lsl #2]
- 8000c16:	461a      	mov	r2, r3
- 8000c18:	f001 fb14 	bl	8002244 <HAL_GPIO_WritePin>
-    HAL_GPIO_WritePin(GPIO_Port, Pin2, state[index][1]);
- 8000c1c:	687b      	ldr	r3, [r7, #4]
- 8000c1e:	6818      	ldr	r0, [r3, #0]
- 8000c20:	687b      	ldr	r3, [r7, #4]
- 8000c22:	88d9      	ldrh	r1, [r3, #6]
- 8000c24:	687a      	ldr	r2, [r7, #4]
- 8000c26:	683b      	ldr	r3, [r7, #0]
- 8000c28:	009b      	lsls	r3, r3, #2
- 8000c2a:	4413      	add	r3, r2
- 8000c2c:	7c5b      	ldrb	r3, [r3, #17]
- 8000c2e:	461a      	mov	r2, r3
- 8000c30:	f001 fb08 	bl	8002244 <HAL_GPIO_WritePin>
-    HAL_GPIO_WritePin(GPIO_Port, Pin3, state[index][2]);
- 8000c34:	687b      	ldr	r3, [r7, #4]
- 8000c36:	6818      	ldr	r0, [r3, #0]
- 8000c38:	687b      	ldr	r3, [r7, #4]
- 8000c3a:	8919      	ldrh	r1, [r3, #8]
- 8000c3c:	687a      	ldr	r2, [r7, #4]
- 8000c3e:	683b      	ldr	r3, [r7, #0]
- 8000c40:	009b      	lsls	r3, r3, #2
- 8000c42:	4413      	add	r3, r2
- 8000c44:	7c9b      	ldrb	r3, [r3, #18]
- 8000c46:	461a      	mov	r2, r3
- 8000c48:	f001 fafc 	bl	8002244 <HAL_GPIO_WritePin>
-    HAL_GPIO_WritePin(GPIO_Port, Pin4, state[index][3]);
- 8000c4c:	687b      	ldr	r3, [r7, #4]
- 8000c4e:	6818      	ldr	r0, [r3, #0]
- 8000c50:	687b      	ldr	r3, [r7, #4]
- 8000c52:	8959      	ldrh	r1, [r3, #10]
- 8000c54:	687a      	ldr	r2, [r7, #4]
- 8000c56:	683b      	ldr	r3, [r7, #0]
- 8000c58:	009b      	lsls	r3, r3, #2
- 8000c5a:	4413      	add	r3, r2
- 8000c5c:	7cdb      	ldrb	r3, [r3, #19]
- 8000c5e:	461a      	mov	r2, r3
- 8000c60:	f001 faf0 	bl	8002244 <HAL_GPIO_WritePin>
-}
- 8000c64:	bf00      	nop
- 8000c66:	3708      	adds	r7, #8
- 8000c68:	46bd      	mov	sp, r7
- 8000c6a:	bd80      	pop	{r7, pc}
-
-08000c6c <_ZN12StepperMotor9stepMotorEitb>:
-
-void StepperMotor::stepMotor(int steps, uint16_t delay, bool clockwise) {
- 8000c6c:	b580      	push	{r7, lr}
- 8000c6e:	b088      	sub	sp, #32
- 8000c70:	af00      	add	r7, sp, #0
- 8000c72:	60f8      	str	r0, [r7, #12]
- 8000c74:	60b9      	str	r1, [r7, #8]
- 8000c76:	4611      	mov	r1, r2
- 8000c78:	461a      	mov	r2, r3
- 8000c7a:	460b      	mov	r3, r1
- 8000c7c:	80fb      	strh	r3, [r7, #6]
- 8000c7e:	4613      	mov	r3, r2
- 8000c80:	717b      	strb	r3, [r7, #5]
-    for (int x = 0; x < steps; ++x) {
- 8000c82:	2300      	movs	r3, #0
- 8000c84:	61fb      	str	r3, [r7, #28]
- 8000c86:	69fa      	ldr	r2, [r7, #28]
- 8000c88:	68bb      	ldr	r3, [r7, #8]
- 8000c8a:	429a      	cmp	r2, r3
- 8000c8c:	da1e      	bge.n	8000ccc <_ZN12StepperMotor9stepMotorEitb+0x60>
-        for (int i = 0; i < STEP_COUNT; ++i) {
- 8000c8e:	2300      	movs	r3, #0
- 8000c90:	61bb      	str	r3, [r7, #24]
- 8000c92:	69bb      	ldr	r3, [r7, #24]
- 8000c94:	2b07      	cmp	r3, #7
- 8000c96:	dc15      	bgt.n	8000cc4 <_ZN12StepperMotor9stepMotorEitb+0x58>
-            int index = clockwise ? (STEP_COUNT - 1 - i) : i;
- 8000c98:	797b      	ldrb	r3, [r7, #5]
- 8000c9a:	2b00      	cmp	r3, #0
- 8000c9c:	d003      	beq.n	8000ca6 <_ZN12StepperMotor9stepMotorEitb+0x3a>
- 8000c9e:	69bb      	ldr	r3, [r7, #24]
- 8000ca0:	f1c3 0307 	rsb	r3, r3, #7
- 8000ca4:	e000      	b.n	8000ca8 <_ZN12StepperMotor9stepMotorEitb+0x3c>
- 8000ca6:	69bb      	ldr	r3, [r7, #24]
- 8000ca8:	617b      	str	r3, [r7, #20]
-            stepSingle(index);
- 8000caa:	6979      	ldr	r1, [r7, #20]
- 8000cac:	68f8      	ldr	r0, [r7, #12]
- 8000cae:	f7ff ffa4 	bl	8000bfa <_ZN12StepperMotor10stepSingleEi>
-            microDelay(delay);
- 8000cb2:	88fb      	ldrh	r3, [r7, #6]
- 8000cb4:	4619      	mov	r1, r3
- 8000cb6:	68f8      	ldr	r0, [r7, #12]
- 8000cb8:	f7ff ff82 	bl	8000bc0 <_ZN12StepperMotor10microDelayEt>
-        for (int i = 0; i < STEP_COUNT; ++i) {
- 8000cbc:	69bb      	ldr	r3, [r7, #24]
- 8000cbe:	3301      	adds	r3, #1
- 8000cc0:	61bb      	str	r3, [r7, #24]
- 8000cc2:	e7e6      	b.n	8000c92 <_ZN12StepperMotor9stepMotorEitb+0x26>
-    for (int x = 0; x < steps; ++x) {
- 8000cc4:	69fb      	ldr	r3, [r7, #28]
- 8000cc6:	3301      	adds	r3, #1
- 8000cc8:	61fb      	str	r3, [r7, #28]
- 8000cca:	e7dc      	b.n	8000c86 <_ZN12StepperMotor9stepMotorEitb+0x1a>
-        }
-    }
-}
- 8000ccc:	bf00      	nop
- 8000cce:	3720      	adds	r7, #32
- 8000cd0:	46bd      	mov	sp, r7
- 8000cd2:	bd80      	pop	{r7, pc}
-
-08000cd4 <_Z5Delaym>:
+08000b60 <_Z5Delaym>:
 void		LCD_FillColor           ( uint32_t ulAmout_Point, uint16_t usColor );
 uint16_t	LCD_Read_PixelData      ( void );
 
 
 
 void Delay ( __IO uint32_t nCount ){  for ( ; nCount != 0; nCount -- );}
- 8000cd4:	b480      	push	{r7}
- 8000cd6:	b083      	sub	sp, #12
- 8000cd8:	af00      	add	r7, sp, #0
- 8000cda:	6078      	str	r0, [r7, #4]
- 8000cdc:	687b      	ldr	r3, [r7, #4]
- 8000cde:	2b00      	cmp	r3, #0
- 8000ce0:	bf14      	ite	ne
- 8000ce2:	2301      	movne	r3, #1
- 8000ce4:	2300      	moveq	r3, #0
- 8000ce6:	b2db      	uxtb	r3, r3
- 8000ce8:	2b00      	cmp	r3, #0
- 8000cea:	d003      	beq.n	8000cf4 <_Z5Delaym+0x20>
- 8000cec:	687b      	ldr	r3, [r7, #4]
- 8000cee:	3b01      	subs	r3, #1
- 8000cf0:	607b      	str	r3, [r7, #4]
- 8000cf2:	e7f3      	b.n	8000cdc <_Z5Delaym+0x8>
- 8000cf4:	bf00      	nop
- 8000cf6:	370c      	adds	r7, #12
- 8000cf8:	46bd      	mov	sp, r7
- 8000cfa:	bc80      	pop	{r7}
- 8000cfc:	4770      	bx	lr
+ 8000b60:	b480      	push	{r7}
+ 8000b62:	b083      	sub	sp, #12
+ 8000b64:	af00      	add	r7, sp, #0
+ 8000b66:	6078      	str	r0, [r7, #4]
+ 8000b68:	687b      	ldr	r3, [r7, #4]
+ 8000b6a:	2b00      	cmp	r3, #0
+ 8000b6c:	bf14      	ite	ne
+ 8000b6e:	2301      	movne	r3, #1
+ 8000b70:	2300      	moveq	r3, #0
+ 8000b72:	b2db      	uxtb	r3, r3
+ 8000b74:	2b00      	cmp	r3, #0
+ 8000b76:	d003      	beq.n	8000b80 <_Z5Delaym+0x20>
+ 8000b78:	687b      	ldr	r3, [r7, #4]
+ 8000b7a:	3b01      	subs	r3, #1
+ 8000b7c:	607b      	str	r3, [r7, #4]
+ 8000b7e:	e7f3      	b.n	8000b68 <_Z5Delaym+0x8>
+ 8000b80:	bf00      	nop
+ 8000b82:	370c      	adds	r7, #12
+ 8000b84:	46bd      	mov	sp, r7
+ 8000b86:	bc80      	pop	{r7}
+ 8000b88:	4770      	bx	lr
 
-08000cfe <_Z8LCD_INITv>:
+08000b8a <_Z8LCD_INITv>:
 
 void LCD_INIT ( void )
 {
- 8000cfe:	b580      	push	{r7, lr}
- 8000d00:	b082      	sub	sp, #8
- 8000d02:	af02      	add	r7, sp, #8
+ 8000b8a:	b580      	push	{r7, lr}
+ 8000b8c:	b082      	sub	sp, #8
+ 8000b8e:	af02      	add	r7, sp, #8
 	LCD_BackLed_Control(ENABLE);      
- 8000d04:	2001      	movs	r0, #1
- 8000d06:	f000 f829 	bl	8000d5c <_Z19LCD_BackLed_Control15FunctionalState>
+ 8000b90:	2001      	movs	r0, #1
+ 8000b92:	f000 f829 	bl	8000be8 <_Z19LCD_BackLed_Control15FunctionalState>
 	LCD_Rst();
- 8000d0a:	f000 f80f 	bl	8000d2c <_Z7LCD_Rstv>
+ 8000b96:	f000 f80f 	bl	8000bb8 <_Z7LCD_Rstv>
 	LCD_REG_Config();
- 8000d0e:	f000 f85f 	bl	8000dd0 <_Z14LCD_REG_Configv>
+ 8000b9a:	f000 f85f 	bl	8000c5c <_Z14LCD_REG_Configv>
 	LCD_Clear (0, 0, 240, 320, BACKGROUND);
- 8000d12:	f64f 73ff 	movw	r3, #65535	; 0xffff
- 8000d16:	9300      	str	r3, [sp, #0]
- 8000d18:	f44f 73a0 	mov.w	r3, #320	; 0x140
- 8000d1c:	22f0      	movs	r2, #240	; 0xf0
- 8000d1e:	2100      	movs	r1, #0
- 8000d20:	2000      	movs	r0, #0
- 8000d22:	f000 f9e5 	bl	80010f0 <_Z9LCD_Clearttttt>
+ 8000b9e:	f64f 73ff 	movw	r3, #65535	; 0xffff
+ 8000ba2:	9300      	str	r3, [sp, #0]
+ 8000ba4:	f44f 73a0 	mov.w	r3, #320	; 0x140
+ 8000ba8:	22f0      	movs	r2, #240	; 0xf0
+ 8000baa:	2100      	movs	r1, #0
+ 8000bac:	2000      	movs	r0, #0
+ 8000bae:	f000 f9e5 	bl	8000f7c <_Z9LCD_Clearttttt>
 }
- 8000d26:	bf00      	nop
- 8000d28:	46bd      	mov	sp, r7
- 8000d2a:	bd80      	pop	{r7, pc}
+ 8000bb2:	bf00      	nop
+ 8000bb4:	46bd      	mov	sp, r7
+ 8000bb6:	bd80      	pop	{r7, pc}
 
-08000d2c <_Z7LCD_Rstv>:
+08000bb8 <_Z7LCD_Rstv>:
 
 
 
 void LCD_Rst ( void )
 {			
- 8000d2c:	b580      	push	{r7, lr}
- 8000d2e:	af00      	add	r7, sp, #0
+ 8000bb8:	b580      	push	{r7, lr}
+ 8000bba:	af00      	add	r7, sp, #0
 	HAL_GPIO_WritePin(LCD_RST_PORT,LCD_RST_PIN,GPIO_PIN_RESET);
- 8000d30:	2200      	movs	r2, #0
- 8000d32:	2102      	movs	r1, #2
- 8000d34:	4807      	ldr	r0, [pc, #28]	; (8000d54 <_Z7LCD_Rstv+0x28>)
- 8000d36:	f001 fa85 	bl	8002244 <HAL_GPIO_WritePin>
+ 8000bbc:	2200      	movs	r2, #0
+ 8000bbe:	2102      	movs	r1, #2
+ 8000bc0:	4807      	ldr	r0, [pc, #28]	; (8000be0 <_Z7LCD_Rstv+0x28>)
+ 8000bc2:	f001 fb3f 	bl	8002244 <HAL_GPIO_WritePin>
 	Delay ( 0xAFFf<<2 ); 					   
- 8000d3a:	4807      	ldr	r0, [pc, #28]	; (8000d58 <_Z7LCD_Rstv+0x2c>)
- 8000d3c:	f7ff ffca 	bl	8000cd4 <_Z5Delaym>
+ 8000bc6:	4807      	ldr	r0, [pc, #28]	; (8000be4 <_Z7LCD_Rstv+0x2c>)
+ 8000bc8:	f7ff ffca 	bl	8000b60 <_Z5Delaym>
 	HAL_GPIO_WritePin(LCD_RST_PORT,LCD_RST_PIN,GPIO_PIN_SET);
- 8000d40:	2201      	movs	r2, #1
- 8000d42:	2102      	movs	r1, #2
- 8000d44:	4803      	ldr	r0, [pc, #12]	; (8000d54 <_Z7LCD_Rstv+0x28>)
- 8000d46:	f001 fa7d 	bl	8002244 <HAL_GPIO_WritePin>
+ 8000bcc:	2201      	movs	r2, #1
+ 8000bce:	2102      	movs	r1, #2
+ 8000bd0:	4803      	ldr	r0, [pc, #12]	; (8000be0 <_Z7LCD_Rstv+0x28>)
+ 8000bd2:	f001 fb37 	bl	8002244 <HAL_GPIO_WritePin>
 	Delay ( 0xAFFf<<2 ); 	
- 8000d4a:	4803      	ldr	r0, [pc, #12]	; (8000d58 <_Z7LCD_Rstv+0x2c>)
- 8000d4c:	f7ff ffc2 	bl	8000cd4 <_Z5Delaym>
+ 8000bd6:	4803      	ldr	r0, [pc, #12]	; (8000be4 <_Z7LCD_Rstv+0x2c>)
+ 8000bd8:	f7ff ffc2 	bl	8000b60 <_Z5Delaym>
 }
- 8000d50:	bf00      	nop
- 8000d52:	bd80      	pop	{r7, pc}
- 8000d54:	40011800 	.word	0x40011800
- 8000d58:	0002bffc 	.word	0x0002bffc
+ 8000bdc:	bf00      	nop
+ 8000bde:	bd80      	pop	{r7, pc}
+ 8000be0:	40011800 	.word	0x40011800
+ 8000be4:	0002bffc 	.word	0x0002bffc
 
-08000d5c <_Z19LCD_BackLed_Control15FunctionalState>:
+08000be8 <_Z19LCD_BackLed_Control15FunctionalState>:
 
 
 void LCD_BackLed_Control ( FunctionalState enumState )
 {
- 8000d5c:	b580      	push	{r7, lr}
- 8000d5e:	b082      	sub	sp, #8
- 8000d60:	af00      	add	r7, sp, #0
- 8000d62:	4603      	mov	r3, r0
- 8000d64:	71fb      	strb	r3, [r7, #7]
+ 8000be8:	b580      	push	{r7, lr}
+ 8000bea:	b082      	sub	sp, #8
+ 8000bec:	af00      	add	r7, sp, #0
+ 8000bee:	4603      	mov	r3, r0
+ 8000bf0:	71fb      	strb	r3, [r7, #7]
 	if ( enumState )
- 8000d66:	79fb      	ldrb	r3, [r7, #7]
- 8000d68:	2b00      	cmp	r3, #0
- 8000d6a:	d006      	beq.n	8000d7a <_Z19LCD_BackLed_Control15FunctionalState+0x1e>
+ 8000bf2:	79fb      	ldrb	r3, [r7, #7]
+ 8000bf4:	2b00      	cmp	r3, #0
+ 8000bf6:	d006      	beq.n	8000c06 <_Z19LCD_BackLed_Control15FunctionalState+0x1e>
 		HAL_GPIO_WritePin(LCD_BK_PORT,LCD_BK_PIN,GPIO_PIN_RESET);	
- 8000d6c:	2200      	movs	r2, #0
- 8000d6e:	f44f 5180 	mov.w	r1, #4096	; 0x1000
- 8000d72:	4807      	ldr	r0, [pc, #28]	; (8000d90 <_Z19LCD_BackLed_Control15FunctionalState+0x34>)
- 8000d74:	f001 fa66 	bl	8002244 <HAL_GPIO_WritePin>
+ 8000bf8:	2200      	movs	r2, #0
+ 8000bfa:	f44f 5180 	mov.w	r1, #4096	; 0x1000
+ 8000bfe:	4807      	ldr	r0, [pc, #28]	; (8000c1c <_Z19LCD_BackLed_Control15FunctionalState+0x34>)
+ 8000c00:	f001 fb20 	bl	8002244 <HAL_GPIO_WritePin>
 	else
 		HAL_GPIO_WritePin(LCD_BK_PORT,LCD_BK_PIN,GPIO_PIN_SET);			
 }
- 8000d78:	e005      	b.n	8000d86 <_Z19LCD_BackLed_Control15FunctionalState+0x2a>
+ 8000c04:	e005      	b.n	8000c12 <_Z19LCD_BackLed_Control15FunctionalState+0x2a>
 		HAL_GPIO_WritePin(LCD_BK_PORT,LCD_BK_PIN,GPIO_PIN_SET);			
- 8000d7a:	2201      	movs	r2, #1
- 8000d7c:	f44f 5180 	mov.w	r1, #4096	; 0x1000
- 8000d80:	4803      	ldr	r0, [pc, #12]	; (8000d90 <_Z19LCD_BackLed_Control15FunctionalState+0x34>)
- 8000d82:	f001 fa5f 	bl	8002244 <HAL_GPIO_WritePin>
+ 8000c06:	2201      	movs	r2, #1
+ 8000c08:	f44f 5180 	mov.w	r1, #4096	; 0x1000
+ 8000c0c:	4803      	ldr	r0, [pc, #12]	; (8000c1c <_Z19LCD_BackLed_Control15FunctionalState+0x34>)
+ 8000c0e:	f001 fb19 	bl	8002244 <HAL_GPIO_WritePin>
 }
- 8000d86:	bf00      	nop
- 8000d88:	3708      	adds	r7, #8
- 8000d8a:	46bd      	mov	sp, r7
- 8000d8c:	bd80      	pop	{r7, pc}
- 8000d8e:	bf00      	nop
- 8000d90:	40011400 	.word	0x40011400
+ 8000c12:	bf00      	nop
+ 8000c14:	3708      	adds	r7, #8
+ 8000c16:	46bd      	mov	sp, r7
+ 8000c18:	bd80      	pop	{r7, pc}
+ 8000c1a:	bf00      	nop
+ 8000c1c:	40011400 	.word	0x40011400
 
-08000d94 <_Z13LCD_Write_Cmdt>:
+08000c20 <_Z13LCD_Write_Cmdt>:
 
 
 
 
 void LCD_Write_Cmd ( uint16_t usCmd )
 {
- 8000d94:	b480      	push	{r7}
- 8000d96:	b083      	sub	sp, #12
- 8000d98:	af00      	add	r7, sp, #0
- 8000d9a:	4603      	mov	r3, r0
- 8000d9c:	80fb      	strh	r3, [r7, #6]
+ 8000c20:	b480      	push	{r7}
+ 8000c22:	b083      	sub	sp, #12
+ 8000c24:	af00      	add	r7, sp, #0
+ 8000c26:	4603      	mov	r3, r0
+ 8000c28:	80fb      	strh	r3, [r7, #6]
 	* ( __IO uint16_t * ) ( FSMC_Addr_LCD_CMD ) = usCmd;
- 8000d9e:	f04f 42c0 	mov.w	r2, #1610612736	; 0x60000000
- 8000da2:	88fb      	ldrh	r3, [r7, #6]
- 8000da4:	8013      	strh	r3, [r2, #0]
+ 8000c2a:	f04f 42c0 	mov.w	r2, #1610612736	; 0x60000000
+ 8000c2e:	88fb      	ldrh	r3, [r7, #6]
+ 8000c30:	8013      	strh	r3, [r2, #0]
 }
- 8000da6:	bf00      	nop
- 8000da8:	370c      	adds	r7, #12
- 8000daa:	46bd      	mov	sp, r7
- 8000dac:	bc80      	pop	{r7}
- 8000dae:	4770      	bx	lr
+ 8000c32:	bf00      	nop
+ 8000c34:	370c      	adds	r7, #12
+ 8000c36:	46bd      	mov	sp, r7
+ 8000c38:	bc80      	pop	{r7}
+ 8000c3a:	4770      	bx	lr
 
-08000db0 <_Z14LCD_Write_Datat>:
+08000c3c <_Z14LCD_Write_Datat>:
 
 
 
 
 void LCD_Write_Data ( uint16_t usData )
 {
- 8000db0:	b480      	push	{r7}
- 8000db2:	b083      	sub	sp, #12
- 8000db4:	af00      	add	r7, sp, #0
- 8000db6:	4603      	mov	r3, r0
- 8000db8:	80fb      	strh	r3, [r7, #6]
+ 8000c3c:	b480      	push	{r7}
+ 8000c3e:	b083      	sub	sp, #12
+ 8000c40:	af00      	add	r7, sp, #0
+ 8000c42:	4603      	mov	r3, r0
+ 8000c44:	80fb      	strh	r3, [r7, #6]
 	* ( __IO uint16_t * ) ( FSMC_Addr_LCD_DATA ) = usData;
- 8000dba:	4a04      	ldr	r2, [pc, #16]	; (8000dcc <_Z14LCD_Write_Datat+0x1c>)
- 8000dbc:	88fb      	ldrh	r3, [r7, #6]
- 8000dbe:	8013      	strh	r3, [r2, #0]
+ 8000c46:	4a04      	ldr	r2, [pc, #16]	; (8000c58 <_Z14LCD_Write_Datat+0x1c>)
+ 8000c48:	88fb      	ldrh	r3, [r7, #6]
+ 8000c4a:	8013      	strh	r3, [r2, #0]
 }
- 8000dc0:	bf00      	nop
- 8000dc2:	370c      	adds	r7, #12
- 8000dc4:	46bd      	mov	sp, r7
- 8000dc6:	bc80      	pop	{r7}
- 8000dc8:	4770      	bx	lr
- 8000dca:	bf00      	nop
- 8000dcc:	60020000 	.word	0x60020000
+ 8000c4c:	bf00      	nop
+ 8000c4e:	370c      	adds	r7, #12
+ 8000c50:	46bd      	mov	sp, r7
+ 8000c52:	bc80      	pop	{r7}
+ 8000c54:	4770      	bx	lr
+ 8000c56:	bf00      	nop
+ 8000c58:	60020000 	.word	0x60020000
 
-08000dd0 <_Z14LCD_REG_Configv>:
+08000c5c <_Z14LCD_REG_Configv>:
 	return ( * ( __IO uint16_t * ) ( FSMC_Addr_LCD_DATA ) );	
 }
 
 
 void LCD_REG_Config ( void )
 {
- 8000dd0:	b580      	push	{r7, lr}
- 8000dd2:	af00      	add	r7, sp, #0
+ 8000c5c:	b580      	push	{r7, lr}
+ 8000c5e:	af00      	add	r7, sp, #0
 	/*  Power control B (CFh)  */
 	DEBUG_DELAY  ();
 	LCD_Write_Cmd ( 0xCF  );
- 8000dd4:	20cf      	movs	r0, #207	; 0xcf
- 8000dd6:	f7ff ffdd 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000c60:	20cf      	movs	r0, #207	; 0xcf
+ 8000c62:	f7ff ffdd 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00  );
- 8000dda:	2000      	movs	r0, #0
- 8000ddc:	f7ff ffe8 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c66:	2000      	movs	r0, #0
+ 8000c68:	f7ff ffe8 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x81  );
- 8000de0:	2081      	movs	r0, #129	; 0x81
- 8000de2:	f7ff ffe5 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c6c:	2081      	movs	r0, #129	; 0x81
+ 8000c6e:	f7ff ffe5 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x30  );
- 8000de6:	2030      	movs	r0, #48	; 0x30
- 8000de8:	f7ff ffe2 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c72:	2030      	movs	r0, #48	; 0x30
+ 8000c74:	f7ff ffe2 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/*  Power on sequence control (EDh) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xED );
- 8000dec:	20ed      	movs	r0, #237	; 0xed
- 8000dee:	f7ff ffd1 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000c78:	20ed      	movs	r0, #237	; 0xed
+ 8000c7a:	f7ff ffd1 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x64 );
- 8000df2:	2064      	movs	r0, #100	; 0x64
- 8000df4:	f7ff ffdc 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c7e:	2064      	movs	r0, #100	; 0x64
+ 8000c80:	f7ff ffdc 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x03 );
- 8000df8:	2003      	movs	r0, #3
- 8000dfa:	f7ff ffd9 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c84:	2003      	movs	r0, #3
+ 8000c86:	f7ff ffd9 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x12 );
- 8000dfe:	2012      	movs	r0, #18
- 8000e00:	f7ff ffd6 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c8a:	2012      	movs	r0, #18
+ 8000c8c:	f7ff ffd6 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x81 );
- 8000e04:	2081      	movs	r0, #129	; 0x81
- 8000e06:	f7ff ffd3 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c90:	2081      	movs	r0, #129	; 0x81
+ 8000c92:	f7ff ffd3 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/*  Driver timing control A (E8h) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xE8 );
- 8000e0a:	20e8      	movs	r0, #232	; 0xe8
- 8000e0c:	f7ff ffc2 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000c96:	20e8      	movs	r0, #232	; 0xe8
+ 8000c98:	f7ff ffc2 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x85 );
- 8000e10:	2085      	movs	r0, #133	; 0x85
- 8000e12:	f7ff ffcd 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000c9c:	2085      	movs	r0, #133	; 0x85
+ 8000c9e:	f7ff ffcd 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x10 );
- 8000e16:	2010      	movs	r0, #16
- 8000e18:	f7ff ffca 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ca2:	2010      	movs	r0, #16
+ 8000ca4:	f7ff ffca 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x78 );
- 8000e1c:	2078      	movs	r0, #120	; 0x78
- 8000e1e:	f7ff ffc7 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ca8:	2078      	movs	r0, #120	; 0x78
+ 8000caa:	f7ff ffc7 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/*  Power control A (CBh) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xCB );
- 8000e22:	20cb      	movs	r0, #203	; 0xcb
- 8000e24:	f7ff ffb6 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000cae:	20cb      	movs	r0, #203	; 0xcb
+ 8000cb0:	f7ff ffb6 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x39 );
- 8000e28:	2039      	movs	r0, #57	; 0x39
- 8000e2a:	f7ff ffc1 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cb4:	2039      	movs	r0, #57	; 0x39
+ 8000cb6:	f7ff ffc1 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x2C );
- 8000e2e:	202c      	movs	r0, #44	; 0x2c
- 8000e30:	f7ff ffbe 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cba:	202c      	movs	r0, #44	; 0x2c
+ 8000cbc:	f7ff ffbe 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x00 );
- 8000e34:	2000      	movs	r0, #0
- 8000e36:	f7ff ffbb 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cc0:	2000      	movs	r0, #0
+ 8000cc2:	f7ff ffbb 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x34 );
- 8000e3a:	2034      	movs	r0, #52	; 0x34
- 8000e3c:	f7ff ffb8 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cc6:	2034      	movs	r0, #52	; 0x34
+ 8000cc8:	f7ff ffb8 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x02 );
- 8000e40:	2002      	movs	r0, #2
- 8000e42:	f7ff ffb5 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ccc:	2002      	movs	r0, #2
+ 8000cce:	f7ff ffb5 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Pump ratio control (F7h) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xF7 );
- 8000e46:	20f7      	movs	r0, #247	; 0xf7
- 8000e48:	f7ff ffa4 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000cd2:	20f7      	movs	r0, #247	; 0xf7
+ 8000cd4:	f7ff ffa4 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x20 );
- 8000e4c:	2020      	movs	r0, #32
- 8000e4e:	f7ff ffaf 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cd8:	2020      	movs	r0, #32
+ 8000cda:	f7ff ffaf 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Driver timing control B */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xEA );
- 8000e52:	20ea      	movs	r0, #234	; 0xea
- 8000e54:	f7ff ff9e 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000cde:	20ea      	movs	r0, #234	; 0xea
+ 8000ce0:	f7ff ff9e 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00 );
- 8000e58:	2000      	movs	r0, #0
- 8000e5a:	f7ff ffa9 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ce4:	2000      	movs	r0, #0
+ 8000ce6:	f7ff ffa9 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x00 );
- 8000e5e:	2000      	movs	r0, #0
- 8000e60:	f7ff ffa6 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cea:	2000      	movs	r0, #0
+ 8000cec:	f7ff ffa6 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Frame Rate Control (In Normal Mode/Full Colors) (B1h) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xB1 );
- 8000e64:	20b1      	movs	r0, #177	; 0xb1
- 8000e66:	f7ff ff95 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000cf0:	20b1      	movs	r0, #177	; 0xb1
+ 8000cf2:	f7ff ff95 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00 );
- 8000e6a:	2000      	movs	r0, #0
- 8000e6c:	f7ff ffa0 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cf6:	2000      	movs	r0, #0
+ 8000cf8:	f7ff ffa0 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x1B );
- 8000e70:	201b      	movs	r0, #27
- 8000e72:	f7ff ff9d 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000cfc:	201b      	movs	r0, #27
+ 8000cfe:	f7ff ff9d 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/*  Display Function Control (B6h) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xB6 );
- 8000e76:	20b6      	movs	r0, #182	; 0xb6
- 8000e78:	f7ff ff8c 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d02:	20b6      	movs	r0, #182	; 0xb6
+ 8000d04:	f7ff ff8c 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x0A );
- 8000e7c:	200a      	movs	r0, #10
- 8000e7e:	f7ff ff97 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d08:	200a      	movs	r0, #10
+ 8000d0a:	f7ff ff97 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0xA2 );
- 8000e82:	20a2      	movs	r0, #162	; 0xa2
- 8000e84:	f7ff ff94 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d0e:	20a2      	movs	r0, #162	; 0xa2
+ 8000d10:	f7ff ff94 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Power Control 1 (C0h) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xC0 );
- 8000e88:	20c0      	movs	r0, #192	; 0xc0
- 8000e8a:	f7ff ff83 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d14:	20c0      	movs	r0, #192	; 0xc0
+ 8000d16:	f7ff ff83 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x35 );
- 8000e8e:	2035      	movs	r0, #53	; 0x35
- 8000e90:	f7ff ff8e 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d1a:	2035      	movs	r0, #53	; 0x35
+ 8000d1c:	f7ff ff8e 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Power Control 2 (C1h) */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0xC1 );
- 8000e94:	20c1      	movs	r0, #193	; 0xc1
- 8000e96:	f7ff ff7d 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d20:	20c1      	movs	r0, #193	; 0xc1
+ 8000d22:	f7ff ff7d 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x11 );
- 8000e9a:	2011      	movs	r0, #17
- 8000e9c:	f7ff ff88 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d26:	2011      	movs	r0, #17
+ 8000d28:	f7ff ff88 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* VCOM Control 1 (C5h) */
 	LCD_Write_Cmd ( 0xC5 );
- 8000ea0:	20c5      	movs	r0, #197	; 0xc5
- 8000ea2:	f7ff ff77 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d2c:	20c5      	movs	r0, #197	; 0xc5
+ 8000d2e:	f7ff ff77 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x45 );
- 8000ea6:	2045      	movs	r0, #69	; 0x45
- 8000ea8:	f7ff ff82 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d32:	2045      	movs	r0, #69	; 0x45
+ 8000d34:	f7ff ff82 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x45 );
- 8000eac:	2045      	movs	r0, #69	; 0x45
- 8000eae:	f7ff ff7f 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d38:	2045      	movs	r0, #69	; 0x45
+ 8000d3a:	f7ff ff7f 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/*  VCOM Control 2 (C7h)  */
 	LCD_Write_Cmd ( 0xC7 );
- 8000eb2:	20c7      	movs	r0, #199	; 0xc7
- 8000eb4:	f7ff ff6e 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d3e:	20c7      	movs	r0, #199	; 0xc7
+ 8000d40:	f7ff ff6e 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0xA2 );
- 8000eb8:	20a2      	movs	r0, #162	; 0xa2
- 8000eba:	f7ff ff79 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d44:	20a2      	movs	r0, #162	; 0xa2
+ 8000d46:	f7ff ff79 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Enable 3G (F2h) */
 	LCD_Write_Cmd ( 0xF2 );
- 8000ebe:	20f2      	movs	r0, #242	; 0xf2
- 8000ec0:	f7ff ff68 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d4a:	20f2      	movs	r0, #242	; 0xf2
+ 8000d4c:	f7ff ff68 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00 );
- 8000ec4:	2000      	movs	r0, #0
- 8000ec6:	f7ff ff73 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d50:	2000      	movs	r0, #0
+ 8000d52:	f7ff ff73 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Gamma Set (26h) */
 	LCD_Write_Cmd ( 0x26 );
- 8000eca:	2026      	movs	r0, #38	; 0x26
- 8000ecc:	f7ff ff62 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d56:	2026      	movs	r0, #38	; 0x26
+ 8000d58:	f7ff ff62 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x01 );
- 8000ed0:	2001      	movs	r0, #1
- 8000ed2:	f7ff ff6d 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d5c:	2001      	movs	r0, #1
+ 8000d5e:	f7ff ff6d 	bl	8000c3c <_Z14LCD_Write_Datat>
 	DEBUG_DELAY ();
 	
 	/* Positive Gamma Correction */
 	LCD_Write_Cmd ( 0xE0 ); //Set Gamma
- 8000ed6:	20e0      	movs	r0, #224	; 0xe0
- 8000ed8:	f7ff ff5c 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000d62:	20e0      	movs	r0, #224	; 0xe0
+ 8000d64:	f7ff ff5c 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x0F );
- 8000edc:	200f      	movs	r0, #15
- 8000ede:	f7ff ff67 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d68:	200f      	movs	r0, #15
+ 8000d6a:	f7ff ff67 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x26 );
- 8000ee2:	2026      	movs	r0, #38	; 0x26
- 8000ee4:	f7ff ff64 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d6e:	2026      	movs	r0, #38	; 0x26
+ 8000d70:	f7ff ff64 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x24 );
- 8000ee8:	2024      	movs	r0, #36	; 0x24
- 8000eea:	f7ff ff61 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d74:	2024      	movs	r0, #36	; 0x24
+ 8000d76:	f7ff ff61 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x0B );
- 8000eee:	200b      	movs	r0, #11
- 8000ef0:	f7ff ff5e 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d7a:	200b      	movs	r0, #11
+ 8000d7c:	f7ff ff5e 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x0E );
- 8000ef4:	200e      	movs	r0, #14
- 8000ef6:	f7ff ff5b 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d80:	200e      	movs	r0, #14
+ 8000d82:	f7ff ff5b 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x09 );
- 8000efa:	2009      	movs	r0, #9
- 8000efc:	f7ff ff58 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d86:	2009      	movs	r0, #9
+ 8000d88:	f7ff ff58 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x54 );
- 8000f00:	2054      	movs	r0, #84	; 0x54
- 8000f02:	f7ff ff55 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d8c:	2054      	movs	r0, #84	; 0x54
+ 8000d8e:	f7ff ff55 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0xA8 );
- 8000f06:	20a8      	movs	r0, #168	; 0xa8
- 8000f08:	f7ff ff52 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d92:	20a8      	movs	r0, #168	; 0xa8
+ 8000d94:	f7ff ff52 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x46 );
- 8000f0c:	2046      	movs	r0, #70	; 0x46
- 8000f0e:	f7ff ff4f 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d98:	2046      	movs	r0, #70	; 0x46
+ 8000d9a:	f7ff ff4f 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x0C );
- 8000f12:	200c      	movs	r0, #12
- 8000f14:	f7ff ff4c 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000d9e:	200c      	movs	r0, #12
+ 8000da0:	f7ff ff4c 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x17 );
- 8000f18:	2017      	movs	r0, #23
- 8000f1a:	f7ff ff49 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000da4:	2017      	movs	r0, #23
+ 8000da6:	f7ff ff49 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x09 );
- 8000f1e:	2009      	movs	r0, #9
- 8000f20:	f7ff ff46 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000daa:	2009      	movs	r0, #9
+ 8000dac:	f7ff ff46 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x0F );
- 8000f24:	200f      	movs	r0, #15
- 8000f26:	f7ff ff43 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000db0:	200f      	movs	r0, #15
+ 8000db2:	f7ff ff43 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x07 );
- 8000f2a:	2007      	movs	r0, #7
- 8000f2c:	f7ff ff40 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000db6:	2007      	movs	r0, #7
+ 8000db8:	f7ff ff40 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x00 );
- 8000f30:	2000      	movs	r0, #0
- 8000f32:	f7ff ff3d 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dbc:	2000      	movs	r0, #0
+ 8000dbe:	f7ff ff3d 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Negative Gamma Correction (E1h) */
 	LCD_Write_Cmd ( 0XE1 ); //Set Gamma
- 8000f36:	20e1      	movs	r0, #225	; 0xe1
- 8000f38:	f7ff ff2c 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000dc2:	20e1      	movs	r0, #225	; 0xe1
+ 8000dc4:	f7ff ff2c 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00 );
- 8000f3c:	2000      	movs	r0, #0
- 8000f3e:	f7ff ff37 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dc8:	2000      	movs	r0, #0
+ 8000dca:	f7ff ff37 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x19 );
- 8000f42:	2019      	movs	r0, #25
- 8000f44:	f7ff ff34 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dce:	2019      	movs	r0, #25
+ 8000dd0:	f7ff ff34 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x1B );
- 8000f48:	201b      	movs	r0, #27
- 8000f4a:	f7ff ff31 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dd4:	201b      	movs	r0, #27
+ 8000dd6:	f7ff ff31 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x04 );
- 8000f4e:	2004      	movs	r0, #4
- 8000f50:	f7ff ff2e 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dda:	2004      	movs	r0, #4
+ 8000ddc:	f7ff ff2e 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x10 );
- 8000f54:	2010      	movs	r0, #16
- 8000f56:	f7ff ff2b 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000de0:	2010      	movs	r0, #16
+ 8000de2:	f7ff ff2b 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x07 );
- 8000f5a:	2007      	movs	r0, #7
- 8000f5c:	f7ff ff28 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000de6:	2007      	movs	r0, #7
+ 8000de8:	f7ff ff28 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x2A );
- 8000f60:	202a      	movs	r0, #42	; 0x2a
- 8000f62:	f7ff ff25 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dec:	202a      	movs	r0, #42	; 0x2a
+ 8000dee:	f7ff ff25 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x47 );
- 8000f66:	2047      	movs	r0, #71	; 0x47
- 8000f68:	f7ff ff22 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000df2:	2047      	movs	r0, #71	; 0x47
+ 8000df4:	f7ff ff22 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x39 );
- 8000f6c:	2039      	movs	r0, #57	; 0x39
- 8000f6e:	f7ff ff1f 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000df8:	2039      	movs	r0, #57	; 0x39
+ 8000dfa:	f7ff ff1f 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x03 );
- 8000f72:	2003      	movs	r0, #3
- 8000f74:	f7ff ff1c 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000dfe:	2003      	movs	r0, #3
+ 8000e00:	f7ff ff1c 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x06 );
- 8000f78:	2006      	movs	r0, #6
- 8000f7a:	f7ff ff19 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e04:	2006      	movs	r0, #6
+ 8000e06:	f7ff ff19 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x06 );
- 8000f7e:	2006      	movs	r0, #6
- 8000f80:	f7ff ff16 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e0a:	2006      	movs	r0, #6
+ 8000e0c:	f7ff ff16 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x30 );
- 8000f84:	2030      	movs	r0, #48	; 0x30
- 8000f86:	f7ff ff13 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e10:	2030      	movs	r0, #48	; 0x30
+ 8000e12:	f7ff ff13 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x38 );
- 8000f8a:	2038      	movs	r0, #56	; 0x38
- 8000f8c:	f7ff ff10 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e16:	2038      	movs	r0, #56	; 0x38
+ 8000e18:	f7ff ff10 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x0F );
- 8000f90:	200f      	movs	r0, #15
- 8000f92:	f7ff ff0d 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e1c:	200f      	movs	r0, #15
+ 8000e1e:	f7ff ff0d 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* memory access control set */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0x36 ); 	
- 8000f96:	2036      	movs	r0, #54	; 0x36
- 8000f98:	f7ff fefc 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000e22:	2036      	movs	r0, #54	; 0x36
+ 8000e24:	f7ff fefc 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0xC8 );  // Version 1
- 8000f9c:	20c8      	movs	r0, #200	; 0xc8
- 8000f9e:	f7ff ff07 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e28:	20c8      	movs	r0, #200	; 0xc8
+ 8000e2a:	f7ff ff07 	bl	8000c3c <_Z14LCD_Write_Datat>
 	/* display inversion */
 //	LCD_Write_Cmd ( 0x21 );   // Version 2
 	DEBUG_DELAY ();
 	
 	/* column address control set */
 	LCD_Write_Cmd ( CMD_Set_COLUMN ); 
- 8000fa2:	202a      	movs	r0, #42	; 0x2a
- 8000fa4:	f7ff fef6 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000e2e:	202a      	movs	r0, #42	; 0x2a
+ 8000e30:	f7ff fef6 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00 );
- 8000fa8:	2000      	movs	r0, #0
- 8000faa:	f7ff ff01 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e34:	2000      	movs	r0, #0
+ 8000e36:	f7ff ff01 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x00 );
- 8000fae:	2000      	movs	r0, #0
- 8000fb0:	f7ff fefe 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e3a:	2000      	movs	r0, #0
+ 8000e3c:	f7ff fefe 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x00 );
- 8000fb4:	2000      	movs	r0, #0
- 8000fb6:	f7ff fefb 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e40:	2000      	movs	r0, #0
+ 8000e42:	f7ff fefb 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0xEF );
- 8000fba:	20ef      	movs	r0, #239	; 0xef
- 8000fbc:	f7ff fef8 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e46:	20ef      	movs	r0, #239	; 0xef
+ 8000e48:	f7ff fef8 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* page address control set */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( CMD_Set_PAGE ); 
- 8000fc0:	202b      	movs	r0, #43	; 0x2b
- 8000fc2:	f7ff fee7 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000e4c:	202b      	movs	r0, #43	; 0x2b
+ 8000e4e:	f7ff fee7 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x00 );
- 8000fc6:	2000      	movs	r0, #0
- 8000fc8:	f7ff fef2 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e52:	2000      	movs	r0, #0
+ 8000e54:	f7ff fef2 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x00 );
- 8000fcc:	2000      	movs	r0, #0
- 8000fce:	f7ff feef 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e58:	2000      	movs	r0, #0
+ 8000e5a:	f7ff feef 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x01 );
- 8000fd2:	2001      	movs	r0, #1
- 8000fd4:	f7ff feec 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e5e:	2001      	movs	r0, #1
+ 8000e60:	f7ff feec 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( 0x3F );
- 8000fd8:	203f      	movs	r0, #63	; 0x3f
- 8000fda:	f7ff fee9 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e64:	203f      	movs	r0, #63	; 0x3f
+ 8000e66:	f7ff fee9 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/*  Pixel Format Set (3Ah)  */
 	DEBUG_DELAY ();
 	LCD_Write_Cmd ( 0x3a ); 
- 8000fde:	203a      	movs	r0, #58	; 0x3a
- 8000fe0:	f7ff fed8 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000e6a:	203a      	movs	r0, #58	; 0x3a
+ 8000e6c:	f7ff fed8 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( 0x55 );
- 8000fe4:	2055      	movs	r0, #85	; 0x55
- 8000fe6:	f7ff fee3 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000e70:	2055      	movs	r0, #85	; 0x55
+ 8000e72:	f7ff fee3 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 	/* Sleep Out (11h)  */
 	LCD_Write_Cmd ( 0x11 );	
- 8000fea:	2011      	movs	r0, #17
- 8000fec:	f7ff fed2 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000e76:	2011      	movs	r0, #17
+ 8000e78:	f7ff fed2 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	Delay ( 0xAFFf<<2 );
- 8000ff0:	4803      	ldr	r0, [pc, #12]	; (8001000 <_Z14LCD_REG_Configv+0x230>)
- 8000ff2:	f7ff fe6f 	bl	8000cd4 <_Z5Delaym>
+ 8000e7c:	4803      	ldr	r0, [pc, #12]	; (8000e8c <_Z14LCD_REG_Configv+0x230>)
+ 8000e7e:	f7ff fe6f 	bl	8000b60 <_Z5Delaym>
 	DEBUG_DELAY ();
 	
 	/* Display ON (29h) */
 	LCD_Write_Cmd ( 0x29 ); 
- 8000ff6:	2029      	movs	r0, #41	; 0x29
- 8000ff8:	f7ff fecc 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000e82:	2029      	movs	r0, #41	; 0x29
+ 8000e84:	f7ff fecc 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	
 	
 }
- 8000ffc:	bf00      	nop
- 8000ffe:	bd80      	pop	{r7, pc}
- 8001000:	0002bffc 	.word	0x0002bffc
+ 8000e88:	bf00      	nop
+ 8000e8a:	bd80      	pop	{r7, pc}
+ 8000e8c:	0002bffc 	.word	0x0002bffc
 
-08001004 <_Z14LCD_OpenWindowtttt>:
+08000e90 <_Z14LCD_OpenWindowtttt>:
 
 
 
 void LCD_OpenWindow ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight )
 {	
- 8001004:	b590      	push	{r4, r7, lr}
- 8001006:	b083      	sub	sp, #12
- 8001008:	af00      	add	r7, sp, #0
- 800100a:	4604      	mov	r4, r0
- 800100c:	4608      	mov	r0, r1
- 800100e:	4611      	mov	r1, r2
- 8001010:	461a      	mov	r2, r3
- 8001012:	4623      	mov	r3, r4
- 8001014:	80fb      	strh	r3, [r7, #6]
- 8001016:	4603      	mov	r3, r0
- 8001018:	80bb      	strh	r3, [r7, #4]
- 800101a:	460b      	mov	r3, r1
- 800101c:	807b      	strh	r3, [r7, #2]
- 800101e:	4613      	mov	r3, r2
- 8001020:	803b      	strh	r3, [r7, #0]
+ 8000e90:	b590      	push	{r4, r7, lr}
+ 8000e92:	b083      	sub	sp, #12
+ 8000e94:	af00      	add	r7, sp, #0
+ 8000e96:	4604      	mov	r4, r0
+ 8000e98:	4608      	mov	r0, r1
+ 8000e9a:	4611      	mov	r1, r2
+ 8000e9c:	461a      	mov	r2, r3
+ 8000e9e:	4623      	mov	r3, r4
+ 8000ea0:	80fb      	strh	r3, [r7, #6]
+ 8000ea2:	4603      	mov	r3, r0
+ 8000ea4:	80bb      	strh	r3, [r7, #4]
+ 8000ea6:	460b      	mov	r3, r1
+ 8000ea8:	807b      	strh	r3, [r7, #2]
+ 8000eaa:	4613      	mov	r3, r2
+ 8000eac:	803b      	strh	r3, [r7, #0]
 	LCD_Write_Cmd ( CMD_Set_COLUMN ); 				
- 8001022:	202a      	movs	r0, #42	; 0x2a
- 8001024:	f7ff feb6 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000eae:	202a      	movs	r0, #42	; 0x2a
+ 8000eb0:	f7ff feb6 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( usCOLUMN >> 8  );	 
- 8001028:	88fb      	ldrh	r3, [r7, #6]
- 800102a:	0a1b      	lsrs	r3, r3, #8
- 800102c:	b29b      	uxth	r3, r3
- 800102e:	4618      	mov	r0, r3
- 8001030:	f7ff febe 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000eb4:	88fb      	ldrh	r3, [r7, #6]
+ 8000eb6:	0a1b      	lsrs	r3, r3, #8
+ 8000eb8:	b29b      	uxth	r3, r3
+ 8000eba:	4618      	mov	r0, r3
+ 8000ebc:	f7ff febe 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( usCOLUMN & 0xff  );	 
- 8001034:	88fb      	ldrh	r3, [r7, #6]
- 8001036:	b2db      	uxtb	r3, r3
- 8001038:	b29b      	uxth	r3, r3
- 800103a:	4618      	mov	r0, r3
- 800103c:	f7ff feb8 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ec0:	88fb      	ldrh	r3, [r7, #6]
+ 8000ec2:	b2db      	uxtb	r3, r3
+ 8000ec4:	b29b      	uxth	r3, r3
+ 8000ec6:	4618      	mov	r0, r3
+ 8000ec8:	f7ff feb8 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( ( usCOLUMN + usWidth - 1 ) >> 8  );
- 8001040:	88fa      	ldrh	r2, [r7, #6]
- 8001042:	887b      	ldrh	r3, [r7, #2]
- 8001044:	4413      	add	r3, r2
- 8001046:	3b01      	subs	r3, #1
- 8001048:	121b      	asrs	r3, r3, #8
- 800104a:	b29b      	uxth	r3, r3
- 800104c:	4618      	mov	r0, r3
- 800104e:	f7ff feaf 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ecc:	88fa      	ldrh	r2, [r7, #6]
+ 8000ece:	887b      	ldrh	r3, [r7, #2]
+ 8000ed0:	4413      	add	r3, r2
+ 8000ed2:	3b01      	subs	r3, #1
+ 8000ed4:	121b      	asrs	r3, r3, #8
+ 8000ed6:	b29b      	uxth	r3, r3
+ 8000ed8:	4618      	mov	r0, r3
+ 8000eda:	f7ff feaf 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( ( usCOLUMN + usWidth - 1 ) & 0xff  );
- 8001052:	88fa      	ldrh	r2, [r7, #6]
- 8001054:	887b      	ldrh	r3, [r7, #2]
- 8001056:	4413      	add	r3, r2
- 8001058:	b29b      	uxth	r3, r3
- 800105a:	3b01      	subs	r3, #1
- 800105c:	b29b      	uxth	r3, r3
- 800105e:	b2db      	uxtb	r3, r3
- 8001060:	b29b      	uxth	r3, r3
- 8001062:	4618      	mov	r0, r3
- 8001064:	f7ff fea4 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000ede:	88fa      	ldrh	r2, [r7, #6]
+ 8000ee0:	887b      	ldrh	r3, [r7, #2]
+ 8000ee2:	4413      	add	r3, r2
+ 8000ee4:	b29b      	uxth	r3, r3
+ 8000ee6:	3b01      	subs	r3, #1
+ 8000ee8:	b29b      	uxth	r3, r3
+ 8000eea:	b2db      	uxtb	r3, r3
+ 8000eec:	b29b      	uxth	r3, r3
+ 8000eee:	4618      	mov	r0, r3
+ 8000ef0:	f7ff fea4 	bl	8000c3c <_Z14LCD_Write_Datat>
 
 	LCD_Write_Cmd ( CMD_Set_PAGE ); 			     
- 8001068:	202b      	movs	r0, #43	; 0x2b
- 800106a:	f7ff fe93 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000ef4:	202b      	movs	r0, #43	; 0x2b
+ 8000ef6:	f7ff fe93 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	LCD_Write_Data ( usPAGE >> 8  );
- 800106e:	88bb      	ldrh	r3, [r7, #4]
- 8001070:	0a1b      	lsrs	r3, r3, #8
- 8001072:	b29b      	uxth	r3, r3
- 8001074:	4618      	mov	r0, r3
- 8001076:	f7ff fe9b 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000efa:	88bb      	ldrh	r3, [r7, #4]
+ 8000efc:	0a1b      	lsrs	r3, r3, #8
+ 8000efe:	b29b      	uxth	r3, r3
+ 8000f00:	4618      	mov	r0, r3
+ 8000f02:	f7ff fe9b 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( usPAGE & 0xff  );
- 800107a:	88bb      	ldrh	r3, [r7, #4]
- 800107c:	b2db      	uxtb	r3, r3
- 800107e:	b29b      	uxth	r3, r3
- 8001080:	4618      	mov	r0, r3
- 8001082:	f7ff fe95 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000f06:	88bb      	ldrh	r3, [r7, #4]
+ 8000f08:	b2db      	uxtb	r3, r3
+ 8000f0a:	b29b      	uxth	r3, r3
+ 8000f0c:	4618      	mov	r0, r3
+ 8000f0e:	f7ff fe95 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( ( usPAGE + usHeight - 1 ) >> 8 );
- 8001086:	88ba      	ldrh	r2, [r7, #4]
- 8001088:	883b      	ldrh	r3, [r7, #0]
- 800108a:	4413      	add	r3, r2
- 800108c:	3b01      	subs	r3, #1
- 800108e:	121b      	asrs	r3, r3, #8
- 8001090:	b29b      	uxth	r3, r3
- 8001092:	4618      	mov	r0, r3
- 8001094:	f7ff fe8c 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000f12:	88ba      	ldrh	r2, [r7, #4]
+ 8000f14:	883b      	ldrh	r3, [r7, #0]
+ 8000f16:	4413      	add	r3, r2
+ 8000f18:	3b01      	subs	r3, #1
+ 8000f1a:	121b      	asrs	r3, r3, #8
+ 8000f1c:	b29b      	uxth	r3, r3
+ 8000f1e:	4618      	mov	r0, r3
+ 8000f20:	f7ff fe8c 	bl	8000c3c <_Z14LCD_Write_Datat>
 	LCD_Write_Data ( ( usPAGE + usHeight - 1) & 0xff );
- 8001098:	88ba      	ldrh	r2, [r7, #4]
- 800109a:	883b      	ldrh	r3, [r7, #0]
- 800109c:	4413      	add	r3, r2
- 800109e:	b29b      	uxth	r3, r3
- 80010a0:	3b01      	subs	r3, #1
- 80010a2:	b29b      	uxth	r3, r3
- 80010a4:	b2db      	uxtb	r3, r3
- 80010a6:	b29b      	uxth	r3, r3
- 80010a8:	4618      	mov	r0, r3
- 80010aa:	f7ff fe81 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000f24:	88ba      	ldrh	r2, [r7, #4]
+ 8000f26:	883b      	ldrh	r3, [r7, #0]
+ 8000f28:	4413      	add	r3, r2
+ 8000f2a:	b29b      	uxth	r3, r3
+ 8000f2c:	3b01      	subs	r3, #1
+ 8000f2e:	b29b      	uxth	r3, r3
+ 8000f30:	b2db      	uxtb	r3, r3
+ 8000f32:	b29b      	uxth	r3, r3
+ 8000f34:	4618      	mov	r0, r3
+ 8000f36:	f7ff fe81 	bl	8000c3c <_Z14LCD_Write_Datat>
 	
 }
- 80010ae:	bf00      	nop
- 80010b0:	370c      	adds	r7, #12
- 80010b2:	46bd      	mov	sp, r7
- 80010b4:	bd90      	pop	{r4, r7, pc}
+ 8000f3a:	bf00      	nop
+ 8000f3c:	370c      	adds	r7, #12
+ 8000f3e:	46bd      	mov	sp, r7
+ 8000f40:	bd90      	pop	{r4, r7, pc}
 
-080010b6 <_Z13LCD_FillColormt>:
+08000f42 <_Z13LCD_FillColormt>:
 
 
 void LCD_FillColor ( uint32_t usPoint, uint16_t usColor )
 {
- 80010b6:	b580      	push	{r7, lr}
- 80010b8:	b084      	sub	sp, #16
- 80010ba:	af00      	add	r7, sp, #0
- 80010bc:	6078      	str	r0, [r7, #4]
- 80010be:	460b      	mov	r3, r1
- 80010c0:	807b      	strh	r3, [r7, #2]
+ 8000f42:	b580      	push	{r7, lr}
+ 8000f44:	b084      	sub	sp, #16
+ 8000f46:	af00      	add	r7, sp, #0
+ 8000f48:	6078      	str	r0, [r7, #4]
+ 8000f4a:	460b      	mov	r3, r1
+ 8000f4c:	807b      	strh	r3, [r7, #2]
 	uint32_t i = 0;
- 80010c2:	2300      	movs	r3, #0
- 80010c4:	60fb      	str	r3, [r7, #12]
+ 8000f4e:	2300      	movs	r3, #0
+ 8000f50:	60fb      	str	r3, [r7, #12]
 	
 	/* memory write */
 	LCD_Write_Cmd ( CMD_SetPixel );	
- 80010c6:	202c      	movs	r0, #44	; 0x2c
- 80010c8:	f7ff fe64 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000f52:	202c      	movs	r0, #44	; 0x2c
+ 8000f54:	f7ff fe64 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 		
 	for ( i = 0; i < usPoint; i ++ )
- 80010cc:	2300      	movs	r3, #0
- 80010ce:	60fb      	str	r3, [r7, #12]
- 80010d0:	68fa      	ldr	r2, [r7, #12]
- 80010d2:	687b      	ldr	r3, [r7, #4]
- 80010d4:	429a      	cmp	r2, r3
- 80010d6:	d207      	bcs.n	80010e8 <_Z13LCD_FillColormt+0x32>
+ 8000f58:	2300      	movs	r3, #0
+ 8000f5a:	60fb      	str	r3, [r7, #12]
+ 8000f5c:	68fa      	ldr	r2, [r7, #12]
+ 8000f5e:	687b      	ldr	r3, [r7, #4]
+ 8000f60:	429a      	cmp	r2, r3
+ 8000f62:	d207      	bcs.n	8000f74 <_Z13LCD_FillColormt+0x32>
 		LCD_Write_Data ( usColor );
- 80010d8:	887b      	ldrh	r3, [r7, #2]
- 80010da:	4618      	mov	r0, r3
- 80010dc:	f7ff fe68 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8000f64:	887b      	ldrh	r3, [r7, #2]
+ 8000f66:	4618      	mov	r0, r3
+ 8000f68:	f7ff fe68 	bl	8000c3c <_Z14LCD_Write_Datat>
 	for ( i = 0; i < usPoint; i ++ )
- 80010e0:	68fb      	ldr	r3, [r7, #12]
- 80010e2:	3301      	adds	r3, #1
- 80010e4:	60fb      	str	r3, [r7, #12]
- 80010e6:	e7f3      	b.n	80010d0 <_Z13LCD_FillColormt+0x1a>
+ 8000f6c:	68fb      	ldr	r3, [r7, #12]
+ 8000f6e:	3301      	adds	r3, #1
+ 8000f70:	60fb      	str	r3, [r7, #12]
+ 8000f72:	e7f3      	b.n	8000f5c <_Z13LCD_FillColormt+0x1a>
 		
 }
- 80010e8:	bf00      	nop
- 80010ea:	3710      	adds	r7, #16
- 80010ec:	46bd      	mov	sp, r7
- 80010ee:	bd80      	pop	{r7, pc}
+ 8000f74:	bf00      	nop
+ 8000f76:	3710      	adds	r7, #16
+ 8000f78:	46bd      	mov	sp, r7
+ 8000f7a:	bd80      	pop	{r7, pc}
 
-080010f0 <_Z9LCD_Clearttttt>:
+08000f7c <_Z9LCD_Clearttttt>:
 
 
 
 
 void LCD_Clear ( uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usWidth, uint16_t usHeight, uint16_t usColor )
 {
- 80010f0:	b590      	push	{r4, r7, lr}
- 80010f2:	b083      	sub	sp, #12
- 80010f4:	af00      	add	r7, sp, #0
- 80010f6:	4604      	mov	r4, r0
- 80010f8:	4608      	mov	r0, r1
- 80010fa:	4611      	mov	r1, r2
- 80010fc:	461a      	mov	r2, r3
- 80010fe:	4623      	mov	r3, r4
- 8001100:	80fb      	strh	r3, [r7, #6]
- 8001102:	4603      	mov	r3, r0
- 8001104:	80bb      	strh	r3, [r7, #4]
- 8001106:	460b      	mov	r3, r1
- 8001108:	807b      	strh	r3, [r7, #2]
- 800110a:	4613      	mov	r3, r2
- 800110c:	803b      	strh	r3, [r7, #0]
+ 8000f7c:	b590      	push	{r4, r7, lr}
+ 8000f7e:	b083      	sub	sp, #12
+ 8000f80:	af00      	add	r7, sp, #0
+ 8000f82:	4604      	mov	r4, r0
+ 8000f84:	4608      	mov	r0, r1
+ 8000f86:	4611      	mov	r1, r2
+ 8000f88:	461a      	mov	r2, r3
+ 8000f8a:	4623      	mov	r3, r4
+ 8000f8c:	80fb      	strh	r3, [r7, #6]
+ 8000f8e:	4603      	mov	r3, r0
+ 8000f90:	80bb      	strh	r3, [r7, #4]
+ 8000f92:	460b      	mov	r3, r1
+ 8000f94:	807b      	strh	r3, [r7, #2]
+ 8000f96:	4613      	mov	r3, r2
+ 8000f98:	803b      	strh	r3, [r7, #0]
 	LCD_OpenWindow ( usCOLUMN, usPAGE, usWidth, usHeight );
- 800110e:	883b      	ldrh	r3, [r7, #0]
- 8001110:	887a      	ldrh	r2, [r7, #2]
- 8001112:	88b9      	ldrh	r1, [r7, #4]
- 8001114:	88f8      	ldrh	r0, [r7, #6]
- 8001116:	f7ff ff75 	bl	8001004 <_Z14LCD_OpenWindowtttt>
+ 8000f9a:	883b      	ldrh	r3, [r7, #0]
+ 8000f9c:	887a      	ldrh	r2, [r7, #2]
+ 8000f9e:	88b9      	ldrh	r1, [r7, #4]
+ 8000fa0:	88f8      	ldrh	r0, [r7, #6]
+ 8000fa2:	f7ff ff75 	bl	8000e90 <_Z14LCD_OpenWindowtttt>
 	LCD_FillColor ( usWidth * usHeight, usColor );		
- 800111a:	887b      	ldrh	r3, [r7, #2]
- 800111c:	883a      	ldrh	r2, [r7, #0]
- 800111e:	fb02 f303 	mul.w	r3, r2, r3
- 8001122:	461a      	mov	r2, r3
- 8001124:	8b3b      	ldrh	r3, [r7, #24]
- 8001126:	4619      	mov	r1, r3
- 8001128:	4610      	mov	r0, r2
- 800112a:	f7ff ffc4 	bl	80010b6 <_Z13LCD_FillColormt>
+ 8000fa6:	887b      	ldrh	r3, [r7, #2]
+ 8000fa8:	883a      	ldrh	r2, [r7, #0]
+ 8000faa:	fb02 f303 	mul.w	r3, r2, r3
+ 8000fae:	461a      	mov	r2, r3
+ 8000fb0:	8b3b      	ldrh	r3, [r7, #24]
+ 8000fb2:	4619      	mov	r1, r3
+ 8000fb4:	4610      	mov	r0, r2
+ 8000fb6:	f7ff ffc4 	bl	8000f42 <_Z13LCD_FillColormt>
 	
 }
- 800112e:	bf00      	nop
- 8001130:	370c      	adds	r7, #12
- 8001132:	46bd      	mov	sp, r7
- 8001134:	bd90      	pop	{r4, r7, pc}
+ 8000fba:	bf00      	nop
+ 8000fbc:	370c      	adds	r7, #12
+ 8000fbe:	46bd      	mov	sp, r7
+ 8000fc0:	bd90      	pop	{r4, r7, pc}
 	...
 
-08001138 <_Z12LCD_DrawCharttc>:
+08000fc4 <_Z12LCD_DrawCharttc>:
 	
 }   
 
 
 void LCD_DrawChar ( uint16_t usC, uint16_t usP, const char cChar )
 {
- 8001138:	b580      	push	{r7, lr}
- 800113a:	b084      	sub	sp, #16
- 800113c:	af00      	add	r7, sp, #0
- 800113e:	4603      	mov	r3, r0
- 8001140:	80fb      	strh	r3, [r7, #6]
- 8001142:	460b      	mov	r3, r1
- 8001144:	80bb      	strh	r3, [r7, #4]
- 8001146:	4613      	mov	r3, r2
- 8001148:	70fb      	strb	r3, [r7, #3]
+ 8000fc4:	b580      	push	{r7, lr}
+ 8000fc6:	b084      	sub	sp, #16
+ 8000fc8:	af00      	add	r7, sp, #0
+ 8000fca:	4603      	mov	r3, r0
+ 8000fcc:	80fb      	strh	r3, [r7, #6]
+ 8000fce:	460b      	mov	r3, r1
+ 8000fd0:	80bb      	strh	r3, [r7, #4]
+ 8000fd2:	4613      	mov	r3, r2
+ 8000fd4:	70fb      	strb	r3, [r7, #3]
 	uint8_t ucTemp, ucRelativePositon, ucPage, ucColumn;
 
 	
 	ucRelativePositon = cChar - ' ';
- 800114a:	78fb      	ldrb	r3, [r7, #3]
- 800114c:	3b20      	subs	r3, #32
- 800114e:	733b      	strb	r3, [r7, #12]
+ 8000fd6:	78fb      	ldrb	r3, [r7, #3]
+ 8000fd8:	3b20      	subs	r3, #32
+ 8000fda:	733b      	strb	r3, [r7, #12]
 	
 	LCD_OpenWindow ( usC, usP, WIDTH_EN_CHAR, HEIGHT_EN_CHAR );
- 8001150:	88b9      	ldrh	r1, [r7, #4]
- 8001152:	88f8      	ldrh	r0, [r7, #6]
- 8001154:	2310      	movs	r3, #16
- 8001156:	2208      	movs	r2, #8
- 8001158:	f7ff ff54 	bl	8001004 <_Z14LCD_OpenWindowtttt>
+ 8000fdc:	88b9      	ldrh	r1, [r7, #4]
+ 8000fde:	88f8      	ldrh	r0, [r7, #6]
+ 8000fe0:	2310      	movs	r3, #16
+ 8000fe2:	2208      	movs	r2, #8
+ 8000fe4:	f7ff ff54 	bl	8000e90 <_Z14LCD_OpenWindowtttt>
 	
 	LCD_Write_Cmd ( CMD_SetPixel );	
- 800115c:	202c      	movs	r0, #44	; 0x2c
- 800115e:	f7ff fe19 	bl	8000d94 <_Z13LCD_Write_Cmdt>
+ 8000fe8:	202c      	movs	r0, #44	; 0x2c
+ 8000fea:	f7ff fe19 	bl	8000c20 <_Z13LCD_Write_Cmdt>
 	
 	for ( ucPage = 0; ucPage < HEIGHT_EN_CHAR; ucPage ++ )
- 8001162:	2300      	movs	r3, #0
- 8001164:	73bb      	strb	r3, [r7, #14]
- 8001166:	7bbb      	ldrb	r3, [r7, #14]
- 8001168:	2b0f      	cmp	r3, #15
- 800116a:	d824      	bhi.n	80011b6 <_Z12LCD_DrawCharttc+0x7e>
+ 8000fee:	2300      	movs	r3, #0
+ 8000ff0:	73bb      	strb	r3, [r7, #14]
+ 8000ff2:	7bbb      	ldrb	r3, [r7, #14]
+ 8000ff4:	2b0f      	cmp	r3, #15
+ 8000ff6:	d824      	bhi.n	8001042 <_Z12LCD_DrawCharttc+0x7e>
 	{
 		ucTemp = ucAscii_1608 [ ucRelativePositon ] [ ucPage ];
- 800116c:	7b3a      	ldrb	r2, [r7, #12]
- 800116e:	7bbb      	ldrb	r3, [r7, #14]
- 8001170:	4913      	ldr	r1, [pc, #76]	; (80011c0 <_Z12LCD_DrawCharttc+0x88>)
- 8001172:	0112      	lsls	r2, r2, #4
- 8001174:	440a      	add	r2, r1
- 8001176:	4413      	add	r3, r2
- 8001178:	781b      	ldrb	r3, [r3, #0]
- 800117a:	73fb      	strb	r3, [r7, #15]
+ 8000ff8:	7b3a      	ldrb	r2, [r7, #12]
+ 8000ffa:	7bbb      	ldrb	r3, [r7, #14]
+ 8000ffc:	4913      	ldr	r1, [pc, #76]	; (800104c <_Z12LCD_DrawCharttc+0x88>)
+ 8000ffe:	0112      	lsls	r2, r2, #4
+ 8001000:	440a      	add	r2, r1
+ 8001002:	4413      	add	r3, r2
+ 8001004:	781b      	ldrb	r3, [r3, #0]
+ 8001006:	73fb      	strb	r3, [r7, #15]
 		
 		for ( ucColumn = 0; ucColumn < WIDTH_EN_CHAR; ucColumn ++ )
- 800117c:	2300      	movs	r3, #0
- 800117e:	737b      	strb	r3, [r7, #13]
- 8001180:	7b7b      	ldrb	r3, [r7, #13]
- 8001182:	2b07      	cmp	r3, #7
- 8001184:	d813      	bhi.n	80011ae <_Z12LCD_DrawCharttc+0x76>
+ 8001008:	2300      	movs	r3, #0
+ 800100a:	737b      	strb	r3, [r7, #13]
+ 800100c:	7b7b      	ldrb	r3, [r7, #13]
+ 800100e:	2b07      	cmp	r3, #7
+ 8001010:	d813      	bhi.n	800103a <_Z12LCD_DrawCharttc+0x76>
 		{
 			if ( ucTemp & 0x01 )
- 8001186:	7bfb      	ldrb	r3, [r7, #15]
- 8001188:	f003 0301 	and.w	r3, r3, #1
- 800118c:	2b00      	cmp	r3, #0
- 800118e:	d003      	beq.n	8001198 <_Z12LCD_DrawCharttc+0x60>
+ 8001012:	7bfb      	ldrb	r3, [r7, #15]
+ 8001014:	f003 0301 	and.w	r3, r3, #1
+ 8001018:	2b00      	cmp	r3, #0
+ 800101a:	d003      	beq.n	8001024 <_Z12LCD_DrawCharttc+0x60>
 				LCD_Write_Data ( 0x001F );
- 8001190:	201f      	movs	r0, #31
- 8001192:	f7ff fe0d 	bl	8000db0 <_Z14LCD_Write_Datat>
- 8001196:	e003      	b.n	80011a0 <_Z12LCD_DrawCharttc+0x68>
+ 800101c:	201f      	movs	r0, #31
+ 800101e:	f7ff fe0d 	bl	8000c3c <_Z14LCD_Write_Datat>
+ 8001022:	e003      	b.n	800102c <_Z12LCD_DrawCharttc+0x68>
 			
 			else
 				LCD_Write_Data (  0xFFFF );								
- 8001198:	f64f 70ff 	movw	r0, #65535	; 0xffff
- 800119c:	f7ff fe08 	bl	8000db0 <_Z14LCD_Write_Datat>
+ 8001024:	f64f 70ff 	movw	r0, #65535	; 0xffff
+ 8001028:	f7ff fe08 	bl	8000c3c <_Z14LCD_Write_Datat>
 			
 			ucTemp >>= 1;		
- 80011a0:	7bfb      	ldrb	r3, [r7, #15]
- 80011a2:	085b      	lsrs	r3, r3, #1
- 80011a4:	73fb      	strb	r3, [r7, #15]
+ 800102c:	7bfb      	ldrb	r3, [r7, #15]
+ 800102e:	085b      	lsrs	r3, r3, #1
+ 8001030:	73fb      	strb	r3, [r7, #15]
 		for ( ucColumn = 0; ucColumn < WIDTH_EN_CHAR; ucColumn ++ )
- 80011a6:	7b7b      	ldrb	r3, [r7, #13]
- 80011a8:	3301      	adds	r3, #1
- 80011aa:	737b      	strb	r3, [r7, #13]
- 80011ac:	e7e8      	b.n	8001180 <_Z12LCD_DrawCharttc+0x48>
+ 8001032:	7b7b      	ldrb	r3, [r7, #13]
+ 8001034:	3301      	adds	r3, #1
+ 8001036:	737b      	strb	r3, [r7, #13]
+ 8001038:	e7e8      	b.n	800100c <_Z12LCD_DrawCharttc+0x48>
 	for ( ucPage = 0; ucPage < HEIGHT_EN_CHAR; ucPage ++ )
- 80011ae:	7bbb      	ldrb	r3, [r7, #14]
- 80011b0:	3301      	adds	r3, #1
- 80011b2:	73bb      	strb	r3, [r7, #14]
- 80011b4:	e7d7      	b.n	8001166 <_Z12LCD_DrawCharttc+0x2e>
+ 800103a:	7bbb      	ldrb	r3, [r7, #14]
+ 800103c:	3301      	adds	r3, #1
+ 800103e:	73bb      	strb	r3, [r7, #14]
+ 8001040:	e7d7      	b.n	8000ff2 <_Z12LCD_DrawCharttc+0x2e>
 			
 		}
 		
 	}
 	
 }
- 80011b6:	bf00      	nop
- 80011b8:	3710      	adds	r7, #16
- 80011ba:	46bd      	mov	sp, r7
- 80011bc:	bd80      	pop	{r7, pc}
- 80011be:	bf00      	nop
- 80011c0:	0800620c 	.word	0x0800620c
+ 8001042:	bf00      	nop
+ 8001044:	3710      	adds	r7, #16
+ 8001046:	46bd      	mov	sp, r7
+ 8001048:	bd80      	pop	{r7, pc}
+ 800104a:	bf00      	nop
+ 800104c:	0800620c 	.word	0x0800620c
 
-080011c4 <_Z14LCD_DrawStringttPKc>:
+08001050 <_Z14LCD_DrawStringttPKc>:
 
 
 
 
 void LCD_DrawString ( uint16_t usC, uint16_t usP, const char * pStr )
 {
- 80011c4:	b580      	push	{r7, lr}
- 80011c6:	b082      	sub	sp, #8
- 80011c8:	af00      	add	r7, sp, #0
- 80011ca:	4603      	mov	r3, r0
- 80011cc:	603a      	str	r2, [r7, #0]
- 80011ce:	80fb      	strh	r3, [r7, #6]
- 80011d0:	460b      	mov	r3, r1
- 80011d2:	80bb      	strh	r3, [r7, #4]
+ 8001050:	b580      	push	{r7, lr}
+ 8001052:	b082      	sub	sp, #8
+ 8001054:	af00      	add	r7, sp, #0
+ 8001056:	4603      	mov	r3, r0
+ 8001058:	603a      	str	r2, [r7, #0]
+ 800105a:	80fb      	strh	r3, [r7, #6]
+ 800105c:	460b      	mov	r3, r1
+ 800105e:	80bb      	strh	r3, [r7, #4]
 	while ( * pStr != '\0' )
- 80011d4:	683b      	ldr	r3, [r7, #0]
- 80011d6:	781b      	ldrb	r3, [r3, #0]
- 80011d8:	2b00      	cmp	r3, #0
- 80011da:	d01d      	beq.n	8001218 <_Z14LCD_DrawStringttPKc+0x54>
+ 8001060:	683b      	ldr	r3, [r7, #0]
+ 8001062:	781b      	ldrb	r3, [r3, #0]
+ 8001064:	2b00      	cmp	r3, #0
+ 8001066:	d01d      	beq.n	80010a4 <_Z14LCD_DrawStringttPKc+0x54>
 	{
 		if ( ( usC - LCD_DispWindow_Start_COLUMN + WIDTH_EN_CHAR ) > LCD_DispWindow_COLUMN )
- 80011dc:	88fb      	ldrh	r3, [r7, #6]
- 80011de:	2be8      	cmp	r3, #232	; 0xe8
- 80011e0:	d904      	bls.n	80011ec <_Z14LCD_DrawStringttPKc+0x28>
+ 8001068:	88fb      	ldrh	r3, [r7, #6]
+ 800106a:	2be8      	cmp	r3, #232	; 0xe8
+ 800106c:	d904      	bls.n	8001078 <_Z14LCD_DrawStringttPKc+0x28>
 		{
 			usC = LCD_DispWindow_Start_COLUMN;
- 80011e2:	2300      	movs	r3, #0
- 80011e4:	80fb      	strh	r3, [r7, #6]
+ 800106e:	2300      	movs	r3, #0
+ 8001070:	80fb      	strh	r3, [r7, #6]
 			usP += HEIGHT_EN_CHAR;
- 80011e6:	88bb      	ldrh	r3, [r7, #4]
- 80011e8:	3310      	adds	r3, #16
- 80011ea:	80bb      	strh	r3, [r7, #4]
+ 8001072:	88bb      	ldrh	r3, [r7, #4]
+ 8001074:	3310      	adds	r3, #16
+ 8001076:	80bb      	strh	r3, [r7, #4]
 		}
 		
 		if ( ( usP - LCD_DispWindow_Start_PAGE + HEIGHT_EN_CHAR ) > LCD_DispWindow_PAGE )
- 80011ec:	88bb      	ldrh	r3, [r7, #4]
- 80011ee:	f5b3 7f98 	cmp.w	r3, #304	; 0x130
- 80011f2:	d903      	bls.n	80011fc <_Z14LCD_DrawStringttPKc+0x38>
+ 8001078:	88bb      	ldrh	r3, [r7, #4]
+ 800107a:	f5b3 7f98 	cmp.w	r3, #304	; 0x130
+ 800107e:	d903      	bls.n	8001088 <_Z14LCD_DrawStringttPKc+0x38>
 		{
 			usC = LCD_DispWindow_Start_COLUMN;
- 80011f4:	2300      	movs	r3, #0
- 80011f6:	80fb      	strh	r3, [r7, #6]
+ 8001080:	2300      	movs	r3, #0
+ 8001082:	80fb      	strh	r3, [r7, #6]
 			usP = LCD_DispWindow_Start_PAGE;
- 80011f8:	2300      	movs	r3, #0
- 80011fa:	80bb      	strh	r3, [r7, #4]
+ 8001084:	2300      	movs	r3, #0
+ 8001086:	80bb      	strh	r3, [r7, #4]
 		}
 		
 		LCD_DrawChar ( usC, usP, * pStr );
- 80011fc:	683b      	ldr	r3, [r7, #0]
- 80011fe:	781a      	ldrb	r2, [r3, #0]
- 8001200:	88b9      	ldrh	r1, [r7, #4]
- 8001202:	88fb      	ldrh	r3, [r7, #6]
- 8001204:	4618      	mov	r0, r3
- 8001206:	f7ff ff97 	bl	8001138 <_Z12LCD_DrawCharttc>
+ 8001088:	683b      	ldr	r3, [r7, #0]
+ 800108a:	781a      	ldrb	r2, [r3, #0]
+ 800108c:	88b9      	ldrh	r1, [r7, #4]
+ 800108e:	88fb      	ldrh	r3, [r7, #6]
+ 8001090:	4618      	mov	r0, r3
+ 8001092:	f7ff ff97 	bl	8000fc4 <_Z12LCD_DrawCharttc>
 		
 		pStr ++;
- 800120a:	683b      	ldr	r3, [r7, #0]
- 800120c:	3301      	adds	r3, #1
- 800120e:	603b      	str	r3, [r7, #0]
+ 8001096:	683b      	ldr	r3, [r7, #0]
+ 8001098:	3301      	adds	r3, #1
+ 800109a:	603b      	str	r3, [r7, #0]
 		
 		usC += WIDTH_EN_CHAR;
- 8001210:	88fb      	ldrh	r3, [r7, #6]
- 8001212:	3308      	adds	r3, #8
- 8001214:	80fb      	strh	r3, [r7, #6]
+ 800109c:	88fb      	ldrh	r3, [r7, #6]
+ 800109e:	3308      	adds	r3, #8
+ 80010a0:	80fb      	strh	r3, [r7, #6]
 	while ( * pStr != '\0' )
- 8001216:	e7dd      	b.n	80011d4 <_Z14LCD_DrawStringttPKc+0x10>
+ 80010a2:	e7dd      	b.n	8001060 <_Z14LCD_DrawStringttPKc+0x10>
 		
 	}
 	
 }
+ 80010a4:	bf00      	nop
+ 80010a6:	3708      	adds	r7, #8
+ 80010a8:	46bd      	mov	sp, r7
+ 80010aa:	bd80      	pop	{r7, pc}
+
+080010ac <_ZN12StepperMotorC1EP12GPIO_TypeDefttttP17TIM_HandleTypeDef>:
+ *      Author: ooj
+ */
+
+#include "StepperMotor.h"
+
+StepperMotor::StepperMotor(GPIO_TypeDef* GPIO_Port, uint16_t Pin1, uint16_t Pin2, uint16_t Pin3, uint16_t Pin4, TIM_HandleTypeDef* Timer)
+ 80010ac:	b4b0      	push	{r4, r5, r7}
+ 80010ae:	b085      	sub	sp, #20
+ 80010b0:	af00      	add	r7, sp, #0
+ 80010b2:	60f8      	str	r0, [r7, #12]
+ 80010b4:	60b9      	str	r1, [r7, #8]
+ 80010b6:	4611      	mov	r1, r2
+ 80010b8:	461a      	mov	r2, r3
+ 80010ba:	460b      	mov	r3, r1
+ 80010bc:	80fb      	strh	r3, [r7, #6]
+ 80010be:	4613      	mov	r3, r2
+ 80010c0:	80bb      	strh	r3, [r7, #4]
+    : GPIO_Port(GPIO_Port), Pin1(Pin1), Pin2(Pin2), Pin3(Pin3), Pin4(Pin4), Timer(Timer) {}
+ 80010c2:	68fb      	ldr	r3, [r7, #12]
+ 80010c4:	68ba      	ldr	r2, [r7, #8]
+ 80010c6:	601a      	str	r2, [r3, #0]
+ 80010c8:	68fb      	ldr	r3, [r7, #12]
+ 80010ca:	88fa      	ldrh	r2, [r7, #6]
+ 80010cc:	809a      	strh	r2, [r3, #4]
+ 80010ce:	68fb      	ldr	r3, [r7, #12]
+ 80010d0:	88ba      	ldrh	r2, [r7, #4]
+ 80010d2:	80da      	strh	r2, [r3, #6]
+ 80010d4:	68fb      	ldr	r3, [r7, #12]
+ 80010d6:	8c3a      	ldrh	r2, [r7, #32]
+ 80010d8:	811a      	strh	r2, [r3, #8]
+ 80010da:	68fb      	ldr	r3, [r7, #12]
+ 80010dc:	8cba      	ldrh	r2, [r7, #36]	; 0x24
+ 80010de:	815a      	strh	r2, [r3, #10]
+ 80010e0:	68fb      	ldr	r3, [r7, #12]
+ 80010e2:	6aba      	ldr	r2, [r7, #40]	; 0x28
+ 80010e4:	60da      	str	r2, [r3, #12]
+ 80010e6:	68fb      	ldr	r3, [r7, #12]
+ 80010e8:	4a07      	ldr	r2, [pc, #28]	; (8001108 <_ZN12StepperMotorC1EP12GPIO_TypeDefttttP17TIM_HandleTypeDef+0x5c>)
+ 80010ea:	f103 0410 	add.w	r4, r3, #16
+ 80010ee:	4615      	mov	r5, r2
+ 80010f0:	cd0f      	ldmia	r5!, {r0, r1, r2, r3}
+ 80010f2:	c40f      	stmia	r4!, {r0, r1, r2, r3}
+ 80010f4:	e895 000f 	ldmia.w	r5, {r0, r1, r2, r3}
+ 80010f8:	e884 000f 	stmia.w	r4, {r0, r1, r2, r3}
+ 80010fc:	68fb      	ldr	r3, [r7, #12]
+ 80010fe:	4618      	mov	r0, r3
+ 8001100:	3714      	adds	r7, #20
+ 8001102:	46bd      	mov	sp, r7
+ 8001104:	bcb0      	pop	{r4, r5, r7}
+ 8001106:	4770      	bx	lr
+ 8001108:	080061d8 	.word	0x080061d8
+
+0800110c <_ZN12StepperMotor10microDelayEt>:
+
+void StepperMotor::microDelay(uint16_t delay) {
+ 800110c:	b480      	push	{r7}
+ 800110e:	b083      	sub	sp, #12
+ 8001110:	af00      	add	r7, sp, #0
+ 8001112:	6078      	str	r0, [r7, #4]
+ 8001114:	460b      	mov	r3, r1
+ 8001116:	807b      	strh	r3, [r7, #2]
+    __HAL_TIM_SET_COUNTER(Timer, 0);
+ 8001118:	687b      	ldr	r3, [r7, #4]
+ 800111a:	68db      	ldr	r3, [r3, #12]
+ 800111c:	681b      	ldr	r3, [r3, #0]
+ 800111e:	2200      	movs	r2, #0
+ 8001120:	625a      	str	r2, [r3, #36]	; 0x24
+    while (__HAL_TIM_GET_COUNTER(Timer) < delay);
+ 8001122:	687b      	ldr	r3, [r7, #4]
+ 8001124:	68db      	ldr	r3, [r3, #12]
+ 8001126:	681b      	ldr	r3, [r3, #0]
+ 8001128:	6a5a      	ldr	r2, [r3, #36]	; 0x24
+ 800112a:	887b      	ldrh	r3, [r7, #2]
+ 800112c:	429a      	cmp	r2, r3
+ 800112e:	bf34      	ite	cc
+ 8001130:	2301      	movcc	r3, #1
+ 8001132:	2300      	movcs	r3, #0
+ 8001134:	b2db      	uxtb	r3, r3
+ 8001136:	2b00      	cmp	r3, #0
+ 8001138:	d000      	beq.n	800113c <_ZN12StepperMotor10microDelayEt+0x30>
+ 800113a:	e7f2      	b.n	8001122 <_ZN12StepperMotor10microDelayEt+0x16>
+}
+ 800113c:	bf00      	nop
+ 800113e:	370c      	adds	r7, #12
+ 8001140:	46bd      	mov	sp, r7
+ 8001142:	bc80      	pop	{r7}
+ 8001144:	4770      	bx	lr
+
+08001146 <_ZN12StepperMotor10singleStepEi>:
+
+void StepperMotor::singleStep(int index) {
+ 8001146:	b580      	push	{r7, lr}
+ 8001148:	b082      	sub	sp, #8
+ 800114a:	af00      	add	r7, sp, #0
+ 800114c:	6078      	str	r0, [r7, #4]
+ 800114e:	6039      	str	r1, [r7, #0]
+    HAL_GPIO_WritePin(GPIO_Port, Pin1, state[index][0]);
+ 8001150:	687b      	ldr	r3, [r7, #4]
+ 8001152:	6818      	ldr	r0, [r3, #0]
+ 8001154:	687b      	ldr	r3, [r7, #4]
+ 8001156:	8899      	ldrh	r1, [r3, #4]
+ 8001158:	687b      	ldr	r3, [r7, #4]
+ 800115a:	683a      	ldr	r2, [r7, #0]
+ 800115c:	3204      	adds	r2, #4
+ 800115e:	f813 3022 	ldrb.w	r3, [r3, r2, lsl #2]
+ 8001162:	461a      	mov	r2, r3
+ 8001164:	f001 f86e 	bl	8002244 <HAL_GPIO_WritePin>
+    HAL_GPIO_WritePin(GPIO_Port, Pin2, state[index][1]);
+ 8001168:	687b      	ldr	r3, [r7, #4]
+ 800116a:	6818      	ldr	r0, [r3, #0]
+ 800116c:	687b      	ldr	r3, [r7, #4]
+ 800116e:	88d9      	ldrh	r1, [r3, #6]
+ 8001170:	687a      	ldr	r2, [r7, #4]
+ 8001172:	683b      	ldr	r3, [r7, #0]
+ 8001174:	009b      	lsls	r3, r3, #2
+ 8001176:	4413      	add	r3, r2
+ 8001178:	7c5b      	ldrb	r3, [r3, #17]
+ 800117a:	461a      	mov	r2, r3
+ 800117c:	f001 f862 	bl	8002244 <HAL_GPIO_WritePin>
+    HAL_GPIO_WritePin(GPIO_Port, Pin3, state[index][2]);
+ 8001180:	687b      	ldr	r3, [r7, #4]
+ 8001182:	6818      	ldr	r0, [r3, #0]
+ 8001184:	687b      	ldr	r3, [r7, #4]
+ 8001186:	8919      	ldrh	r1, [r3, #8]
+ 8001188:	687a      	ldr	r2, [r7, #4]
+ 800118a:	683b      	ldr	r3, [r7, #0]
+ 800118c:	009b      	lsls	r3, r3, #2
+ 800118e:	4413      	add	r3, r2
+ 8001190:	7c9b      	ldrb	r3, [r3, #18]
+ 8001192:	461a      	mov	r2, r3
+ 8001194:	f001 f856 	bl	8002244 <HAL_GPIO_WritePin>
+    HAL_GPIO_WritePin(GPIO_Port, Pin4, state[index][3]);
+ 8001198:	687b      	ldr	r3, [r7, #4]
+ 800119a:	6818      	ldr	r0, [r3, #0]
+ 800119c:	687b      	ldr	r3, [r7, #4]
+ 800119e:	8959      	ldrh	r1, [r3, #10]
+ 80011a0:	687a      	ldr	r2, [r7, #4]
+ 80011a2:	683b      	ldr	r3, [r7, #0]
+ 80011a4:	009b      	lsls	r3, r3, #2
+ 80011a6:	4413      	add	r3, r2
+ 80011a8:	7cdb      	ldrb	r3, [r3, #19]
+ 80011aa:	461a      	mov	r2, r3
+ 80011ac:	f001 f84a 	bl	8002244 <HAL_GPIO_WritePin>
+}
+ 80011b0:	bf00      	nop
+ 80011b2:	3708      	adds	r7, #8
+ 80011b4:	46bd      	mov	sp, r7
+ 80011b6:	bd80      	pop	{r7, pc}
+
+080011b8 <_ZN12StepperMotor9makeStepsEitb>:
+
+void StepperMotor::makeSteps(int steps, uint16_t delay, bool clockwise) {
+ 80011b8:	b580      	push	{r7, lr}
+ 80011ba:	b088      	sub	sp, #32
+ 80011bc:	af00      	add	r7, sp, #0
+ 80011be:	60f8      	str	r0, [r7, #12]
+ 80011c0:	60b9      	str	r1, [r7, #8]
+ 80011c2:	4611      	mov	r1, r2
+ 80011c4:	461a      	mov	r2, r3
+ 80011c6:	460b      	mov	r3, r1
+ 80011c8:	80fb      	strh	r3, [r7, #6]
+ 80011ca:	4613      	mov	r3, r2
+ 80011cc:	717b      	strb	r3, [r7, #5]
+    for (int x = 0; x < steps; ++x) {
+ 80011ce:	2300      	movs	r3, #0
+ 80011d0:	61fb      	str	r3, [r7, #28]
+ 80011d2:	69fa      	ldr	r2, [r7, #28]
+ 80011d4:	68bb      	ldr	r3, [r7, #8]
+ 80011d6:	429a      	cmp	r2, r3
+ 80011d8:	da1e      	bge.n	8001218 <_ZN12StepperMotor9makeStepsEitb+0x60>
+        for (int i = 0; i < STEP_COUNT; ++i) {
+ 80011da:	2300      	movs	r3, #0
+ 80011dc:	61bb      	str	r3, [r7, #24]
+ 80011de:	69bb      	ldr	r3, [r7, #24]
+ 80011e0:	2b07      	cmp	r3, #7
+ 80011e2:	dc15      	bgt.n	8001210 <_ZN12StepperMotor9makeStepsEitb+0x58>
+            int index = clockwise ? (STEP_COUNT - 1 - i) : i;
+ 80011e4:	797b      	ldrb	r3, [r7, #5]
+ 80011e6:	2b00      	cmp	r3, #0
+ 80011e8:	d003      	beq.n	80011f2 <_ZN12StepperMotor9makeStepsEitb+0x3a>
+ 80011ea:	69bb      	ldr	r3, [r7, #24]
+ 80011ec:	f1c3 0307 	rsb	r3, r3, #7
+ 80011f0:	e000      	b.n	80011f4 <_ZN12StepperMotor9makeStepsEitb+0x3c>
+ 80011f2:	69bb      	ldr	r3, [r7, #24]
+ 80011f4:	617b      	str	r3, [r7, #20]
+            singleStep(index);
+ 80011f6:	6979      	ldr	r1, [r7, #20]
+ 80011f8:	68f8      	ldr	r0, [r7, #12]
+ 80011fa:	f7ff ffa4 	bl	8001146 <_ZN12StepperMotor10singleStepEi>
+            microDelay(delay);
+ 80011fe:	88fb      	ldrh	r3, [r7, #6]
+ 8001200:	4619      	mov	r1, r3
+ 8001202:	68f8      	ldr	r0, [r7, #12]
+ 8001204:	f7ff ff82 	bl	800110c <_ZN12StepperMotor10microDelayEt>
+        for (int i = 0; i < STEP_COUNT; ++i) {
+ 8001208:	69bb      	ldr	r3, [r7, #24]
+ 800120a:	3301      	adds	r3, #1
+ 800120c:	61bb      	str	r3, [r7, #24]
+ 800120e:	e7e6      	b.n	80011de <_ZN12StepperMotor9makeStepsEitb+0x26>
+    for (int x = 0; x < steps; ++x) {
+ 8001210:	69fb      	ldr	r3, [r7, #28]
+ 8001212:	3301      	adds	r3, #1
+ 8001214:	61fb      	str	r3, [r7, #28]
+ 8001216:	e7dc      	b.n	80011d2 <_ZN12StepperMotor9makeStepsEitb+0x1a>
+        }
+    }
+}
  8001218:	bf00      	nop
- 800121a:	3708      	adds	r7, #8
+ 800121a:	3720      	adds	r7, #32
  800121c:	46bd      	mov	sp, r7
  800121e:	bd80      	pop	{r7, pc}
 
@@ -2013,7 +2013,7 @@ int main(void)
  800123e:	f000 f8bf 	bl	80013c0 <_ZL12MX_TIM1_Initv>
   /* USER CODE BEGIN 2 */
   LCD_INIT();
- 8001242:	f7ff fd5c 	bl	8000cfe <_Z8LCD_INITv>
+ 8001242:	f7ff fca2 	bl	8000b8a <_Z8LCD_INITv>
 
   char name[] = "DAS, Ujaan";
  8001246:	4a19      	ldr	r2, [pc, #100]	; (80012ac <main+0x8c>)
@@ -2029,7 +2029,7 @@ int main(void)
  800125c:	461a      	mov	r2, r3
  800125e:	2100      	movs	r1, #0
  8001260:	2000      	movs	r0, #0
- 8001262:	f7ff ffaf 	bl	80011c4 <_Z14LCD_DrawStringttPKc>
+ 8001262:	f7ff fef5 	bl	8001050 <_Z14LCD_DrawStringttPKc>
 
   HAL_TIM_Base_Start(&htim1);
  8001266:	4812      	ldr	r0, [pc, #72]	; (80012b0 <main+0x90>)
@@ -2039,7 +2039,7 @@ int main(void)
 //          .Pin4 = STP_4_Pin,
 //          .Timer = &htim1
 //      };
-  StepperMotor motor(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
+  StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
  800126c:	1d38      	adds	r0, r7, #4
  800126e:	4b10      	ldr	r3, [pc, #64]	; (80012b0 <main+0x90>)
  8001270:	9302      	str	r3, [sp, #8]
@@ -2050,28 +2050,28 @@ int main(void)
  800127a:	2320      	movs	r3, #32
  800127c:	2210      	movs	r2, #16
  800127e:	490d      	ldr	r1, [pc, #52]	; (80012b4 <main+0x94>)
- 8001280:	f7ff fc6e 	bl	8000b60 <_ZN12StepperMotorC1EP12GPIO_TypeDefttttP17TIM_HandleTypeDef>
+ 8001280:	f7ff ff14 	bl	80010ac <_ZN12StepperMotorC1EP12GPIO_TypeDefttttP17TIM_HandleTypeDef>
   while (1)
   {
 //	  step_motor(&motor, 256, 1000, 1);  // 256 half revolution
 //	  HAL_Delay(100);
 //	  step_motor(&motor, 128, 1000, 0); // 128 quarter revolution
-	  motor.stepMotor(256, 1000, true);
+	  stepper.makeSteps(256, 1000, true);
  8001284:	1d38      	adds	r0, r7, #4
  8001286:	2301      	movs	r3, #1
  8001288:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
  800128c:	f44f 7180 	mov.w	r1, #256	; 0x100
- 8001290:	f7ff fcec 	bl	8000c6c <_ZN12StepperMotor9stepMotorEitb>
+ 8001290:	f7ff ff92 	bl	80011b8 <_ZN12StepperMotor9makeStepsEitb>
 	  HAL_Delay(100);
  8001294:	2064      	movs	r0, #100	; 0x64
  8001296:	f000 fd0f 	bl	8001cb8 <HAL_Delay>
-	  motor.stepMotor(128, 1000, false);
+	  stepper.makeSteps(128, 1000, false);
  800129a:	1d38      	adds	r0, r7, #4
  800129c:	2300      	movs	r3, #0
  800129e:	f44f 727a 	mov.w	r2, #1000	; 0x3e8
  80012a2:	2180      	movs	r1, #128	; 0x80
- 80012a4:	f7ff fce2 	bl	8000c6c <_ZN12StepperMotor9stepMotorEitb>
-	  motor.stepMotor(256, 1000, true);
+ 80012a4:	f7ff ff88 	bl	80011b8 <_ZN12StepperMotor9makeStepsEitb>
+	  stepper.makeSteps(256, 1000, true);
  80012a8:	e7ec      	b.n	8001284 <main+0x64>
  80012aa:	bf00      	nop
  80012ac:	08006200 	.word	0x08006200

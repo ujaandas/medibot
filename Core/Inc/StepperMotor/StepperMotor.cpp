@@ -15,18 +15,18 @@ void StepperMotor::microDelay(uint16_t delay) {
     while (__HAL_TIM_GET_COUNTER(Timer) < delay);
 }
 
-void StepperMotor::stepSingle(int index) {
+void StepperMotor::singleStep(int index) {
     HAL_GPIO_WritePin(GPIO_Port, Pin1, state[index][0]);
     HAL_GPIO_WritePin(GPIO_Port, Pin2, state[index][1]);
     HAL_GPIO_WritePin(GPIO_Port, Pin3, state[index][2]);
     HAL_GPIO_WritePin(GPIO_Port, Pin4, state[index][3]);
 }
 
-void StepperMotor::stepMotor(int steps, uint16_t delay, bool clockwise) {
+void StepperMotor::makeSteps(int steps, uint16_t delay, bool clockwise) {
     for (int x = 0; x < steps; ++x) {
         for (int i = 0; i < STEP_COUNT; ++i) {
             int index = clockwise ? (STEP_COUNT - 1 - i) : i;
-            stepSingle(index);
+            singleStep(index);
             microDelay(delay);
         }
     }
