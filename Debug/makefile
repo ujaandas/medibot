@@ -13,6 +13,7 @@ RM := rm -rf
 -include Core/Startup/subdir.mk
 -include Core/Src/subdir.mk
 -include Core/Inc/StepperMotor/subdir.mk
+-include Core/Inc/ServoMotor/subdir.mk
 -include Core/Inc/Screen/subdir.mk
 -include objects.mk
 

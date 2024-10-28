@@ -15,15 +15,15 @@
 
 class StepperMotor {
 	public:
-		StepperMotor(GPIO_TypeDef* GPIO_Port, uint16_t Pin1, uint16_t Pin2, uint16_t Pin3, uint16_t Pin4, TIM_HandleTypeDef* Timer);
+		StepperMotor(GPIO_TypeDef* gpioPort, uint16_t pin1, uint16_t pin2, uint16_t pin3, uint16_t pin4, TIM_HandleTypeDef* timer);
 		void makeSteps(int steps, uint16_t delay, bool clockwise);
 	private:
-	    GPIO_TypeDef* GPIO_Port;
-	    uint16_t Pin1;
-	    uint16_t Pin2;
-	    uint16_t Pin3;
-	    uint16_t Pin4;
-	    TIM_HandleTypeDef* Timer;
+	    GPIO_TypeDef* gpioPort;
+	    uint16_t pin1;
+	    uint16_t pin2;
+	    uint16_t pin3;
+	    uint16_t pin4;
+	    TIM_HandleTypeDef* timer;
 
 	    void microDelay(uint16_t delay);
 	    void singleStep(int index);
