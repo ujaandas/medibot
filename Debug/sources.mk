@@ -31,6 +31,7 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Inc/CupServo \
 Core/Inc/Screen \
 Core/Inc/ServoMotor \
 Core/Inc/StepperMotor \

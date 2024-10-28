@@ -22,6 +22,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "CupServo/CupServo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +32,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -41,6 +41,8 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
+extern TIM_HandleTypeDef htim3;
+CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -56,7 +58,6 @@
 /* External variables --------------------------------------------------------*/
 
 /* USER CODE BEGIN EV */
-
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -223,7 +224,13 @@ void EXTI3_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-
+	int status = __HAL_GPIO_EXTI_GET_IT(K2_Btn_Pin);
+	if (status != RESET)
+	{
+		cupServo.selectCup(2);
+		__HAL_GPIO_EXTI_CLEAR_IT(K2_Btn_Pin);
+		HAL_GPIO_EXTI_Callback(K2_Btn_Pin);
+	}
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(K2_Btn_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */

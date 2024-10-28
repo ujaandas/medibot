@@ -1,3 +1,4 @@
+"./Core/Inc/CupServo/CupServo.o"
 "./Core/Inc/Screen/lcd.o"
 "./Core/Inc/ServoMotor/ServoMotor.o"
 "./Core/Inc/StepperMotor/StepperMotor.o"
