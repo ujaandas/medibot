@@ -20,9 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f1xx_it.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "CupServo/CupServo.h"
+//#include "CupServo/CupServo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 extern TIM_HandleTypeDef htim3;
-CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
+//CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -58,6 +59,7 @@ CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* External variables --------------------------------------------------------*/
 
 /* USER CODE BEGIN EV */
+extern void handleK2BtnPress(int cup, TIM_HandleTypeDef* timer, uint16_t timerChannel);
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -227,7 +229,7 @@ void EXTI15_10_IRQHandler(void)
 	int status = __HAL_GPIO_EXTI_GET_IT(K2_Btn_Pin);
 	if (status != RESET)
 	{
-		cupServo.selectCup(2);
+		handleK2BtnPress(2, &htim3, TIM_CHANNEL_1);
 		__HAL_GPIO_EXTI_CLEAR_IT(K2_Btn_Pin);
 		HAL_GPIO_EXTI_Callback(K2_Btn_Pin);
 	}
