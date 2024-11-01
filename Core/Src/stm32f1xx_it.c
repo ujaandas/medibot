@@ -43,7 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 extern TIM_HandleTypeDef htim3;
-int presses;
+int presses = 0;
 //CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
 
@@ -232,12 +232,15 @@ void EXTI15_10_IRQHandler(void)
 	{
 		switch (presses % 3) {
 		  case 0:
+			  presses = presses + 1;
 			  handleK2BtnPress(0, &htim3, TIM_CHANNEL_1);
 			break;
 		  case 1:
+			  presses = presses + 1;
 			  handleK2BtnPress(1, &htim3, TIM_CHANNEL_1);
 			break;
 		  case 2:
+			  presses = presses + 1;
 			  handleK2BtnPress(2, &htim3, TIM_CHANNEL_1);
 			break;
 		  }

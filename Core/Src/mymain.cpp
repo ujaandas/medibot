@@ -23,7 +23,7 @@ int mymain(void)
   {
 //	  stepper.makeSteps(256, 300, true);
 //	  HAL_Delay(100);
-	  stepper.makeSteps(128, 300, false);
+	  stepper.makeSteps(256, 500, false);
   }
 
   return 0;
