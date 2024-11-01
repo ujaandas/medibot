@@ -43,6 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 extern TIM_HandleTypeDef htim3;
+int presses;
 //CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
 
@@ -229,7 +230,17 @@ void EXTI15_10_IRQHandler(void)
 	int status = __HAL_GPIO_EXTI_GET_IT(K2_Btn_Pin);
 	if (status != RESET)
 	{
-		handleK2BtnPress(2, &htim3, TIM_CHANNEL_1);
+		switch (presses % 3) {
+		  case 0:
+			  handleK2BtnPress(0, &htim3, TIM_CHANNEL_1);
+			break;
+		  case 1:
+			  handleK2BtnPress(1, &htim3, TIM_CHANNEL_1);
+			break;
+		  case 2:
+			  handleK2BtnPress(2, &htim3, TIM_CHANNEL_1);
+			break;
+		  }
 		__HAL_GPIO_EXTI_CLEAR_IT(K2_Btn_Pin);
 		HAL_GPIO_EXTI_Callback(K2_Btn_Pin);
 	}
