@@ -31,10 +31,16 @@ int mymain(void)
   {
 //	  stepper.makeSteps(256, 300, true);
 //	  HAL_Delay(100);
-//	  stepper.makeSteps(256, 1000, false);
+	  stepper.makeSteps(256, 700, false);
 	  ldr.read();
 	  ConvertToDecimalString(ldr.getIntensity(), buf);
-	  LCD_DrawString(100, 50, buf);
+	  LCD_DrawString(30, 30, buf);
+
+	  if (ldr.somethingPassed(10)) {
+		  LCD_DrawString(50, 50, "Something detected");
+	  } else {
+		  LCD_DrawString(50, 50, "Hmm...");
+	  }
 
 	  HAL_Delay(100);
   }

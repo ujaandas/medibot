@@ -8,29 +8,36 @@
 #include <LDR/LDR.h>
 #include <stdio.h>
 
-LDR::LDR(ADC_HandleTypeDef* hadc) : hadc(hadc) {
+LDR::LDR(ADC_HandleTypeDef* hadc) :
+	hadc(hadc), rawVal(0), intensity(0), baselineIntensity(0) {
 	HAL_ADCEx_Calibration_Start(hadc);
     HAL_ADC_Start(hadc);
+    read();
+    baselineIntensity = intensity;
 }
 
 void LDR::read() {
     HAL_ADC_PollForConversion(hadc, 1000);
-    LDR::rawVal = HAL_ADC_GetValue(hadc);
-    LDR::intensity = mapValue(rawVal);
+    rawVal = HAL_ADC_GetValue(hadc);
+    intensity = mapValue(rawVal);
 }
 
 uint8_t LDR::getIntensity() const {
-    return LDR::intensity;
+    return intensity;
 }
 
 uint32_t LDR::getRawVal() const {
-    return LDR::rawVal;
+    return rawVal;
 }
 
 uint8_t LDR::mapValue(uint32_t adcVal) {
-    if (adcVal <= 1700) return 0;
-    if (adcVal >= 4096) return 100;
-    return (adcVal - 1700) * 100 / (4096 - 1700);
+    if (adcVal <= MIN_VAL) return 0;
+    if (adcVal >= MAX_VAL) return 100;
+    return (adcVal - MIN_VAL) * 100 / (MAX_VAL - MIN_VAL);
+}
+
+bool LDR::somethingPassed(uint8_t threshold) {
+	return (intensity < baselineIntensity - threshold);
 }
 
 
