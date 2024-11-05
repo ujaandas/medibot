@@ -40,4 +40,21 @@ bool LDR::somethingPassed(uint8_t threshold) {
 	return (intensity < baselineIntensity - threshold);
 }
 
+bool LDR::somethingBlocking(uint8_t threshold, uint32_t durationMs) {
+	uint32_t currentTime = HAL_GetTick();
+	if (somethingPassed(threshold)) {
+		if (!passingState) {
+			passingState = true;
+			lastCheckTimestamp = currentTime;
+		}
+		else if ((currentTime - lastCheckTimestamp) >= durationMs) {
+			return true;
+		}
+	}
+	else {
+		passingState = false;
+	}
+	return false;
+}
+
 
