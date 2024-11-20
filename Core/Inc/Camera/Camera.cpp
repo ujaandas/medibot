@@ -116,7 +116,7 @@ static constexpr size_t CONFIG_SIZE = sizeof(CONFIG) / sizeof(CONFIG[0]);
 static constexpr uint8_t SENSOR_ID = 0x21;
 
 Camera::Camera(GPIO_TypeDef* sccbPort, uint16_t sclPin, uint16_t sdaPin)
-    : initialized_(false), sccb_(sccbPort, sclPin, sdaPin) {}
+    : initialized(false), sccb(sccbPort, sclPin, sdaPin) {}
 
 bool Camera::init() {
     // Reset sensor
@@ -138,12 +138,12 @@ bool Camera::init() {
             }
         }
 
-    initialized_ = true;
+    initialized = true;
     return true;
 }
 
 void Camera::displayImage() {
-    if (!initialized_) return;
+    if (!initialized) return;
 
 	uint16_t i, j;
 	uint16_t Camera_Data;
@@ -162,11 +162,11 @@ void Camera::displayImage() {
 }
 
 bool Camera::writeSensorReg(uint8_t addr, uint8_t data) {
-    return sccb_.writeByte(addr, data);
+    return sccb.writeByte(addr, data);
 }
 
 bool Camera::readSensorReg(uint8_t addr, uint8_t& data) {
-    return sccb_.readBytes(&data, 1, addr);
+    return sccb.readBytes(&data, 1, addr);
 }
 
 bool Camera::verifySensorID() {

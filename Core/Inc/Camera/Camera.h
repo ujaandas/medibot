@@ -18,11 +18,11 @@ class Camera {
 
 		bool init();
 		void displayImage();
-		bool isInitialized() const { return initialized_; }
+		bool isInitialized() const { return initialized; }
 
 	private:
-		bool initialized_;
-		SCCB sccb_;
+		bool initialized;
+		SCCB sccb;
 
 		bool writeSensorReg(uint8_t addr, uint8_t data);
 		bool readSensorReg(uint8_t addr, uint8_t& data);

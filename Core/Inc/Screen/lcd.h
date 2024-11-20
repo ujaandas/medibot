@@ -57,4 +57,6 @@ usColor );
 void LCD_DrawCircle ( uint16_t usC, uint16_t usP, uint16_t R,
 uint16_t usColor);
 void LCD_Cam_Gram(void);
+void LCD_DrawCharColor(uint16_t usC, uint16_t usP, const char cChar, uint16_t usColor, uint16_t usBgColor);
+void LCD_DrawStringColor(uint16_t usC, uint16_t usP, const char *pStr, uint16_t usColor, uint16_t usBgColor);
 #endif

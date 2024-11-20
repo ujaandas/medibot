@@ -342,3 +342,59 @@ LCD_Write_Data ( 0x00 );
 LCD_Write_Data ( 0xEF );
 LCD_Write_Cmd ( 0x2C );
 }
+
+void LCD_DrawCharColor(uint16_t usC, uint16_t usP, const char cChar, uint16_t usColor, uint16_t usBgColor)
+{
+    uint8_t ucTemp, ucRelativePositon, ucPage, ucColumn;
+
+    ucRelativePositon = cChar - ' ';
+
+    LCD_OpenWindow(usC, usP, WIDTH_EN_CHAR, HEIGHT_EN_CHAR);
+
+    LCD_Write_Cmd(CMD_SetPixel);
+
+    for (ucPage = 0; ucPage < HEIGHT_EN_CHAR; ucPage++)
+    {
+        ucTemp = ucAscii_1608[ucRelativePositon][ucPage];
+
+        for (ucColumn = 0; ucColumn < WIDTH_EN_CHAR; ucColumn++)
+        {
+            if (ucTemp & 0x01)
+                LCD_Write_Data(usColor); // Use the specified text color
+            else
+                LCD_Write_Data(usBgColor); // Use the specified background color
+
+            ucTemp >>= 1;
+        }
+    }
+}
+
+void LCD_DrawStringColor(uint16_t usC, uint16_t usP, const char *pStr, uint16_t usColor, uint16_t usBgColor)
+{
+    while (*pStr != '\0')
+    {
+        // Check if the current column exceeds the display window
+        if ((usC - LCD_DispWindow_Start_COLUMN + WIDTH_EN_CHAR) > LCD_DispWindow_COLUMN)
+        {
+            usC = LCD_DispWindow_Start_COLUMN;
+            usP += HEIGHT_EN_CHAR;
+        }
+
+        // Check if the current page exceeds the display window
+        if ((usP - LCD_DispWindow_Start_PAGE + HEIGHT_EN_CHAR) > LCD_DispWindow_PAGE)
+        {
+            usC = LCD_DispWindow_Start_COLUMN;
+            usP = LCD_DispWindow_Start_PAGE;
+        }
+
+        // Draw the background rectangle for the character
+        LCD_Clear(usC, usP, WIDTH_EN_CHAR, HEIGHT_EN_CHAR, usBgColor);
+
+        // Draw the character with the specified text color
+        LCD_DrawCharColor(usC, usP, *pStr, usColor, usBgColor);
+
+        // Move to the next character position
+        pStr++;
+        usC += WIDTH_EN_CHAR;
+    }
+}

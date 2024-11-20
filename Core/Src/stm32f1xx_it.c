@@ -24,6 +24,7 @@
 /* USER CODE BEGIN Includes */
 //#include "CupServo/CupServo.h"
 #include "Camera/Helper/CameraPins.h"
+#include "Screen/touchscreenDriver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -235,6 +236,25 @@ void EXTI3_IRQHandler(void)
   /* USER CODE BEGIN EXTI3_IRQn 1 */
 
   /* USER CODE END EXTI3_IRQn 1 */
+}
+
+/**
+  * @brief This function handles EXTI line4 interrupt.
+  */
+void EXTI4_IRQHandler(void)
+{
+  /* USER CODE BEGIN EXTI4_IRQn 0 */
+	if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_4) != RESET) {
+		isScreenTouched = 1;
+		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_4);
+		HAL_GPIO_EXTI_Callback(GPIO_PIN_4);
+	}
+
+  /* USER CODE END EXTI4_IRQn 0 */
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_4);
+  /* USER CODE BEGIN EXTI4_IRQn 1 */
+
+  /* USER CODE END EXTI4_IRQn 1 */
 }
 
 /**
