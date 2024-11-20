@@ -20,10 +20,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f1xx_it.h"
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "CupServo/CupServo.h"
+#include "Camera/CameraPins.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,6 +43,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 extern TIM_HandleTypeDef htim3;
+extern uint8_t Ov7725_vsync;
 int presses = 0;
 //CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
@@ -207,12 +208,27 @@ void SysTick_Handler(void)
 void EXTI3_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI3_IRQn 0 */
-	int status = __HAL_GPIO_EXTI_GET_IT(GPIO_PIN_3);
-	if (status != RESET)
-	{
-		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_3);
-		HAL_GPIO_EXTI_Callback(GPIO_PIN_3);
-	}
+	if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_3) != RESET)
+	  {
+			if( Ov7725_vsync == 0 )
+	    {
+			FIFO_WRST_L();
+	        FIFO_WE_H();
+
+	        Ov7725_vsync = 1;
+	        FIFO_WE_H();
+	        FIFO_WRST_H();
+	    }
+	    else if( Ov7725_vsync == 1 )
+	    {
+	        FIFO_WE_L();
+	        Ov7725_vsync = 2;
+	    }
+
+
+	    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_3);
+	    HAL_GPIO_EXTI_Callback(GPIO_PIN_3);
+	  }
 
   /* USER CODE END EXTI3_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_3);
