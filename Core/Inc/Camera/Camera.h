@@ -9,8 +9,8 @@
 #define __CAMERA_H
 
 #include "stm32f1xx_hal.h"
-#include "SCCB.h"
-#include "CameraRegisters.h"
+#include "SCCB/SCCB.h"
+#include "Helper/CameraRegisters.h"
 
 class Camera {
 	public:

@@ -23,7 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "CupServo/CupServo.h"
-#include "Camera/CameraPins.h"
+#include "Camera/Helper/CameraPins.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

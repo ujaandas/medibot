@@ -7,7 +7,7 @@ extern "C" int mymain(void);
 #include "StepperMotor/StepperMotor.h"
 #include "CupServo/CupServo.h"
 #include "Camera/Camera.h"
-#include "Camera/CameraPins.h"
+#include "Camera/Helper/CameraPins.h"
 
 extern TIM_HandleTypeDef htim1;
 extern uint8_t Ov7725_vsync;

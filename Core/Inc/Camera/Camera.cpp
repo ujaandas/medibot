@@ -6,8 +6,8 @@
  */
 
 #include "Camera.h"
-#include "CameraPins.h"
-#include "CameraRegisters.h"
+#include "Helper/CameraPins.h"
+#include "Helper/CameraRegisters.h"
 #include "Screen/lcd.h"
 #include <stdio.h>
 

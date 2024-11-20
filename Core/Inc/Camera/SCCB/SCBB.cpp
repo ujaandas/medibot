@@ -5,7 +5,7 @@
  *      Author: ooj
  */
 
-#include <Camera/SCCB.h>
+#include <Camera/SCCB/SCCB.h>
 #include "Screen/lcd.h"
 #include <stdio.h>
 
