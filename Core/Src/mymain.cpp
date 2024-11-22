@@ -36,6 +36,9 @@ int mymain(void)
   uint8_t selectedPatientIndex = 0;
   uint8_t selectedOptionIndex = 0; // 0 for vitals, 1 for medication
 
+  StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
+
+
   while (1) {
        // 1A: DISPLAY patients
        DisplayPatientSelection(patients, NUM_PATIENTS);
@@ -94,15 +97,18 @@ int mymain(void)
       }
   }
 
-      if (selectedOptionIndex == 0){ // Take vitals
-    	  DisplayTakingVitals(&patients[selectedPatientIndex]);
-    	  // Put code to take measurements here
-      } else if (selectedOptionIndex == 1){ // Dispense medication
-    	  DisplayDispensingMedication(&patients[selectedPatientIndex]);
-    	  // Put code to dispense medication here
-      }
+  if (selectedOptionIndex == 0){ // Take vitals
+	  DisplayTakingVitals(&patients[selectedPatientIndex]);
+	  // Put code to take measurements here
+  } else if (selectedOptionIndex == 1){ // Dispense medication
+	  DisplayDispensingMedication(&patients[selectedPatientIndex]);
+	  // Put code to dispense medication here
+	  while (1) {
+	  	  stepper.makeSteps(256, 1200, false);
+	  }
+  }
 
-//  StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
+
 
 //  LCD_Clear (50, 80, 140, 70, RED);
 //  LCD_DrawString(75, 100, (uint8_t*)"CAMERA DEMO");

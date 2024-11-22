@@ -268,18 +268,16 @@ void EXTI15_10_IRQHandler(void)
 	{
 		switch (presses % 3) {
 		  case 0:
-			  presses = presses + 1;
 			  handleK2BtnPress(0, &htim3, TIM_CHANNEL_1);
 			break;
 		  case 1:
-			  presses = presses + 1;
 			  handleK2BtnPress(1, &htim3, TIM_CHANNEL_1);
 			break;
 		  case 2:
-			  presses = presses + 1;
 			  handleK2BtnPress(2, &htim3, TIM_CHANNEL_1);
 			break;
 		  }
+		presses = presses + 1;
 		__HAL_GPIO_EXTI_CLEAR_IT(K2_Btn_Pin);
 		HAL_GPIO_EXTI_Callback(K2_Btn_Pin);
 	}
