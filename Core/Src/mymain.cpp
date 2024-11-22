@@ -7,10 +7,12 @@ extern "C" int mymain(void);
 #include "Screen/lcd.h"
 #include "StepperMotor/StepperMotor.h"
 #include "CupServo/CupServo.h"
+#include "ServoMotor/ServoMotor.h"
 #include "Camera/Camera.h"
 #include "Camera/Helper/CameraPins.h"
 
 extern TIM_HandleTypeDef htim1;
+extern TIM_HandleTypeDef htim3;
 extern uint8_t Ov7725_vsync;
 extern UART_HandleTypeDef huart1;
 
@@ -37,7 +39,7 @@ int mymain(void)
   uint8_t selectedOptionIndex = 0; // 0 for vitals, 1 for medication
 
   StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
-
+  ServoMotor armServo(&htim3, TIM_CHANNEL_3);
 
   while (1) {
        // 1A: DISPLAY patients
@@ -104,7 +106,13 @@ int mymain(void)
 	  DisplayDispensingMedication(&patients[selectedPatientIndex]);
 	  // Put code to dispense medication here
 	  while (1) {
-	  	  stepper.makeSteps(256, 1200, false);
+	  	  stepper.makeSteps(256, 800, false);
+	  	  armServo.spinTo(90);
+	  	  HAL_Delay(1000);
+	  	  armServo.spinTo(120);
+	  	  HAL_Delay(1000);
+	  	  armServo.spinTo(150);
+	  	  HAL_Delay(1000);
 	  }
   }
 
