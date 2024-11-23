@@ -59,9 +59,13 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define K2_Btn_Pin GPIO_PIN_13
-#define K2_Btn_GPIO_Port GPIOC
-#define K2_Btn_EXTI_IRQn EXTI15_10_IRQn
+#define K2_BTN_Pin GPIO_PIN_13
+#define K2_BTN_GPIO_Port GPIOC
+#define K2_BTN_EXTI_IRQn EXTI15_10_IRQn
+#define CAM_RRST_Pin GPIO_PIN_2
+#define CAM_RRST_GPIO_Port GPIOA
+#define CAM_CS_Pin GPIO_PIN_3
+#define CAM_CS_GPIO_Port GPIOA
 #define STP_1_Pin GPIO_PIN_4
 #define STP_1_GPIO_Port GPIOA
 #define STP_2_Pin GPIO_PIN_5
@@ -70,6 +74,10 @@ void Error_Handler(void);
 #define STP_3_GPIO_Port GPIOA
 #define STP_4_Pin GPIO_PIN_7
 #define STP_4_GPIO_Port GPIOA
+#define CAM_WRST_Pin GPIO_PIN_4
+#define CAM_WRST_GPIO_Port GPIOC
+#define CAM_RCLK_Pin GPIO_PIN_5
+#define CAM_RCLK_GPIO_Port GPIOC
 #define LED_G_Pin GPIO_PIN_0
 #define LED_G_GPIO_Port GPIOB
 #define LED_B_Pin GPIO_PIN_1
@@ -78,6 +86,12 @@ void Error_Handler(void);
 #define LCD_BL_GPIO_Port GPIOD
 #define LCD_DB_Pin GPIO_PIN_13
 #define LCD_DB_GPIO_Port GPIOD
+#define CAM_SCL_Pin GPIO_PIN_6
+#define CAM_SCL_GPIO_Port GPIOC
+#define CAM_SDA_Pin GPIO_PIN_7
+#define CAM_SDA_GPIO_Port GPIOC
+#define CAM_WE_Pin GPIO_PIN_3
+#define CAM_WE_GPIO_Port GPIOD
 #define LED_R_Pin GPIO_PIN_5
 #define LED_R_GPIO_Port GPIOB
 #define LCD_TP_Pin GPIO_PIN_0

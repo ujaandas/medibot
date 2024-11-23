@@ -6,10 +6,6 @@
  */
 
 #include "Camera.h"
-#include "Helper/CameraPins.h"
-#include "Helper/CameraRegisters.h"
-#include "Screen/lcd.h"
-#include <stdio.h>
 
 struct RegConfig {
         uint8_t address;
@@ -115,31 +111,37 @@ static constexpr RegConfig CONFIG[] =
 static constexpr size_t CONFIG_SIZE = sizeof(CONFIG) / sizeof(CONFIG[0]);
 static constexpr uint8_t SENSOR_ID = 0x21;
 
-Camera::Camera(GPIO_TypeDef* sccbPort, uint16_t sclPin, uint16_t sdaPin)
-    : initialized(false), sccb(sccbPort, sclPin, sdaPin) {}
+Camera::Camera(const SCCBController& sccbController, const FIFOController& fifoController)
+	: initialized(false), sccbController(sccbController), fifoController(fifoController) {
+	this->init();
+}
 
 bool Camera::init() {
+	LCD_DrawString(50, 150, (uint8_t*) "Initializing camera...");
     // Reset sensor
     if (!writeSensorReg(COM7, GAM3)) {
+    	LCD_DrawString(50, 200, (uint8_t*) "Reset sensor failed!");
         return false;
     }
-
     HAL_Delay(10); // Wait for reset to complete
 
     // Verify sensor ID
     if (!verifySensorID()) {
+    	LCD_DrawString(50, 200, (uint8_t*) "Verify sensor failed!");
         return false;
     }
 
     // Configure sensor registers
     for (size_t i = 0; i < CONFIG_SIZE; i++) {
             if (!writeSensorReg(CONFIG[i].address, CONFIG[i].value)) {
+            	LCD_DrawString(50, 200, (uint8_t*) "Configure sensor failed!");
                 return false;
             }
         }
 
     initialized = true;
-    return true;
+    LCD_DrawString(50, 170, (uint8_t*) "Camera init success!");
+    return 1;
 }
 
 void Camera::displayImage() {
@@ -148,13 +150,14 @@ void Camera::displayImage() {
 	uint16_t i, j;
 	uint16_t Camera_Data;
 
+	fifoController.prepareFIFO();
 	LCD_Cam_Gram();
 
 	for(i = 0; i < 240; i++)
 	{
 		for(j = 0; j < 320; j++)
 		{
-			READ_FIFO_PIXEL(Camera_Data);
+			Camera_Data = fifoController.readPixel();
 			LCD_Write_Data(Camera_Data);
 		}
 	}
@@ -162,17 +165,34 @@ void Camera::displayImage() {
 }
 
 bool Camera::writeSensorReg(uint8_t addr, uint8_t data) {
-    return sccb.writeByte(addr, data);
+    return sccbController.writeByte(addr, data);
 }
 
 bool Camera::readSensorReg(uint8_t addr, uint8_t& data) {
-    return sccb.readBytes(&data, 1, addr);
+    return sccbController.readBytes(&data, 1, addr);
 }
 
 bool Camera::verifySensorID() {
     uint8_t sensorId;
-    if (!readSensorReg(0x0b, sensorId)) {
+    if (!readSensorReg(VER, sensorId)) { // change back to 0x0b if err
         return false;
     }
     return sensorId == SENSOR_ID;
+}
+
+void Camera::vsyncHandler() {
+	if( vsync == 0 )
+	{
+		fifoController.wrstLow();
+		fifoController.weLow();
+
+		vsync = 1;
+		fifoController.weHigh();
+		fifoController.wrstHigh();
+	}
+	else if( vsync == 1 )
+	{
+		fifoController.weLow();
+		vsync = 2;
+	}
 }
