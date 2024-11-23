@@ -17,7 +17,7 @@ static constexpr RegConfig CONFIG[] =
 {
 	{CLKRC,     0x00}, /*clock config*/
 	{COM7,      0x46}, /*QVGA RGB565 */
-  {HSTART,    0x3f},
+	{HSTART,    0x3f},
 	{HSIZE,     0x50},
 	{VSTRT,     0x03},
 	{VSIZE,     0x78},
@@ -116,32 +116,35 @@ Camera::Camera(const SCCBController& sccbController, const FIFOController& fifoC
 	this->init();
 }
 
-bool Camera::init() {
+void Camera::init() {
 	LCD_DrawString(50, 150, (uint8_t*) "Initializing camera...");
     // Reset sensor
     if (!writeSensorReg(COM7, GAM3)) {
     	LCD_DrawString(50, 200, (uint8_t*) "Reset sensor failed!");
-        return false;
+    	return;
     }
     HAL_Delay(10); // Wait for reset to complete
 
     // Verify sensor ID
     if (!verifySensorID()) {
     	LCD_DrawString(50, 200, (uint8_t*) "Verify sensor failed!");
-        return false;
+    	return;
     }
 
     // Configure sensor registers
     for (size_t i = 0; i < CONFIG_SIZE; i++) {
-            if (!writeSensorReg(CONFIG[i].address, CONFIG[i].value)) {
-            	LCD_DrawString(50, 200, (uint8_t*) "Configure sensor failed!");
-                return false;
-            }
-        }
+		if (!writeSensorReg(CONFIG[i].address, CONFIG[i].value)) {
+			LCD_DrawString(50, 200, (uint8_t*) "Configure sensor failed!");
+			return;
+		}
+	}
 
     initialized = true;
     LCD_DrawString(50, 170, (uint8_t*) "Camera init success!");
-    return 1;
+}
+
+bool Camera::isInitialized() {
+	return initialized;
 }
 
 void Camera::displayImage() {
@@ -163,6 +166,7 @@ void Camera::displayImage() {
 	}
 	HAL_Delay(1000);
 }
+
 
 bool Camera::writeSensorReg(uint8_t addr, uint8_t data) {
     return sccbController.writeByte(addr, data);
@@ -196,3 +200,26 @@ void Camera::vsyncHandler() {
 		vsync = 2;
 	}
 }
+
+bool Camera::isColorAtPoint(uint16_t x, uint16_t y, uint16_t targetColor) {
+    if (!initialized) return false;
+
+    // Validate coordinates
+    if (x >= 320 || y >= 240) return false;
+
+    // Read pixel data at (x, y)
+    uint16_t Camera_Data;
+    fifoController.prepareFIFO();
+    for (uint16_t i = 0; i <= y; i++) {
+        for (uint16_t j = 0; j < 320; j++) {
+            Camera_Data = fifoController.readPixel();
+            if (i == y && j == x) {
+                // Check if the pixel matches the target color
+                return Camera_Data == targetColor;
+            }
+        }
+    }
+
+    return false;
+}
+

@@ -11,6 +11,7 @@ extern "C" int mymain(void);
 #include "Camera/Camera.h"
 #include "Camera/SCCBController/SCCBController.h"
 #include "Camera/FIFOController/FIFOController.h"
+#include "Detector/Detector.h"
 
 extern TIM_HandleTypeDef htim1;
 //extern TIM_HandleTypeDef htim3;
@@ -27,6 +28,7 @@ PatientDetails patients[NUM_PATIENTS] = {
     {"Tim", 70, 99, 37.1, 0, 2, 1},
 	{"Fox", 68, 99, 36.8, 0, 1, 1},
 };
+
 SCCBController sccb(GPIOC, CAM_SCL_Pin, CAM_SDA_Pin);
 FIFOController fifo(
 		  {GPIOA, CAM_CS_Pin}, // cs
@@ -45,13 +47,14 @@ int mymain(void)
 //  ServoMotor armServo(&htim3, TIM_CHANNEL_3);
 
   camera.init();
+  Detector detector(camera);
 
   camera.vsync = 0;
   while (1)
   {
 	  if (camera.vsync == 2)
 	  {
-		  camera.displayImage();
+		  detector.displayImage(100, 200, 50);
 		  camera.vsync = 0;
 	  }
   }

@@ -19,9 +19,13 @@ class Camera {
 		Camera(const SCCBController& sccbController, const FIFOController& fifoController);
 		volatile uint8_t vsync;
 
-		bool init();
+		void init();
+		bool isInitialized();
 		void displayImage();
 		void vsyncHandler();
+		bool isColorAtPoint(uint16_t x, uint16_t y, uint16_t targetColor);
+
+		friend class Detector;
 
 	private:
 		bool initialized;
