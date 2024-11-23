@@ -23,20 +23,11 @@ public:
     FIFOController(GPIOPin cs, GPIOPin wrst, GPIOPin rrst, GPIOPin rclk, GPIOPin we);
 
     // FIFO Control Methods
-    void csHigh();
-    void csLow();
-
-    void wrstHigh();
-    void wrstLow();
-
-    void rrstHigh();
-    void rrstLow();
-
-    void rclkHigh();
-    void rclkLow();
-
-    void weHigh();
-    void weLow();
+    void setCs(bool high) const;
+    void setWrst(bool high) const;
+    void setRrst(bool high) const;
+    void setRclk(bool high) const;
+    void setWe(bool high) const;
 
     // FIFO Operations
     uint16_t readPixel();

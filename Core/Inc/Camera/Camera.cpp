@@ -183,16 +183,16 @@ bool Camera::verifySensorID() {
 void Camera::vsyncHandler() {
 	if( vsync == 0 )
 	{
-		fifoController.wrstLow();
-		fifoController.weLow();
+		fifoController.setWrst(false);
+		fifoController.setWe(false);
 
 		vsync = 1;
-		fifoController.weHigh();
-		fifoController.wrstHigh();
+		fifoController.setWe(true);
+		fifoController.setWrst(true);
 	}
 	else if( vsync == 1 )
 	{
-		fifoController.weLow();
+		fifoController.setWe(false);
 		vsync = 2;
 	}
 }
