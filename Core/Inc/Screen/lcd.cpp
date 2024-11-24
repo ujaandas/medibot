@@ -305,13 +305,45 @@ pStr ++;
 usC += WIDTH_EN_CHAR;
 }
 }
-//Task 2
+int getHighByte(int num) { return num >> 8; } // Right shift 8 positions to get upper bytes
+int getLowByte(int num) { return num & 0xFF; } // Perform AND op with 11111... to get lower bytes
+// Can't just left shift since it'll give some huge number
+
 void LCD_DrawDot(uint16_t usCOLUMN, uint16_t usPAGE, uint16_t usColor)
 {
-/*
-* Task 2 : Implement the LCD_DrawDot to turn on a particular dot on the
-LCD.
-*/
+	/*
+	 *  Task 2 : Implement the LCD_DrawDot to turn on a particular dot on the LCD.
+	 */
+
+	// Set page col.
+	LCD_Write_Cmd(CMD_Set_COLUMN);
+
+	int dotSize = 1;
+
+	int minCol = usCOLUMN; // min width of dot
+	int maxCol = usCOLUMN + dotSize; // max width of dot
+
+	LCD_Write_Data(getHighByte(minCol)); // High B of start
+	LCD_Write_Data(getLowByte(minCol)); // Low B of start
+	LCD_Write_Data(getHighByte(maxCol)); // High B of end
+	LCD_Write_Data(getLowByte(maxCol)); // Low B of end
+
+	//	Set page addr.
+	LCD_Write_Cmd(CMD_Set_PAGE);
+
+	int minPage = usPAGE; // min height of dot
+	int maxPage = usPAGE + dotSize; // max height of dot
+
+	LCD_Write_Data(getHighByte(minPage)); // High B of start
+	LCD_Write_Data(getLowByte(minPage)); // Low B of start
+	LCD_Write_Data(getHighByte(maxPage)); // High B of end
+	LCD_Write_Data(getLowByte(maxPage)); // Low B of end
+
+	// Set/write actual pixels
+	LCD_Write_Cmd(CMD_SetPixel);
+	for (int i = 0; i < dotSize * 10; i++){
+		LCD_Write_Data(usColor);
+	}
 }
 //Task 3
 void LCD_DrawCircle ( uint16_t usC, uint16_t usP, uint16_t R, uint16_t usColor)

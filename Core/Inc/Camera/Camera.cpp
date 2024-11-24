@@ -6,10 +6,6 @@
  */
 
 #include "Camera.h"
-#include "Helper/CameraPins.h"
-#include "Helper/CameraRegisters.h"
-#include "Screen/lcd.h"
-#include <stdio.h>
 
 struct RegConfig {
         uint8_t address;
@@ -21,7 +17,7 @@ static constexpr RegConfig CONFIG[] =
 {
 	{CLKRC,     0x00}, /*clock config*/
 	{COM7,      0x46}, /*QVGA RGB565 */
-  {HSTART,    0x3f},
+	{HSTART,    0x3f},
 	{HSIZE,     0x50},
 	{VSTRT,     0x03},
 	{VSIZE,     0x78},
@@ -115,31 +111,40 @@ static constexpr RegConfig CONFIG[] =
 static constexpr size_t CONFIG_SIZE = sizeof(CONFIG) / sizeof(CONFIG[0]);
 static constexpr uint8_t SENSOR_ID = 0x21;
 
-Camera::Camera(GPIO_TypeDef* sccbPort, uint16_t sclPin, uint16_t sdaPin)
-    : initialized(false), sccb(sccbPort, sclPin, sdaPin) {}
+Camera::Camera(const SCCBController& sccbController, const FIFOController& fifoController)
+	: initialized(false), sccbController(sccbController), fifoController(fifoController) {
+	this->init();
+}
 
-bool Camera::init() {
+void Camera::init() {
+	LCD_DrawString(50, 150, (uint8_t*) "Initializing camera...");
     // Reset sensor
     if (!writeSensorReg(COM7, GAM3)) {
-        return false;
+    	LCD_DrawString(50, 200, (uint8_t*) "Reset sensor failed!");
+    	return;
     }
-
     HAL_Delay(10); // Wait for reset to complete
 
     // Verify sensor ID
     if (!verifySensorID()) {
-        return false;
+    	LCD_DrawString(50, 200, (uint8_t*) "Verify sensor failed!");
+    	return;
     }
 
     // Configure sensor registers
     for (size_t i = 0; i < CONFIG_SIZE; i++) {
-            if (!writeSensorReg(CONFIG[i].address, CONFIG[i].value)) {
-                return false;
-            }
-        }
+		if (!writeSensorReg(CONFIG[i].address, CONFIG[i].value)) {
+			LCD_DrawString(50, 200, (uint8_t*) "Configure sensor failed!");
+			return;
+		}
+	}
 
     initialized = true;
-    return true;
+    LCD_DrawString(50, 170, (uint8_t*) "Camera init success!");
+}
+
+bool Camera::isInitialized() {
+	return initialized;
 }
 
 void Camera::displayImage() {
@@ -148,31 +153,73 @@ void Camera::displayImage() {
 	uint16_t i, j;
 	uint16_t Camera_Data;
 
+	fifoController.prepareFIFO();
 	LCD_Cam_Gram();
 
 	for(i = 0; i < 240; i++)
 	{
 		for(j = 0; j < 320; j++)
 		{
-			READ_FIFO_PIXEL(Camera_Data);
+			Camera_Data = fifoController.readPixel();
 			LCD_Write_Data(Camera_Data);
 		}
 	}
 	HAL_Delay(1000);
 }
 
+
 bool Camera::writeSensorReg(uint8_t addr, uint8_t data) {
-    return sccb.writeByte(addr, data);
+    return sccbController.writeByte(addr, data);
 }
 
 bool Camera::readSensorReg(uint8_t addr, uint8_t& data) {
-    return sccb.readBytes(&data, 1, addr);
+    return sccbController.readBytes(&data, 1, addr);
 }
 
 bool Camera::verifySensorID() {
     uint8_t sensorId;
-    if (!readSensorReg(0x0b, sensorId)) {
+    if (!readSensorReg(VER, sensorId)) { // change back to 0x0b if err
         return false;
     }
     return sensorId == SENSOR_ID;
 }
+
+void Camera::vsyncHandler() {
+	if( vsync == 0 )
+	{
+		fifoController.setWrst(false);
+		fifoController.setWe(false);
+
+		vsync = 1;
+		fifoController.setWe(true);
+		fifoController.setWrst(true);
+	}
+	else if( vsync == 1 )
+	{
+		fifoController.setWe(false);
+		vsync = 2;
+	}
+}
+
+bool Camera::isColorAtPoint(uint16_t x, uint16_t y, uint16_t targetColor) {
+    if (!initialized) return false;
+
+    // Validate coordinates
+    if (x >= 320 || y >= 240) return false;
+
+    // Read pixel data at (x, y)
+    uint16_t Camera_Data;
+    fifoController.prepareFIFO();
+    for (uint16_t i = 0; i <= y; i++) {
+        for (uint16_t j = 0; j < 320; j++) {
+            Camera_Data = fifoController.readPixel();
+            if (i == y && j == x) {
+                // Check if the pixel matches the target color
+                return Camera_Data == targetColor;
+            }
+        }
+    }
+
+    return false;
+}
+

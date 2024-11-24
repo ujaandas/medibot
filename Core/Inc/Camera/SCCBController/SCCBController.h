@@ -10,9 +10,9 @@
 
 #include "stm32f1xx_hal.h"
 
-class SCCB {
+class SCCBController {
 	public:
-		SCCB(GPIO_TypeDef* port, uint16_t sclPin, uint16_t sdaPin);
+		SCCBController(GPIO_TypeDef* port, uint16_t sclPin, uint16_t sdaPin);
 
 		bool writeByte(uint16_t writeAddress, uint8_t sendByte);
 		bool readBytes(uint8_t* pBuffer, uint16_t length, uint8_t readAddress);
@@ -21,9 +21,9 @@ class SCCB {
 		static constexpr uint8_t OV7725_ADDR = 0x42;
 		static constexpr uint16_t DELAY_COUNT = 400;
 
-		GPIO_TypeDef* const port_;
-		const uint16_t sclPin_;
-		const uint16_t sdaPin_;
+		GPIO_TypeDef* const port;
+		const uint16_t sclPin;
+		const uint16_t sdaPin;
 
 		void delay() const;
 		bool start();

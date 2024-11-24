@@ -23,7 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 //#include "CupServo/CupServo.h"
-#include "Camera/Helper/CameraPins.h"
 #include "Screen/touchscreenDriver.h"
 /* USER CODE END Includes */
 
@@ -44,7 +43,6 @@
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
 extern TIM_HandleTypeDef htim3;
-extern uint8_t Ov7725_vsync;
 int presses = 0;
 //CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
@@ -63,6 +61,7 @@ int presses = 0;
 
 /* USER CODE BEGIN EV */
 extern void handleK2BtnPress(int cup, TIM_HandleTypeDef* timer, uint16_t timerChannel);
+extern void handleVsyncInterrupt();
 /* USER CODE END EV */
 
 /******************************************************************************/
@@ -211,22 +210,7 @@ void EXTI3_IRQHandler(void)
   /* USER CODE BEGIN EXTI3_IRQn 0 */
 	if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_3) != RESET)
 	  {
-			if( Ov7725_vsync == 0 )
-	    {
-			FIFO_WRST_L();
-	        FIFO_WE_H();
-
-	        Ov7725_vsync = 1;
-	        FIFO_WE_H();
-	        FIFO_WRST_H();
-	    }
-	    else if( Ov7725_vsync == 1 )
-	    {
-	        FIFO_WE_L();
-	        Ov7725_vsync = 2;
-	    }
-
-
+		handleVsyncInterrupt();
 	    __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_3);
 	    HAL_GPIO_EXTI_Callback(GPIO_PIN_3);
 	  }
@@ -263,7 +247,7 @@ void EXTI4_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-	int status = __HAL_GPIO_EXTI_GET_IT(K2_Btn_Pin);
+	int status = __HAL_GPIO_EXTI_GET_IT(K2_BTN_Pin);
 	if (status != RESET)
 	{
 		switch (presses % 3) {
@@ -278,11 +262,11 @@ void EXTI15_10_IRQHandler(void)
 			break;
 		  }
 		presses = presses + 1;
-		__HAL_GPIO_EXTI_CLEAR_IT(K2_Btn_Pin);
-		HAL_GPIO_EXTI_Callback(K2_Btn_Pin);
+		__HAL_GPIO_EXTI_CLEAR_IT(K2_BTN_Pin);
+		HAL_GPIO_EXTI_Callback(K2_BTN_Pin);
 	}
   /* USER CODE END EXTI15_10_IRQn 0 */
-  HAL_GPIO_EXTI_IRQHandler(K2_Btn_Pin);
+  HAL_GPIO_EXTI_IRQHandler(K2_BTN_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */
 
   /* USER CODE END EXTI15_10_IRQn 1 */

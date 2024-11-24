@@ -1,23 +1,28 @@
 /*
  * Detector.h
  *
- *  Created on: Nov 20, 2024
+ *  Created on: Nov 23, 2024
  *      Author: ooj
  */
 
-#ifndef __DETECTOR_H
-#define __DETECTOR_H
+#ifndef __DETECTOR_H_
+#define __DETECTOR_H_
 
-#include "stm32f1xx_hal.h"
 #include "Camera/Camera.h"
+#include "Screen/lcd.h"
+#include <stdio.h>
 
-class Detector: public Camera {
-	public:
-		Detector(uint8_t size_x, uint8_t size_y, uint16_t colour);
-		bool isDetected();
+class Detector {
+public:
+    Detector(Camera& camera)
+        : camera(camera) {}
 
-	private:
+    void displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize);
 
+private:
+    Camera& camera;
+
+    uint16_t calcAvgColour(uint32_t sumRed, uint32_t sumGreen, uint32_t sumBlue, uint32_t pixelCount);
 };
 
-#endif /* __DETECTOR_H */
+#endif /* __DETECTOR_H_ */

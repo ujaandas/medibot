@@ -3,55 +3,60 @@
 extern "C" int mymain(void);
 
 #include <stdio.h>
-#include <StepperMotor/StepperMotor.h>
-#include <CupServo/CupServo.h>
-#include <LDR/LDR.h>
+#include "Screen/touchscreenDriver.h"
+#include "Screen/lcd.h"
+#include "StepperMotor/StepperMotor.h"
+#include "CupServo/CupServo.h"
+#include "ServoMotor/ServoMotor.h"
+#include "Camera/Camera.h"
+#include "Camera/SCCBController/SCCBController.h"
+#include "Camera/FIFOController/FIFOController.h"
+#include "Detector/Detector.h"
 
 extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim3;
-extern ADC_HandleTypeDef hadc1;
+//extern TIM_HandleTypeDef htim3;
+extern uint8_t Ov7725_vsync;
+extern UART_HandleTypeDef huart1;
 
-void ConvertToDecimalString(uint32_t adcVal, char *buffer)
-{
-  sprintf(buffer, "%4lu", adcVal);
-}
+#define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+
+#define NUM_PATIENTS 4
+
+PatientDetails patients[NUM_PATIENTS] = {
+    {"Armaan", 72, 98, 36.5, 2, 0, 1},
+    {"Ujaan", 75, 95, 37.0, 1, 2, 0},
+    {"Tim", 70, 99, 37.1, 0, 2, 1},
+	{"Fox", 68, 99, 36.8, 0, 1, 1},
+};
+
+SCCBController sccb(GPIOC, CAM_SCL_Pin, CAM_SDA_Pin);
+FIFOController fifo(
+		  {GPIOA, CAM_CS_Pin}, // cs
+		  {GPIOC, CAM_WRST_Pin}, // wrst
+		  {GPIOA, CAM_RRST_Pin}, // rrst
+		  {GPIOC, CAM_RCLK_Pin}, // rclk
+		  {GPIOD, CAM_WE_Pin});
+Camera camera(sccb, fifo);
 
 int mymain(void)
 {
   TOUCHSCREEN_CS_DISABLE();
   LCD_INIT();
 
-  LCD_DrawStringColor(40, 140, "Welcome to MediMate!", RED, WHITE);
-  CycleLedGradient(500);
-
-  uint8_t selectedPatientIndex = 0;
-  uint8_t selectedOptionIndex = 0; // 0 for vitals, 1 for medication
-
   StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
-  CupServo servo(3, &htim3, TIM_CHANNEL_1);
-  LDR ldr(&hadc1);
-  char buf[12];
+//  ServoMotor armServo(&htim3, TIM_CHANNEL_3);
 
+  camera.init();
+  Detector detector(camera);
+
+  camera.vsync = 0;
   while (1)
   {
-    //	  stepper.makeSteps(256, 300, true);
-    //	  HAL_Delay(100);
-    stepper.makeSteps(256, 700, false);
-    ldr.read();
-    ConvertToDecimalString(ldr.getIntensity(), buf);
-    LCD_DrawString(30, 30, buf);
-
-    if (ldr.somethingPassed(10))
-    {
-      LCD_DrawString(50, 50, "Something detected");
-      servo.selectCup(0);
-    }
-    else
-    {
-      LCD_DrawString(50, 50, "                    ");
-      servo.selectCup(1);
-    }
-    HAL_Delay(1000);
+	  if (camera.vsync == 2)
+	  {
+		  detector.displayImage(100, 200, 50);
+		  camera.vsync = 0;
+	  }
   }
 
   return 0;
@@ -65,3 +70,4 @@ PUTCHAR_PROTOTYPE
 
   return ch;
 }
+
