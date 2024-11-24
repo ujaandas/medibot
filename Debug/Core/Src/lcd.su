@@ -1,0 +1,20 @@
+../Core/Src/lcd.cpp:10:6:void Delay(uint32_t)	16	static
+../Core/Src/lcd.cpp:12:6:void LCD_INIT()	16	static
+../Core/Src/lcd.cpp:22:6:void LCD_Rst()	8	static
+../Core/Src/lcd.cpp:31:6:void LCD_BackLed_Control(FunctionalState)	16	static
+../Core/Src/lcd.cpp:42:6:void LCD_Write_Cmd(uint16_t)	16	static
+../Core/Src/lcd.cpp:50:6:void LCD_Write_Data(uint16_t)	16	static
+../Core/Src/lcd.cpp:58:10:uint16_t LCD_Read_Data()	4	static
+../Core/Src/lcd.cpp:64:6:void LCD_REG_Config()	8	static
+../Core/Src/lcd.cpp:228:6:void LCD_OpenWindow(uint16_t, uint16_t, uint16_t, uint16_t)	24	static
+../Core/Src/lcd.cpp:245:6:void LCD_FillColor(uint32_t, uint16_t)	24	static
+../Core/Src/lcd.cpp:260:6:void LCD_Clear(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t)	24	static
+../Core/Src/lcd.cpp:269:10:uint16_t LCD_Read_PixelData()	16	static
+../Core/Src/lcd.cpp:289:10:uint16_t LCD_GetPointPixel(uint16_t, uint16_t)	24	static
+../Core/Src/lcd.cpp:303:6:void LCD_DrawLine(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t)	64	static
+../Core/Src/lcd.cpp:375:6:void LCD_DrawChar(uint16_t, uint16_t, char)	24	static
+../Core/Src/lcd.cpp:409:6:void LCD_DrawString(uint16_t, uint16_t, const char*)	16	static
+../Core/Src/lcd.cpp:441:5:int getHighByte(int)	16	static
+../Core/Src/lcd.cpp:442:5:int getLowByte(int)	16	static
+../Core/Src/lcd.cpp:445:6:void LCD_DrawDot(uint16_t, uint16_t, uint16_t)	40	static
+../Core/Src/lcd.cpp:483:6:void LCD_DrawEllipse(uint16_t, uint16_t, uint16_t, uint16_t, uint16_t)	72	static
