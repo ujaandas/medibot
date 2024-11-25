@@ -5,44 +5,44 @@
  *      Author: ooj
  */
 
-#include <Camera/SCCB/SCCB.h>
+#include <Camera/SCCBController/SCCBController.h>
 #include "Screen/lcd.h"
 #include <stdio.h>
 
-SCCB::SCCB(GPIO_TypeDef* port, uint16_t sclPin, uint16_t sdaPin)
-    : port_(port), sclPin_(sclPin) , sdaPin_(sdaPin) {}
+SCCBController::SCCBController(GPIO_TypeDef* port, uint16_t sclPin, uint16_t sdaPin)
+    : port(port), sclPin(sclPin) , sdaPin(sdaPin) {}
 
-void SCCB::delay() const {
+void SCCBController::delay() const {
     volatile uint16_t i = DELAY_COUNT;
     while(i--);
 }
 
-void SCCB::setSCL(bool high) const {
+void SCCBController::setSCL(bool high) const {
     if (high) {
-        port_->BSRR = sclPin_;
+        port->BSRR = sclPin;
     } else {
-        port_->BRR = sclPin_;
+        port->BRR = sclPin;
     }
 }
 
-void SCCB::setSDA(bool high) const {
+void SCCBController::setSDA(bool high) const {
     if (high) {
-        port_->BSRR = sdaPin_;
+        port->BSRR = sdaPin;
     } else {
-        port_->BRR = sdaPin_;
+        port->BRR = sdaPin;
     }
 }
 
-bool SCCB::readSCL() const {
-    return HAL_GPIO_ReadPin(port_, sclPin_) == GPIO_PIN_SET;
+bool SCCBController::readSCL() const {
+    return HAL_GPIO_ReadPin(port, sclPin) == GPIO_PIN_SET;
 }
 
-bool SCCB::readSDA() const {
-	LCD_DrawString(30, 250, (uint8_t*) (HAL_GPIO_ReadPin(port_, sdaPin_) ? "true" : "false"));
-    return HAL_GPIO_ReadPin(port_, sdaPin_) == GPIO_PIN_SET;
+bool SCCBController::readSDA() const {
+	LCD_DrawString(30, 250, (uint8_t*) (HAL_GPIO_ReadPin(port, sdaPin) ? "true" : "false"));
+    return HAL_GPIO_ReadPin(port, sdaPin) == GPIO_PIN_SET;
 }
 
-bool SCCB::start() {
+bool SCCBController::start() {
     setSDA(true);
     setSCL(true);
     delay();
@@ -59,7 +59,7 @@ bool SCCB::start() {
     return true;
 }
 
-void SCCB::stop() {
+void SCCBController::stop() {
     setSCL(false);
     delay();
     setSDA(false);
@@ -70,7 +70,7 @@ void SCCB::stop() {
     delay();
 }
 
-void SCCB::sendAck() {
+void SCCBController::sendAck() {
     setSCL(false);
     delay();
     setSDA(false);
@@ -81,7 +81,7 @@ void SCCB::sendAck() {
     delay();
 }
 
-void SCCB::sendNoAck() {
+void SCCBController::sendNoAck() {
     setSCL(false);
     delay();
     setSDA(true);
@@ -92,7 +92,7 @@ void SCCB::sendNoAck() {
     delay();
 }
 
-bool SCCB::waitAck() {
+bool SCCBController::waitAck() {
     setSCL(false);
     delay();
     setSDA(true);
@@ -109,7 +109,7 @@ bool SCCB::waitAck() {
     return true;
 }
 
-void SCCB::sendByte(uint8_t byte) {
+void SCCBController::sendByte(uint8_t byte) {
     for (int i = 7; i >= 0; i--) {
         setSCL(false);
         delay();
@@ -121,7 +121,7 @@ void SCCB::sendByte(uint8_t byte) {
     setSCL(false);
 }
 
-uint8_t SCCB::receiveByte() {
+uint8_t SCCBController::receiveByte() {
     uint8_t byte = 0;
     setSDA(true);
 
@@ -140,7 +140,7 @@ uint8_t SCCB::receiveByte() {
     return byte;
 }
 
-bool SCCB::writeByte(uint16_t writeAddress, uint8_t data) {
+bool SCCBController::writeByte(uint16_t writeAddress, uint8_t data) {
     if (!start()) return false;
 
     sendByte(OV7725_ADDR);
@@ -168,7 +168,7 @@ bool SCCB::writeByte(uint16_t writeAddress, uint8_t data) {
     return true;
 }
 
-bool SCCB::readBytes(uint8_t* pBuffer, uint16_t length, uint8_t readAddress) {
+bool SCCBController::readBytes(uint8_t* pBuffer, uint16_t length, uint8_t readAddress) {
     if (!start()) return false;
 
     sendByte(OV7725_ADDR);

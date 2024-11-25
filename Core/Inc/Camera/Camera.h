@@ -9,20 +9,28 @@
 #define __CAMERA_H
 
 #include "stm32f1xx_hal.h"
-#include "SCCB/SCCB.h"
-#include "Helper/CameraRegisters.h"
+#include "SCCBController/SCCBController.h"
+#include "FIFOController/FIFOController.h"
+#include "Screen/lcd.h"
+#include "CameraRegisters.h"
 
 class Camera {
 	public:
-		Camera(GPIO_TypeDef* sccbPort, uint16_t sclPin, uint16_t sdaPin);
+		Camera(const SCCBController& sccbController, const FIFOController& fifoController);
+		volatile uint8_t vsync;
 
-		bool init();
+		void init();
+		bool isInitialized();
 		void displayImage();
-		bool isInitialized() const { return initialized; }
+		void vsyncHandler();
+		bool isColorAtPoint(uint16_t x, uint16_t y, uint16_t targetColor);
+
+		friend class Detector;
 
 	private:
 		bool initialized;
-		SCCB sccb;
+		SCCBController sccbController;
+		FIFOController fifoController;
 
 		bool writeSensorReg(uint8_t addr, uint8_t data);
 		bool readSensorReg(uint8_t addr, uint8_t& data);

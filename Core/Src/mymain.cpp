@@ -9,8 +9,10 @@ extern "C" int mymain(void);
 #include "CupServo/CupServo.h"
 #include "ServoMotor/ServoMotor.h"
 #include "Camera/Camera.h"
-#include "Camera/Helper/CameraPins.h"
-#include <LDR/LDR.h>
+#include "Camera/SCCBController/SCCBController.h"
+#include "Camera/FIFOController/FIFOController.h"
+#include "Detector/Detector.h"
+#include "LDR/LDR.h"
 
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
@@ -19,6 +21,7 @@ extern uint8_t Ov7725_vsync;
 extern UART_HandleTypeDef huart1;
 
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
+
 #define NUM_PATIENTS 4
 
 PatientDetails patients[NUM_PATIENTS] = {
@@ -28,8 +31,24 @@ PatientDetails patients[NUM_PATIENTS] = {
 	{"Fox", 68, 99, 36.8, 0, 1, 1},
 };
 
-void ConvertToDecimalString(uint32_t adcVal, char *buffer) {
-    sprintf(buffer, "%4lu", adcVal);
+SCCBController sccb(GPIOC, CAM_SCL_Pin, CAM_SDA_Pin);
+FIFOController fifo(
+		  {GPIOA, CAM_CS_Pin}, // cs
+		  {GPIOC, CAM_WRST_Pin}, // wrst
+		  {GPIOA, CAM_RRST_Pin}, // rrst
+		  {GPIOC, CAM_RCLK_Pin}, // rclk
+		  {GPIOD, CAM_WE_Pin});
+Camera camera(sccb, fifo);
+
+uint16_t targetColours[] = {0xF800, 0x07E0, 0x001F};
+void colourDetectedHandler(uint16_t detectedColour) {
+	//@armaan IMPLEMENT THIS!!! function pointer that acts as handler
+	// this function is only called when one of the targetColours passed into
+	// detector's ctor is detected, so you must check against that for
+	// which one has been called via a switch/case and perform the appropriate action
+	// if you're bored, use interrupts
+	// buena suerte! look at the impl if ur confuzzled
+	blinkRed();
 }
 
 int mymain(void)
@@ -39,10 +58,15 @@ int mymain(void)
 
   uint8_t selectedPatientIndex = 0;
   uint8_t selectedOptionIndex = 0; // 0 for vitals, 1 for medication
+  char buf[12];
 
-  StepperMotor stepper(GPIOA, STP_1_Pin, STP_2_Pin, STP_3_Pin, STP_4_Pin, &htim1);
+  StepperMotor stepper({GPIOC, STP_1_Pin}, {GPIOA, STP_2_Pin}, {GPIOA, STP_3_Pin}, {GPIOA, STP_4_Pin}, &htim1);
   ServoMotor armServo(&htim3, TIM_CHANNEL_3);
   LDR ldr(&hadc1);
+
+  camera.init();
+  Detector detector(camera, 2, targetColours, 20, colourDetectedHandler);
+  camera.vsync = 0;
 
   LCD_DrawStringColor(40, 140, "Welcome to MediMate!", RED, WHITE);
   CycleLedGradient(500);
@@ -113,47 +137,30 @@ int mymain(void)
 	  // Put code to dispense medication here
 	  while (1) {
 	  	  stepper.makeSteps(128, 1500, false);
-//	  	  armServo.spinTo(90);
-//	  	  HAL_Delay(1000);
-//	  	  armServo.spinTo(120);
-//	  	  HAL_Delay(1000);
-//	  	  armServo.spinTo(150);
-//	  	  HAL_Delay(1000);
+	  	  // Calibrate armServo first using "armServo.spinTo(90);"
+	  	  armServo.spinTo(90);
+	  	  // Once calibrated, start dispensing medications (pill 1 = BLACK, pill 2 = WHITE) + checking LDR
+
 	  	  ldr.read();
-	  	  if (ldr.somethingPassed(10)) {
-			  LCD_DrawString(50, 150, (uint8_t*) "Blockage detected!");
+	  	  sprintf(buf, "%4lu", ldr.getRawVal());
+	  	  LCD_DrawStringColor(10, 270, "Checking for blockages...", BLACK, WHITE);
+	  	  LCD_DrawStringColor(10, 290, "Current light intensity:", BLACK, WHITE);
+	  	  LCD_DrawStringColor(200, 290, buf, BLACK, WHITE);
+	  	  if (ldr.somethingBlocking(10,2000)) {
+	  		  LCD_Clear(0,0,239,319,WHITE);
+			  LCD_DrawStringColor(50, 150, "Blockage detected!", RED, WHITE);
+	  		  LCD_DrawStringColor(70, 170, "Please reset", RED, WHITE);
 			  break;
 		  }
+	  	  if (camera.vsync == 2) {
+	  		  detector.displayImage(100, 200, 50);
+	  		  camera.vsync = 0;
+		  }
+	  }
+	  while (1){
+		  blinkRed(); // Only blinks red once finished
 	  }
   }
-
-
-
-//  LCD_Clear (50, 80, 140, 70, RED);
-//  LCD_DrawString(75, 100, (uint8_t*)"CAMERA DEMO");
-//  	HAL_Delay(2000);
-//
-//  Camera camera(GPIOC, GPIO_PIN_6, GPIO_PIN_7);
-//
-//  LCD_DrawString(50, 150, (uint8_t*) "Initializing camera...");
-//
-//  if (!camera.init()) {
-//	  LCD_DrawString(50, 170, (uint8_t*) "Camera init failed!");
-//  } else {
-//	  LCD_DrawString(50, 170, (uint8_t*) "Camera init success!");
-//  }
-//
-//
-//  Ov7725_vsync = 0;
-//	while (1)
-//	{
-//		if (Ov7725_vsync == 2)
-//		{
-//			FIFO_PREPARE;
-//			camera.displayImage();
-//			Ov7725_vsync = 0;
-//		}
-//	}
 
   return 0;
 }

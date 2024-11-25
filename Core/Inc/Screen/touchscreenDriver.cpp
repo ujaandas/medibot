@@ -236,3 +236,14 @@ void DisplayDispensingMedication(PatientDetails *patient) {
     snprintf(buffer2, sizeof(buffer2), "Medicine C x %d", patient->medicine3Pills);
     LCD_DrawString(64, startY+80+60, (uint8_t*) buffer2);
 }
+
+void blinkRed() {
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET); // Red on
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);   // Green off
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);   // Blue off
+    DelayMicroseconds(100000);                             // Wait for 100 ms for visibility
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);   // Red off
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, GPIO_PIN_SET);   // Green off
+    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, GPIO_PIN_SET);   // Blue off
+    DelayMicroseconds(100000);                             // Wait for 100 ms for visibility
+}

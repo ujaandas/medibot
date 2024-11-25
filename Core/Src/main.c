@@ -51,7 +51,6 @@ UART_HandleTypeDef huart1;
 SRAM_HandleTypeDef hsram1;
 
 /* USER CODE BEGIN PV */
-volatile uint8_t Ov7725_vsync;
 volatile uint8_t isScreenTouched = 0;
 /* USER CODE END PV */
 
@@ -217,7 +216,7 @@ static void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
@@ -229,7 +228,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
-  sConfig.Channel = ADC_CHANNEL_0;
+  sConfig.Channel = ADC_CHANNEL_4;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
@@ -360,10 +359,6 @@ static void MX_TIM3_Init(void)
   sConfigOC.Pulse = 0;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_3) != HAL_OK)
   {
     Error_Handler();
@@ -428,19 +423,22 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_2|LCD_TP_Pin|LCD_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, CAM_RRST_Pin|CAM_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_7, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, CAM_WRST_Pin|CAM_RCLK_Pin|CAM_SCL_Pin|CAM_SDA_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, LED_G_Pin|LED_B_Pin|LED_R_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, LCD_BL_Pin|LCD_DB_Pin|GPIO_PIN_3, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, LCD_BL_Pin|LCD_DB_Pin|CAM_WE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(STP_1_GPIO_Port, STP_1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PE2 LCD_TP_Pin LCD_RST_Pin */
   GPIO_InitStruct.Pin = GPIO_PIN_2|LCD_TP_Pin|LCD_RST_Pin;
@@ -461,11 +459,11 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : K2_Btn_Pin */
-  GPIO_InitStruct.Pin = K2_Btn_Pin;
+  /*Configure GPIO pin : K2_BTN_Pin */
+  GPIO_InitStruct.Pin = K2_BTN_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(K2_Btn_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(K2_BTN_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PC3 */
   GPIO_InitStruct.Pin = GPIO_PIN_3;
@@ -473,17 +471,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PA2 PA3 STP_1_Pin STP_2_Pin
-                           STP_3_Pin STP_4_Pin */
-  GPIO_InitStruct.Pin = GPIO_PIN_2|GPIO_PIN_3|STP_1_Pin|STP_2_Pin
-                          |STP_3_Pin|STP_4_Pin;
+  /*Configure GPIO pins : CAM_RRST_Pin CAM_CS_Pin STP_2_Pin STP_3_Pin
+                           STP_4_Pin */
+  GPIO_InitStruct.Pin = CAM_RRST_Pin|CAM_CS_Pin|STP_2_Pin|STP_3_Pin
+                          |STP_4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PC4 PC5 */
-  GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5;
+  /*Configure GPIO pins : CAM_WRST_Pin CAM_RCLK_Pin CAM_SCL_Pin STP_1_Pin */
+  GPIO_InitStruct.Pin = CAM_WRST_Pin|CAM_RCLK_Pin|CAM_SCL_Pin|STP_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
@@ -504,19 +502,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : LCD_BL_Pin LCD_DB_Pin PD3 */
-  GPIO_InitStruct.Pin = LCD_BL_Pin|LCD_DB_Pin|GPIO_PIN_3;
+  /*Configure GPIO pins : LCD_BL_Pin LCD_DB_Pin CAM_WE_Pin */
+  GPIO_InitStruct.Pin = LCD_BL_Pin|LCD_DB_Pin|CAM_WE_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PC7 */
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
+  /*Configure GPIO pin : CAM_SDA_Pin */
+  GPIO_InitStruct.Pin = CAM_SDA_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(CAM_SDA_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PA8 */
   GPIO_InitStruct.Pin = GPIO_PIN_8;
