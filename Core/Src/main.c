@@ -39,7 +39,9 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
- I2C_HandleTypeDef hi2c2;
+ ADC_HandleTypeDef hadc1;
+
+I2C_HandleTypeDef hi2c2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim3;
@@ -60,6 +62,7 @@ static void MX_I2C2_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM1_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_ADC1_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -101,6 +104,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
+  MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -151,6 +155,7 @@ void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
@@ -180,7 +185,60 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+  if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
+  {
+    Error_Handler();
+  }
   HAL_RCC_MCOConfig(RCC_MCO, RCC_MCO1SOURCE_PLLCLK, RCC_MCODIV_1);
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+  /* USER CODE BEGIN ADC1_Init 0 */
+
+  /* USER CODE END ADC1_Init 0 */
+
+  ADC_ChannelConfTypeDef sConfig = {0};
+
+  /* USER CODE BEGIN ADC1_Init 1 */
+
+  /* USER CODE END ADC1_Init 1 */
+
+  /** Common config
+  */
+  hadc1.Instance = ADC1;
+  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.DiscontinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  hadc1.Init.NbrOfConversion = 1;
+  if (HAL_ADC_Init(&hadc1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Configure Regular Channel
+  */
+  sConfig.Channel = ADC_CHANNEL_4;
+  sConfig.Rank = ADC_REGULAR_RANK_1;
+  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN ADC1_Init 2 */
+
+  /* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -368,7 +426,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, CAM_RRST_Pin|CAM_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, STP_1_Pin|STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(GPIOA, STP_2_Pin|STP_3_Pin|STP_4_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, CAM_WRST_Pin|CAM_RCLK_Pin|CAM_SCL_Pin|CAM_SDA_Pin, GPIO_PIN_RESET);
@@ -378,6 +436,9 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, LCD_BL_Pin|LCD_DB_Pin|CAM_WE_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(STP_1_GPIO_Port, STP_1_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : PE2 LCD_TP_Pin LCD_RST_Pin */
   GPIO_InitStruct.Pin = GPIO_PIN_2|LCD_TP_Pin|LCD_RST_Pin;
@@ -410,17 +471,17 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : CAM_RRST_Pin CAM_CS_Pin STP_1_Pin STP_2_Pin
-                           STP_3_Pin STP_4_Pin */
-  GPIO_InitStruct.Pin = CAM_RRST_Pin|CAM_CS_Pin|STP_1_Pin|STP_2_Pin
-                          |STP_3_Pin|STP_4_Pin;
+  /*Configure GPIO pins : CAM_RRST_Pin CAM_CS_Pin STP_2_Pin STP_3_Pin
+                           STP_4_Pin */
+  GPIO_InitStruct.Pin = CAM_RRST_Pin|CAM_CS_Pin|STP_2_Pin|STP_3_Pin
+                          |STP_4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : CAM_WRST_Pin CAM_RCLK_Pin CAM_SCL_Pin */
-  GPIO_InitStruct.Pin = CAM_WRST_Pin|CAM_RCLK_Pin|CAM_SCL_Pin;
+  /*Configure GPIO pins : CAM_WRST_Pin CAM_RCLK_Pin CAM_SCL_Pin STP_1_Pin */
+  GPIO_InitStruct.Pin = CAM_WRST_Pin|CAM_RCLK_Pin|CAM_SCL_Pin|STP_1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;

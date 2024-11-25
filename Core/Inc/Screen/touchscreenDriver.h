@@ -58,5 +58,6 @@ void DisplayPatientOptions(PatientDetails *patient);
 void DisplayTakingVitals(PatientDetails *patient);
 void DisplayDispensingMedication(PatientDetails *patient);
 void CycleLedGradient(uint32_t durationMs);
+void blinkRed();
 
 #endif /* __BSP_TOUCHSCREEN_LCD_H */

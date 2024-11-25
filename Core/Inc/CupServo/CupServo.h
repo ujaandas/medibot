@@ -16,7 +16,7 @@ class CupServo: public ServoMotor {
 		CupServo(uint16_t cupCount, TIM_HandleTypeDef* timer, uint16_t timerChannel);
 		void selectCup(uint16_t cup);
 	private:
-		uint16_t cupCount;
+		uint16_t totalCups;
 };
 
 #endif /* __CUP_SERVO */

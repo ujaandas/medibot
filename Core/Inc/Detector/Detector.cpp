@@ -7,6 +7,13 @@
 
 #include "Detector.h"
 
+Detector::Detector(Camera& camera, uint8_t colourCount, uint16_t targetColours[], uint8_t threshold, void (*colourDetectedHandler)(uint16_t))
+	: camera(camera), colourCount(colourCount), threshold(threshold), colourDetectedHandler(colourDetectedHandler) {
+	for (uint8_t i = 0; i < colourCount && i < MAX_TARGET_COLOURS; i++) {
+		this->targetColours[i] = targetColours[i];
+	}
+}
+
 void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize) {
     if (!camera.isInitialized()) return;
 
@@ -49,9 +56,11 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
         }
     }
 
-    uint16_t averageColor = calcAvgColour(sumRed, sumGreen, sumBlue, pixelCount);
+    uint16_t averageColour = calcAvgColour(sumRed, sumGreen, sumBlue, pixelCount);
+    averageColour = isColourDetected(averageColour);
+
     char message[30];
-    sprintf(message, "Avg Color: 0x%04X", averageColor);
+    sprintf(message, "Avg Color: 0x%04X", averageColour);
     LCD_DrawString(50, 220, (uint8_t*)message);
 
     HAL_Delay(1000);
@@ -65,5 +74,30 @@ uint16_t Detector::calcAvgColour(uint32_t sumRed, uint32_t sumGreen, uint32_t su
     uint16_t avgBlue = (sumBlue / pixelCount) >> 3;
 
     return (avgRed << 11) | (avgGreen << 5) | avgBlue;
+}
+
+int Detector::abs(int x) {
+	return (x > 0) ? x : -x;
+}
+
+uint16_t Detector::isColourDetected(uint16_t colour) {
+	uint16_t red1 = (colour & 0xF800) >> 11;
+	uint16_t green1 = (colour & 0x07E0) >> 5;
+	uint16_t blue1 = colour & 0x001F;
+
+	for (uint8_t i = 0; i < colourCount; i++) {
+		uint16_t targetColour = targetColours[i];
+		uint16_t red2 = (targetColour & 0xF800) >> 11;
+		uint16_t green2 = (targetColour & 0x07E0) >> 5;
+		uint16_t blue2 = (targetColour & 0x001F);
+
+		if ((abs(red1 - red2) <= threshold) &&
+				(abs(green1 - green2) <= threshold) &&
+				(abs(blue1 - blue2) <= threshold)) {
+			colourDetectedHandler(targetColour);
+			return targetColour;
+		}
+	}
+	return colour;
 }
 

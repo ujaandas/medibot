@@ -9,14 +9,7 @@
 #define __FIFO_CONTROLLER_H
 
 #include "stm32f1xx_hal.h"
-
-struct GPIOPin {
-    GPIO_TypeDef* port;
-    uint16_t pin;
-
-    void setHigh() const;
-    void setLow() const;
-};
+#include "GPIOPin.h"
 
 class FIFOController {
 public:
