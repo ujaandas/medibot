@@ -29,6 +29,7 @@ private:
     void (*colourDetectedHandler)(uint16_t);
 
     uint16_t calcAvgColour(uint32_t sumRed, uint32_t sumGreen, uint32_t sumBlue, uint32_t pixelCount);
+    uint16_t getBackgroundColour(uint16_t color);
     int abs(int x);
 };
 

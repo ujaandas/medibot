@@ -39,16 +39,17 @@ FIFOController fifo(
 		  {GPIOC, CAM_RCLK_Pin}, // rclk
 		  {GPIOD, CAM_WE_Pin});
 Camera camera(sccb, fifo);
+CupServo servo(3, &htim3, TIM_CHANNEL_4);
 
-uint16_t targetColours[] = {0xF800, 0x07E0, 0x001F};
+uint16_t targetColours[] = {0x8DD8, 0x0000};
 void colourDetectedHandler(uint16_t detectedColour) {
-	//@armaan IMPLEMENT THIS!!! function pointer that acts as handler
-	// this function is only called when one of the targetColours passed into
-	// detector's ctor is detected, so you must check against that for
-	// which one has been called via a switch/case and perform the appropriate action
-	// if you're bored, use interrupts
-	// buena suerte! look at the impl if ur confuzzled
-	blinkRed();
+	if (detectedColour == targetColours[0]) {
+		servo.selectCup(0);
+	} else if (detectedColour == targetColours[0]) {
+		servo.selectCup(1);
+	} else {
+		servo.selectCup(2);
+	}
 }
 
 int mymain(void)
@@ -68,6 +69,7 @@ int mymain(void)
   Detector detector(camera, 2, targetColours, 20, colourDetectedHandler);
   camera.vsync = 0;
 
+  LCD_Clear(0,0,239,319,WHITE);
   LCD_DrawStringColor(40, 140, "Welcome to MediMate!", RED, WHITE);
   CycleLedGradient(500);
 
@@ -136,24 +138,24 @@ int mymain(void)
 	  DisplayDispensingMedication(&patients[selectedPatientIndex]);
 	  // Put code to dispense medication here
 	  while (1) {
-	  	  stepper.makeSteps(128, 1500, false);
 	  	  // Calibrate armServo first using "armServo.spinTo(90);"
 	  	  armServo.spinTo(90);
 	  	  // Once calibrated, start dispensing medications (pill 1 = BLACK, pill 2 = WHITE) + checking LDR
 
 	  	  ldr.read();
-	  	  sprintf(buf, "%4lu", ldr.getRawVal());
+	  	  sprintf(buf, "%4lu", ldr.getIntensity());
 	  	  LCD_DrawStringColor(10, 270, "Checking for blockages...", BLACK, WHITE);
 	  	  LCD_DrawStringColor(10, 290, "Current light intensity:", BLACK, WHITE);
 	  	  LCD_DrawStringColor(200, 290, buf, BLACK, WHITE);
-	  	  if (ldr.somethingBlocking(10,2000)) {
+	  	  if (ldr.somethingBlocking(70,2000)) {
 	  		  LCD_Clear(0,0,239,319,WHITE);
 			  LCD_DrawStringColor(50, 150, "Blockage detected!", RED, WHITE);
 	  		  LCD_DrawStringColor(70, 170, "Please reset", RED, WHITE);
 			  break;
 		  }
 	  	  if (camera.vsync == 2) {
-	  		  detector.displayImage(100, 200, 50);
+	  		  stepper.makeSteps(16, 3000, false);
+	  		  detector.displayImage(150, 90, 150);
 	  		  camera.vsync = 0;
 		  }
 	  }

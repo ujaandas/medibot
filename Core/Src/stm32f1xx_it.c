@@ -252,13 +252,13 @@ void EXTI15_10_IRQHandler(void)
 	{
 		switch (presses % 3) {
 		  case 0:
-			  handleK2BtnPress(0, &htim3, TIM_CHANNEL_1);
+			  handleK2BtnPress(0, &htim3, TIM_CHANNEL_4);
 			break;
 		  case 1:
-			  handleK2BtnPress(1, &htim3, TIM_CHANNEL_1);
+			  handleK2BtnPress(1, &htim3, TIM_CHANNEL_4);
 			break;
 		  case 2:
-			  handleK2BtnPress(2, &htim3, TIM_CHANNEL_1);
+			  handleK2BtnPress(2, &htim3, TIM_CHANNEL_4);
 			break;
 		  }
 		presses = presses + 1;

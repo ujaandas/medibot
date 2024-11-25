@@ -104,8 +104,8 @@ static constexpr RegConfig CONFIG[] =
 	{COM3,		  0xd0},/*Horizontal mirror image*/
 
 	/*night mode auto frame rate control*/
-	{COM5,		0xf5},	 /*auto reduce rate*/
-	//{COM5,		0x31},	/*no auto*/
+//	{COM5,		0xf5},	 /*auto reduce rate*/
+	{COM5,		0x31},	/*no auto*/
 };
 
 static constexpr size_t CONFIG_SIZE = sizeof(CONFIG) / sizeof(CONFIG[0]);

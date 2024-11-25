@@ -61,9 +61,9 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
 
     char message[30];
     sprintf(message, "Avg Color: 0x%04X", averageColour);
-    LCD_DrawString(50, 220, (uint8_t*)message);
+    LCD_DrawStringColor(50, 220, message, averageColour, 0xFFFF);
 
-    HAL_Delay(1000);
+//    HAL_Delay(1000);
 }
 
 uint16_t Detector::calcAvgColour(uint32_t sumRed, uint32_t sumGreen, uint32_t sumBlue, uint32_t pixelCount) {
@@ -81,23 +81,41 @@ int Detector::abs(int x) {
 }
 
 uint16_t Detector::isColourDetected(uint16_t colour) {
-	uint16_t red1 = (colour & 0xF800) >> 11;
-	uint16_t green1 = (colour & 0x07E0) >> 5;
-	uint16_t blue1 = colour & 0x001F;
+    uint16_t red1 = (colour & 0xF800) >> 11;       // 5 bits (0-31)
+    uint16_t green1 = (colour & 0x07E0) >> 5;      // 6 bits (0-63)
+    uint16_t blue1 = colour & 0x001F;              // 5 bits (0-31)
 
-	for (uint8_t i = 0; i < colourCount; i++) {
-		uint16_t targetColour = targetColours[i];
-		uint16_t red2 = (targetColour & 0xF800) >> 11;
-		uint16_t green2 = (targetColour & 0x07E0) >> 5;
-		uint16_t blue2 = (targetColour & 0x001F);
+    // Weighted thresholds based on channel bit depth
+    const uint8_t redThreshold = threshold;         // For 5 bits
+    const uint8_t greenThreshold = threshold * 2;   // For 6 bits
+    const uint8_t blueThreshold = threshold;        // For 5 bits
 
-		if ((abs(red1 - red2) <= threshold) &&
-				(abs(green1 - green2) <= threshold) &&
-				(abs(blue1 - blue2) <= threshold)) {
-			colourDetectedHandler(targetColour);
-			return targetColour;
-		}
-	}
-	return colour;
+    // Color similarity percentage (0-100)
+    const uint8_t requiredSimilarity = 80;
+
+    for (uint8_t i = 0; i <= colourCount; i++) {
+        uint16_t targetColour = targetColours[i];
+        uint16_t red2 = (targetColour & 0xF800) >> 11;
+        uint16_t green2 = (targetColour & 0x07E0) >> 5;
+        uint16_t blue2 = targetColour & 0x001F;
+
+        // Calculate color similarity percentage
+        uint8_t redSimilarity = 100 - ((abs(red1 - red2) * 100) / 31);
+        uint8_t greenSimilarity = 100 - ((abs(green1 - green2) * 100) / 63);
+        uint8_t blueSimilarity = 100 - ((abs(blue1 - blue2) * 100) / 31);
+
+        uint8_t totalSimilarity = (redSimilarity + greenSimilarity + blueSimilarity) / 3;
+
+        // Check if color is within threshold and meets similarity requirement
+        if (totalSimilarity >= requiredSimilarity &&
+            abs(red1 - red2) <= redThreshold &&
+            abs(green1 - green2) <= greenThreshold &&
+            abs(blue1 - blue2) <= blueThreshold) {
+
+            colourDetectedHandler(targetColour);
+            return targetColour;
+        }
+    }
+    return colour;
 }
 
