@@ -1,8 +1,8 @@
 # Fuck debug
-Debug/*
+Debug/
 
 # Fuck drivers
-Drivers/*
+Drivers/
 
 # Prerequisites
 *.d
