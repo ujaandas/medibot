@@ -25,10 +25,10 @@ extern UART_HandleTypeDef huart1;
 #define NUM_PATIENTS 4
 
 PatientDetails patients[NUM_PATIENTS] = {
-    {"Armaan", 72, 98, 36.5, 2, 0, 1},
-    {"Ujaan", 75, 95, 37.0, 1, 2, 0},
-    {"Tim", 70, 99, 37.1, 0, 2, 1},
-	{"Fox", 68, 99, 36.8, 0, 1, 1},
+    {"Armaan", 72, 98, 36.5, 2, 0},
+    {"Ujaan", 75, 95, 37.0, 1, 2},
+    {"Tim", 70, 99, 37.1, 0, 2},
+	{"Fox", 68, 99, 36.8, 0, 1},
 };
 
 SCCBController sccb(GPIOC, CAM_SCL_Pin, CAM_SDA_Pin);

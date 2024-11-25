@@ -37,9 +37,8 @@ typedef struct
     uint16_t heartRate;           // Heart rate (in beats per minute)
     uint16_t bloodOxygen;         // Blood oxygen level (in percentage)
     float temperature;             // Temperature (in degrees Celsius)
-    uint8_t medicine1Pills;       // Number of pills for medicine 1
-    uint8_t medicine2Pills;       // Number of pills for medicine 2
-    uint8_t medicine3Pills;       // Number of pills for medicine 3
+    uint8_t medicine1Pills;       // Number of pills for medicine 1 BLACK
+    uint8_t medicine2Pills;       // Number of pills for medicine 2 WHITE
 } PatientDetails;
 
 extern volatile uint8_t isScreenTouched;

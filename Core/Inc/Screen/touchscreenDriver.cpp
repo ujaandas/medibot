@@ -229,12 +229,10 @@ void DisplayDispensingMedication(PatientDetails *patient) {
     startY += BLOCK_HEIGHT;
 
     char buffer2[100];
-    snprintf(buffer2, sizeof(buffer2), "Medicine A x %d", patient->medicine1Pills);
-    LCD_DrawString(64, startY+80, (uint8_t*) buffer2);
-    snprintf(buffer2, sizeof(buffer2), "Medicine B x %d", patient->medicine2Pills);
-    LCD_DrawString(64, startY+80+30, (uint8_t*) buffer2);
-    snprintf(buffer2, sizeof(buffer2), "Medicine C x %d", patient->medicine3Pills);
-    LCD_DrawString(64, startY+80+60, (uint8_t*) buffer2);
+    snprintf(buffer2, sizeof(buffer2), "White x %d", patient->medicine1Pills);
+    LCD_DrawStringColor(80, startY+100, buffer2, MAGENTA, WHITE);
+    snprintf(buffer2, sizeof(buffer2), "Black x %d", patient->medicine2Pills);
+    LCD_DrawStringColor(80, startY+120, buffer2, MAGENTA, WHITE);
 }
 
 void blinkRed() {
