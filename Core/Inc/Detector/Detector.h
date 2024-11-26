@@ -39,24 +39,31 @@ struct RGB
 class Detector
 {
 public:
-    Detector(Camera &camera, ServoMotor &armServo, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, void (*colourDetectedHandler)(uint16_t));
+    Detector(Camera &camera, ServoMotor &armServo, uint16_t targetColours[], uint8_t desiredCount[], uint8_t colourCount, void (*colourDetectedHandler)(int32_t));
 
     void calibrate(uint16_t targetX, uint16_t targetY, uint16_t boxSize);
     bool isCalibrated();
     void displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize);
 
+    bool done = false;
+
 private:
     Camera &camera;
     ServoMotor &armServo;
     uint16_t targetColours[MAX_TARGET_COLOURS];
+    uint16_t prevTarget;
+    uint8_t targetCount[MAX_TARGET_COLOURS];
+    uint8_t desiredCount[MAX_TARGET_COLOURS];
     uint16_t baselineColours[MAX_BASELINE_COLOURS];
-    uint16_t currAngle = 180;
+    uint16_t startAngle = 170;
+    uint16_t currAngle = startAngle;
+    uint16_t minAngle = 160;
+    uint16_t TSLT = 0;
     uint8_t colourCount;
-    uint8_t threshold;
     //    uint16_t targetX;
     //    uint16_t targetY;
     //    uint16_t boxSize;
-    void (*colourDetectedHandler)(uint16_t);
+    void (*colourDetectedHandler)(int32_t);
     uint16_t calcAvgColour(uint32_t sumRed, uint32_t sumGreen, uint32_t sumBlue, uint32_t pixelCount);
     float getWeightedDistance(const RGB &color1, const RGB &color2);
 

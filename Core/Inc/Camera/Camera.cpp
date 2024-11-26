@@ -66,8 +66,8 @@ static constexpr RegConfig CONFIG[] =
 	// Image
 	{BRIGHT,	  0x00},
 	{CNST,		  0x10},
-	{USAT,		  0x45},
-	{VSAT,		  0x45},
+	{USAT,		  0x85},
+	{VSAT,		  0x85},
 	{UVADJ0,	  0x81},
 	{SDE,		  0x02},
 

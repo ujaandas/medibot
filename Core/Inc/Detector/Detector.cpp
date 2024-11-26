@@ -7,12 +7,14 @@
 
 #include "Detector.h"
 
-Detector::Detector(Camera &camera, ServoMotor &armServo, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, void (*colourDetectedHandler)(uint16_t))
-    : camera(camera), armServo(armServo), colourCount(colourCount), threshold(threshold), colourDetectedHandler(colourDetectedHandler)
+Detector::Detector(Camera &camera, ServoMotor &armServo, uint16_t targetColours[], uint8_t desiredCount[], uint8_t colourCount, void (*colourDetectedHandler)(int32_t))
+    : camera(camera), armServo(armServo), colourCount(colourCount), colourDetectedHandler(colourDetectedHandler)
 {
     for (uint8_t i = 0; i < colourCount && i < MAX_TARGET_COLOURS; i++)
     {
         this->targetColours[i] = targetColours[i];
+        this->desiredCount[i] = desiredCount[i];
+        targetCount[i] = 0;
     }
 
     for (uint8_t i = 0; i < MAX_BASELINE_COLOURS; i++)
@@ -26,7 +28,7 @@ void Detector::calibrate(uint16_t targetX, uint16_t targetY, uint16_t boxSize)
     if (!camera.isInitialized())
         return;
 
-    armServo.spinTo(currAngle);
+    armServo.spinTo(startAngle);
     uint16_t halfBoxSize = boxSize / 2;
     uint32_t sumRed = 0, sumGreen = 0, sumBlue = 0, pixelCount = 0;
 
@@ -95,6 +97,19 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
 {
     if (!camera.isInitialized())
         return;
+
+    // Check if finished
+    for (uint8_t i = 0; i < colourCount; i++)
+    {
+        if (targetCount[i] < desiredCount[i])
+            break;
+        if (i == colourCount - 1)
+        {
+            // Print "Target count reached"
+            colourDetectedHandler(420);
+            done = true;
+        }
+    }
 
     armServo.spinTo(currAngle);
     uint16_t halfBoxSize = boxSize / 2;
@@ -187,21 +202,61 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
         // Print closest baseline colour
         sprintf(message, "Baseline: 0x%04X", closestBaselineColour);
         LCD_DrawString(50, 220, (uint8_t *)message);
-        currAngle <= 160 ? currAngle : currAngle -= 5;
+        TSLT++;
+
+        // If time since last target is greater than threshold, allow more movement
+        if (TSLT > 5)
+        {
+            currAngle = (currAngle > minAngle) ? currAngle - 3 : currAngle;
+        }
     }
     else
     {
         // Print closest target colour
         sprintf(message, "Target: 0x%04X", closestTargetColour);
         LCD_DrawString(50, 220, (uint8_t *)message);
-        colourDetectedHandler(closestTargetColour);
-        currAngle = 180;
+
+        // Find target colour and append to targetCount
+        for (uint8_t i = 0; i < colourCount; i++)
+        {
+            if (closestTargetColour == targetColours[i])
+            {
+                // Reset TSLT
+                TSLT = 0;
+
+                // Move arm back to startAngle
+                currAngle = startAngle;
+
+                if (closestTargetColour == prevTarget) {
+                	colourDetectedHandler(closestTargetColour*-2); // double same colour in a row
+                } else { // not same colour as previous
+					prevTarget = closestTargetColour;
+                	if (targetCount[i] < desiredCount[i]) { // and quota not met yet
+						// Call colourDetectedHandler
+						colourDetectedHandler(closestTargetColour);
+						// Increment targetCount
+						targetCount[i]++;
+					} else { // already met quota
+						colourDetectedHandler(closestTargetColour*-3);
+					}
+                }
+            } // keep looking through other target colours, its one of them for sure
+        }
     }
 
     sprintf(message, "Arm angle: %d", currAngle);
-    LCD_DrawString(10, 110, (uint8_t *) message);
+    LCD_DrawString(10, 110, (uint8_t *)message);
 
-//    HAL_Delay(5000);
+    sprintf(message, "TSLT: %d", TSLT);
+    LCD_DrawString(10, 130, (uint8_t *)message);
+
+    sprintf(message, "White: %d/%d", targetCount[0], desiredCount[0]);
+    LCD_DrawString(10, 150, (uint8_t *)message);
+
+    sprintf(message, "Black: %d/%d", targetCount[1], desiredCount[1]);
+    LCD_DrawString(10, 170, (uint8_t *)message);
+
+	HAL_Delay(2000);
 }
 
 float Detector::getWeightedDistance(const RGB &color1, const RGB &color2)
