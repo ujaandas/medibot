@@ -66,8 +66,6 @@ void Error_Handler(void);
 #define CAM_RRST_GPIO_Port GPIOA
 #define CAM_CS_Pin GPIO_PIN_3
 #define CAM_CS_GPIO_Port GPIOA
-#define STP_2_Pin GPIO_PIN_5
-#define STP_2_GPIO_Port GPIOA
 #define STP_3_Pin GPIO_PIN_6
 #define STP_3_GPIO_Port GPIOA
 #define STP_4_Pin GPIO_PIN_7
@@ -88,6 +86,8 @@ void Error_Handler(void);
 #define CAM_SCL_GPIO_Port GPIOC
 #define CAM_SDA_Pin GPIO_PIN_7
 #define CAM_SDA_GPIO_Port GPIOC
+#define STP_2_Pin GPIO_PIN_11
+#define STP_2_GPIO_Port GPIOC
 #define STP_1_Pin GPIO_PIN_12
 #define STP_1_GPIO_Port GPIOC
 #define CAM_WE_Pin GPIO_PIN_3

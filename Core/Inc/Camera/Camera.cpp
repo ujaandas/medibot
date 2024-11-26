@@ -63,12 +63,13 @@ static constexpr RegConfig CONFIG[] =
 	{MTX6,		  0x5a},
 	{MTX_Ctrl,  0x1e},
 
+	// Image
 	{BRIGHT,	  0x00},
-	{CNST,		  0x25},
-	{USAT,		  0x65},
-	{VSAT,		  0x65},
+	{CNST,		  0x10},
+	{USAT,		  0x45},
+	{VSAT,		  0x45},
 	{UVADJ0,	  0x81},
-	{SDE,		    0x06},
+	{SDE,		  0x02},
 
     /*GAMMA config*/
 	{GAM1,		  0x0c},
@@ -90,7 +91,7 @@ static constexpr RegConfig CONFIG[] =
 
 	{HUECOS,	  0x80},
 	{HUESIN,	  0x80},
-	{DSPAuto,	  0xff},
+	{DSPAuto,	  0xFF},
 	{DM_LNL,	  0x00},
 	{BDBase,	  0x99},
 	{BDMStep,	  0x03},

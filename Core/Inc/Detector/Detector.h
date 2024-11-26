@@ -13,19 +13,25 @@
 #include <stdio.h>
 
 #define MAX_TARGET_COLOURS 10
+#define MAX_BASELINE_COLOURS 5
 
 class Detector {
 public:
-    Detector(Camera& camera, uint8_t colourCount, uint16_t targetColours[], uint8_t threshold, void (*colourDetectedHandler)(uint16_t));
+    Detector(Camera& camera, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, uint16_t targetX, uint16_t targetY, uint16_t boxSize, void (*colourDetectedHandler)(uint16_t));
 
-    void displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize);
+    void calibrate();
+    void displayImage();
     uint16_t isColourDetected(uint16_t colour);
 
 private:
     Camera& camera;
     uint16_t targetColours[MAX_TARGET_COLOURS];
+    uint16_t baselineColours[MAX_BASELINE_COLOURS];
     uint8_t colourCount;
     uint8_t threshold;
+    uint16_t targetX;
+    uint16_t targetY;
+    uint16_t boxSize;
     void (*colourDetectedHandler)(uint16_t);
 
     uint16_t calcAvgColour(uint32_t sumRed, uint32_t sumGreen, uint32_t sumBlue, uint32_t pixelCount);
