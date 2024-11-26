@@ -41,7 +41,7 @@ FIFOController fifo(
 Camera camera(sccb, fifo);
 CupServo servo(3, &htim3, TIM_CHANNEL_4);
 
-uint16_t targetColours[] = {0x8DD8, 0x0000};
+uint16_t targetColours[] = {0x6C53, 0x3207};
 void colourDetectedHandler(uint16_t detectedColour) {
 	if (detectedColour == targetColours[0]) {
 		LCD_DrawStringColor(70, 170, "White detected!", RED, WHITE);
@@ -68,7 +68,7 @@ int mymain(void)
   LDR ldr(&hadc1);
 
   camera.init();
-  Detector detector(camera, targetColours, 2, 25, 150, 90, 150, colourDetectedHandler);
+  Detector detector(camera, targetColours, 2, 10, colourDetectedHandler);
   camera.vsync = 0;
 
   LCD_Clear(0,0,239,319,WHITE);
@@ -139,7 +139,6 @@ int mymain(void)
   } else if (selectedOptionIndex == 1){ // Dispense medication
 	  DisplayDispensingMedication(&patients[selectedPatientIndex]);
 	  // Put code to dispense medication here
-	  detector.calibrate();
 //	  LCD_Clear(0,0,239,319,WHITE);
 	  while (1) {
 	  	  // Calibrate armServo first using "armServo.spinTo(90);"
@@ -159,7 +158,10 @@ int mymain(void)
 		  }
 	  	  if (camera.vsync == 2) {
 //	  		  stepper.makeSteps(16, 3000, false);
-	  		  detector.displayImage();
+	  		  detector.calibrate(150, 90, 150);
+	  		  if (detector.isCalibrated()){
+	  			detector.displayImage(150, 90, 150);
+	  		  }
 	  		  camera.vsync = 0;
 		  }
 	  }
