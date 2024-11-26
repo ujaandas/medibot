@@ -33,10 +33,10 @@ PatientDetails patients[NUM_PATIENTS] = {
 
 SCCBController sccb(GPIOC, CAM_SCL_Pin, CAM_SDA_Pin);
 FIFOController fifo(
-		  {GPIOA, CAM_CS_Pin}, // cs
-		  {GPIOC, CAM_WRST_Pin}, // wrst
-		  {GPIOA, CAM_RRST_Pin}, // rrst
-		  {GPIOC, CAM_RCLK_Pin}, // rclk
+		  {GPIOA, CAM_CS_Pin},
+		  {GPIOC, CAM_WRST_Pin},
+		  {GPIOA, CAM_RRST_Pin},
+		  {GPIOC, CAM_RCLK_Pin},
 		  {GPIOD, CAM_WE_Pin});
 Camera camera(sccb, fifo);
 CupServo servo(3, &htim3, TIM_CHANNEL_4);
@@ -46,7 +46,7 @@ void colourDetectedHandler(uint16_t detectedColour) {
 	if (detectedColour == targetColours[0]) {
 		LCD_DrawStringColor(70, 170, "White detected!", RED, WHITE);
 		servo.selectCup(0);
-	} else if (detectedColour == targetColours[0]) {
+	} else if (detectedColour == targetColours[1]) {
 		LCD_DrawStringColor(70, 170, "Black detected!", RED, WHITE);
 		servo.selectCup(1);
 	} else {

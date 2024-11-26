@@ -138,7 +138,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
     float minBaselineDist = 1000.0f;
     for (uint8_t i = 0; i < MAX_BASELINE_COLOURS; i++)
     {
-        float distance = getWeightedDistance(RGB(averageColour), RGB(baselineColours[i]));
+        float distance = getWeightedDistance(RGB(averageColour), RGB(baselineColours[i])) * BASELINE_THRESHOLD;
         if (distance < minBaselineDist)
         {
             minBaselineDist = distance;
@@ -160,7 +160,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
     float minTargetDist = 1000.0f;
     for (uint8_t i = 0; i < colourCount; i++)
     {
-        float distance = getWeightedDistance(RGB(averageColour), RGB(targetColours[i]));
+        float distance = getWeightedDistance(RGB(averageColour), RGB(targetColours[i])) * TARGET_THRESHOLD;
         if (distance < minTargetDist)
         {
             minTargetDist = distance;
@@ -191,6 +191,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
         // Print closest target colour
         sprintf(message, "Target: 0x%04X", closestTargetColour);
         LCD_DrawString(50, 220, (uint8_t *)message);
+        colourDetectedHandler(closestTargetColour);
     }
 
     HAL_Delay(5000);
