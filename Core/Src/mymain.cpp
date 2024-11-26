@@ -13,12 +13,16 @@ extern "C" int mymain(void);
 #include "Camera/FIFOController/FIFOController.h"
 #include "Detector/Detector.h"
 #include "LDR/LDR.h"
+#include "Temperature/Temperature.h"
 
 extern TIM_HandleTypeDef htim1;
 extern TIM_HandleTypeDef htim3;
 extern ADC_HandleTypeDef hadc1;
+extern ADC_HandleTypeDef hadc2;
 extern uint8_t Ov7725_vsync;
 extern UART_HandleTypeDef huart1;
+extern void handleK2BtnPress(int cup, TIM_HandleTypeDef* timer, uint16_t timerChannel);
+
 
 #define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
 
@@ -39,18 +43,17 @@ FIFOController fifo(
 		  {GPIOC, CAM_RCLK_Pin},
 		  {GPIOD, CAM_WE_Pin});
 Camera camera(sccb, fifo);
-CupServo servo(3, &htim3, TIM_CHANNEL_4);
 
 uint16_t targetColours[] = {0x6C53, 0x3207};
 void colourDetectedHandler(uint16_t detectedColour) {
 	if (detectedColour == targetColours[0]) {
 		LCD_DrawStringColor(70, 170, "White detected!", RED, WHITE);
-		servo.selectCup(0);
+		handleK2BtnPress(0, &htim3, TIM_CHANNEL_4);
 	} else if (detectedColour == targetColours[1]) {
 		LCD_DrawStringColor(70, 170, "Black detected!", RED, WHITE);
-		servo.selectCup(1);
+		handleK2BtnPress(1, &htim3, TIM_CHANNEL_4);
 	} else {
-		servo.selectCup(2);
+		handleK2BtnPress(2, &htim3, TIM_CHANNEL_4);
 	}
 }
 
@@ -64,11 +67,12 @@ int mymain(void)
   char buf[12];
 
   StepperMotor stepper({GPIOC, STP_1_Pin}, {GPIOC, STP_2_Pin}, {GPIOA, STP_3_Pin}, {GPIOA, STP_4_Pin}, &htim1);
-  ServoMotor armServo(&htim3, TIM_CHANNEL_3);
   LDR ldr(&hadc1);
+  Temperature tempSensor(&hadc2);
 
   camera.init();
-  Detector detector(camera, targetColours, 2, 10, colourDetectedHandler);
+  ServoMotor armServo(&htim3, TIM_CHANNEL_3);
+  Detector detector(camera, armServo, targetColours, 2, 10, colourDetectedHandler);
   camera.vsync = 0;
 
   LCD_Clear(0,0,239,319,WHITE);
@@ -136,25 +140,20 @@ int mymain(void)
   if (selectedOptionIndex == 0){ // Take vitals
 	  DisplayTakingVitals(&patients[selectedPatientIndex]);
 	  // Put code to take measurements here
+	  while (1){
+		  tempSensor.read();
+		  sprintf(buf, "%4lu", tempSensor.getRawVal());
+		  	  LCD_DrawStringColor(10, 10, buf, BLACK, WHITE);
+	  }
   } else if (selectedOptionIndex == 1){ // Dispense medication
 	  DisplayDispensingMedication(&patients[selectedPatientIndex]);
+	  HAL_Delay(5000);
 	  // Put code to dispense medication here
 //	  LCD_Clear(0,0,239,319,WHITE);
 	  while (1) {
 	  	  // Calibrate armServo first using "armServo.spinTo(90);"
 	  	  // Once calibrated, start dispensing medications (pill 1 = BLACK, pill 2 = WHITE) + checking LDR
 
-	  	  ldr.read();
-	  	  sprintf(buf, "%4lu", ldr.getIntensity());
-	  	  LCD_DrawStringColor(10, 270, "Checking for blockages...", BLACK, WHITE);
-	  	  LCD_DrawStringColor(10, 290, "Current light intensity:", BLACK, WHITE);
-	  	  LCD_DrawStringColor(200, 290, buf, BLACK, WHITE);
-	  	  if (ldr.somethingBlocking(70,2000)) {
-	  		  LCD_Clear(0,0,239,319,WHITE);
-			  LCD_DrawStringColor(50, 150, "Blockage detected!", RED, WHITE);
-	  		  LCD_DrawStringColor(70, 170, "Please reset", RED, WHITE);
-			  break;
-		  }
 	  	  if (camera.vsync == 2) {
 	  		  stepper.makeSteps(16, 3000, false);
 	  		  detector.calibrate(150, 70, 120);
@@ -162,6 +161,19 @@ int mymain(void)
 	  			detector.displayImage(150, 70, 120);
 	  		  }
 	  		  camera.vsync = 0;
+
+	  		  // ldr stuff
+		  	  ldr.read();
+		  	  sprintf(buf, "%4lu", ldr.getIntensity());
+		  	  LCD_DrawStringColor(10, 270, "Checking for blockages...", BLACK, WHITE);
+		  	  LCD_DrawStringColor(10, 290, "Current light intensity:", BLACK, WHITE);
+		  	  LCD_DrawStringColor(200, 290, buf, BLACK, WHITE);
+		  	  if (ldr.somethingBlocking(70,2000)) {
+		  		  LCD_Clear(0,0,239,319,WHITE);
+				  LCD_DrawStringColor(50, 150, "Blockage detected!", RED, WHITE);
+		  		  LCD_DrawStringColor(70, 170, "Please reset", RED, WHITE);
+				  break;
+			  }
 		  }
 	  }
 	  while (1){

@@ -42,8 +42,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern TIM_HandleTypeDef htim3;
-int presses = 0;
+
 //CupServo cupServo(3, &htim3, TIM_CHANNEL_1);
 /* USER CODE END PV */
 
@@ -60,7 +59,6 @@ int presses = 0;
 /* External variables --------------------------------------------------------*/
 
 /* USER CODE BEGIN EV */
-extern void handleK2BtnPress(int cup, TIM_HandleTypeDef* timer, uint16_t timerChannel);
 extern void handleVsyncInterrupt();
 /* USER CODE END EV */
 
@@ -247,24 +245,12 @@ void EXTI4_IRQHandler(void)
 void EXTI15_10_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI15_10_IRQn 0 */
-//	int status = __HAL_GPIO_EXTI_GET_IT(K2_BTN_Pin);
-//	if (status != RESET)
-//	{
-//		switch (presses % 3) {
-//		  case 0:
-//			  handleK2BtnPress(0, &htim3, TIM_CHANNEL_4);
-//			break;
-//		  case 1:
-//			  handleK2BtnPress(1, &htim3, TIM_CHANNEL_4);
-//			break;
-//		  case 2:
-//			  handleK2BtnPress(2, &htim3, TIM_CHANNEL_4);
-//			break;
-//		  }
-//		presses = presses + 1;
-//		__HAL_GPIO_EXTI_CLEAR_IT(K2_BTN_Pin);
-//		HAL_GPIO_EXTI_Callback(K2_BTN_Pin);
-//	}
+	int status = __HAL_GPIO_EXTI_GET_IT(K2_BTN_Pin);
+	if (status != RESET)
+	{
+		__HAL_GPIO_EXTI_CLEAR_IT(K2_BTN_Pin);
+		HAL_GPIO_EXTI_Callback(K2_BTN_Pin);
+	}
   /* USER CODE END EXTI15_10_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(K2_BTN_Pin);
   /* USER CODE BEGIN EXTI15_10_IRQn 1 */

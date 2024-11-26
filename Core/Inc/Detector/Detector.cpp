@@ -7,8 +7,8 @@
 
 #include "Detector.h"
 
-Detector::Detector(Camera &camera, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, void (*colourDetectedHandler)(uint16_t))
-    : camera(camera), colourCount(colourCount), threshold(threshold), colourDetectedHandler(colourDetectedHandler)
+Detector::Detector(Camera &camera, ServoMotor &armServo, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, void (*colourDetectedHandler)(uint16_t))
+    : camera(camera), armServo(armServo), colourCount(colourCount), threshold(threshold), colourDetectedHandler(colourDetectedHandler)
 {
     for (uint8_t i = 0; i < colourCount && i < MAX_TARGET_COLOURS; i++)
     {
@@ -26,6 +26,7 @@ void Detector::calibrate(uint16_t targetX, uint16_t targetY, uint16_t boxSize)
     if (!camera.isInitialized())
         return;
 
+    armServo.spinTo(currAngle);
     uint16_t halfBoxSize = boxSize / 2;
     uint32_t sumRed = 0, sumGreen = 0, sumBlue = 0, pixelCount = 0;
 
@@ -95,6 +96,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
     if (!camera.isInitialized())
         return;
 
+    armServo.spinTo(currAngle);
     uint16_t halfBoxSize = boxSize / 2;
     uint32_t sumRed = 0, sumGreen = 0, sumBlue = 0, pixelCount = 0;
 
@@ -185,6 +187,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
         // Print closest baseline colour
         sprintf(message, "Baseline: 0x%04X", closestBaselineColour);
         LCD_DrawString(50, 220, (uint8_t *)message);
+        currAngle <= 160 ? currAngle : currAngle -= 5;
     }
     else
     {
@@ -192,7 +195,11 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
         sprintf(message, "Target: 0x%04X", closestTargetColour);
         LCD_DrawString(50, 220, (uint8_t *)message);
         colourDetectedHandler(closestTargetColour);
+        currAngle = 180;
     }
+
+    sprintf(message, "Arm angle: %d", currAngle);
+    LCD_DrawString(10, 110, (uint8_t *) message);
 
 //    HAL_Delay(5000);
 }

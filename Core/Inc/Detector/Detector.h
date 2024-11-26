@@ -9,6 +9,7 @@
 #define __DETECTOR_H_
 
 #include "Camera/Camera.h"
+#include "ServoMotor/ServoMotor.h"
 #include "Screen/lcd.h"
 #include <stdio.h>
 #include <math.h>
@@ -38,7 +39,7 @@ struct RGB
 class Detector
 {
 public:
-    Detector(Camera &camera, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, void (*colourDetectedHandler)(uint16_t));
+    Detector(Camera &camera, ServoMotor &armServo, uint16_t targetColours[], uint8_t colourCount, uint8_t threshold, void (*colourDetectedHandler)(uint16_t));
 
     void calibrate(uint16_t targetX, uint16_t targetY, uint16_t boxSize);
     bool isCalibrated();
@@ -46,8 +47,10 @@ public:
 
 private:
     Camera &camera;
+    ServoMotor &armServo;
     uint16_t targetColours[MAX_TARGET_COLOURS];
     uint16_t baselineColours[MAX_BASELINE_COLOURS];
+    uint16_t currAngle = 180;
     uint8_t colourCount;
     uint8_t threshold;
     //    uint16_t targetX;
@@ -63,7 +66,7 @@ private:
     static constexpr float BLUE_WEIGHT = 0.2f;
 
     // Constants for weighted threshold
-    static constexpr float TARGET_THRESHOLD = 0.9f;
+    static constexpr float TARGET_THRESHOLD = 0.8f;
     static constexpr float BASELINE_THRESHOLD = 1.1f;
 };
 
