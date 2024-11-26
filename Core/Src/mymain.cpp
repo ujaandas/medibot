@@ -63,7 +63,7 @@ int mymain(void)
   uint8_t selectedOptionIndex = 0; // 0 for vitals, 1 for medication
   char buf[12];
 
-  StepperMotor stepper({GPIOC, STP_1_Pin}, {GPIOA, STP_2_Pin}, {GPIOA, STP_3_Pin}, {GPIOA, STP_4_Pin}, &htim1);
+  StepperMotor stepper({GPIOC, STP_1_Pin}, {GPIOC, STP_2_Pin}, {GPIOA, STP_3_Pin}, {GPIOA, STP_4_Pin}, &htim1);
   ServoMotor armServo(&htim3, TIM_CHANNEL_3);
   LDR ldr(&hadc1);
 
@@ -142,7 +142,6 @@ int mymain(void)
 //	  LCD_Clear(0,0,239,319,WHITE);
 	  while (1) {
 	  	  // Calibrate armServo first using "armServo.spinTo(90);"
-	  	  armServo.spinTo(90);
 	  	  // Once calibrated, start dispensing medications (pill 1 = BLACK, pill 2 = WHITE) + checking LDR
 
 	  	  ldr.read();
@@ -157,10 +156,10 @@ int mymain(void)
 			  break;
 		  }
 	  	  if (camera.vsync == 2) {
-//	  		  stepper.makeSteps(16, 3000, false);
-	  		  detector.calibrate(150, 90, 150);
+	  		  stepper.makeSteps(16, 3000, false);
+	  		  detector.calibrate(150, 70, 120);
 	  		  if (detector.isCalibrated()){
-	  			detector.displayImage(150, 90, 150);
+	  			detector.displayImage(150, 70, 120);
 	  		  }
 	  		  camera.vsync = 0;
 		  }

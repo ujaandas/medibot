@@ -194,7 +194,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
         colourDetectedHandler(closestTargetColour);
     }
 
-    HAL_Delay(5000);
+//    HAL_Delay(5000);
 }
 
 float Detector::getWeightedDistance(const RGB &color1, const RGB &color2)
