@@ -43,7 +43,7 @@ FIFOController fifo(
     {GPIOC, CAM_RCLK_Pin},
     {GPIOD, CAM_WE_Pin});
 Camera camera(sccb, fifo);
-uint16_t targetColours[] = {0x8537, 0x3207};
+uint16_t targetColours[] = {0x7DBC, 0x1964};
 void colourDetectedHandler(int32_t detectedColour)
 {
     if (detectedColour == targetColours[0])
@@ -191,7 +191,8 @@ int mymain(void)
             {
                 tempSensor.read();
                 sprintf(buf, "%4.1f", tempSensor.getTemperatureCelsius());
-                LCD_DrawStringColor(10, 10, buf, BLACK, WHITE);
+                LCD_DrawStringColor(100, 180, buf, BLACK, WHITE);
+                patients[selectedPatientIndex].temperature = (float)tempSensor.getTemperatureCelsius();
                 HAL_Delay(100);
             }
             // Instead of break, continue to main loop
@@ -210,11 +211,11 @@ int mymain(void)
                 // Once calibrated, start dispensing medications (pill 1 = BLACK, pill 2 = WHITE) + checking LDR
                 if (camera.vsync == 2 && !detector.done)
                 {
-                    moveBasePlate(&htim1, 16, 3000, false);
-                    detector.calibrate(220, 110, 100);
+                    moveBasePlate(&htim1, 15, 2000, false);
+                    detector.calibrate(190, 100, 150);
                     if (detector.isCalibrated())
                     {
-                        detector.displayImage(220, 110, 100);
+                        detector.displayImage(190, 100, 150);
                     }
                     camera.vsync = 0;
 

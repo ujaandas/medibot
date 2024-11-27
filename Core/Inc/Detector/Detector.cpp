@@ -227,10 +227,10 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
                 // Move arm back to startAngle
                 currAngle = startAngle;
 
-                if (closestTargetColour == prevTarget) {
-                	colourDetectedHandler(closestTargetColour*-2); // double same colour in a row
-                } else { // not same colour as previous
-					prevTarget = closestTargetColour;
+//                if (closestTargetColour == prevTarget) {
+//                	colourDetectedHandler(closestTargetColour*-2); // double same colour in a row
+//                } else { // not same colour as previous
+//					prevTarget = closestTargetColour;
                 	if (targetCount[i] < desiredCount[i]) { // and quota not met yet
 						// Call colourDetectedHandler
 						colourDetectedHandler(closestTargetColour);
@@ -238,7 +238,7 @@ void Detector::displayImage(uint16_t targetX, uint16_t targetY, uint16_t boxSize
 						targetCount[i]++;
 					} else { // already met quota
 						colourDetectedHandler(closestTargetColour*-3);
-					}
+//					}
                 }
             } // keep looking through other target colours, its one of them for sure
         }

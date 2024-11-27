@@ -183,7 +183,7 @@ void DisplayPatientOptions(PatientDetails *patient) {
     startY += BLOCK_HEIGHT + GAP;
 
     const char *options[] = {
-        "Take vitals",
+        "Take temperature",
         "Dispense medication"
     };
 
@@ -212,7 +212,7 @@ void DisplayTakingVitals(PatientDetails *patient) {
     LCD_DrawStringColor(25, startY + 20, buffer, WHITE, BLACK);
     startY += BLOCK_HEIGHT;
 
-    LCD_DrawString(50, startY+110, (uint8_t*) "Do not interrupt");
+    LCD_DrawString(40, startY+110, (uint8_t*) "Saving temperature...");
 
     // Put code to display readings here
 }
